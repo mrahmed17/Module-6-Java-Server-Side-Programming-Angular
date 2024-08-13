@@ -1,0 +1,40 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" type="text" class="form-control" />
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" class="form-control" />
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+        <div *ngIf="email.errors?.['required']">Email is required.</div>
+        <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" class="form-control" />
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" />
+      <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="error-message">
+        <div *ngIf="confirmPassword.errors?.['required']">Confirm Password is required.</div>
+        <div *ngIf="confirmPassword.errors?.['mismatch']">Passwords do not match.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>

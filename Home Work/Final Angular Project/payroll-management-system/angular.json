@@ -1,0 +1,159 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "payroll-management-system": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/payroll-management-system",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css",
+<<<<<<< Updated upstream
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/vendors/mdi/css/materialdesignicons.min.css",
+              "src/assets/vendors/css/vendor.bundle.base.css",
+              "src/assets/vendors/jvectormap/jquery-jvectormap.css",
+              "src/assets/vendors/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/vendors/owl-carousel-2/owl.carousel.min.css",
+              "src/assets/vendors/owl-carousel-2/owl.theme.default.min.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/vendors/js/vendor.bundle.base.js",
+              "src/assets/vendors/chart.js/Chart.min.js",
+              "src/assets/vendors/progressbar.js/progressbar.min.js",
+              "src/assets/vendors/jvectormap/jquery-jvectormap.min.js",
+              "src/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js",
+              "src/assets/vendors/owl-carousel-2/owl.carousel.min.js",
+              "src/assets/js/off-canvas.js",
+              "src/assets/js/hoverable-collapse.js",
+              "src/assets/js/misc.js",
+              "src/assets/js/settings.js",
+              "src/assets/js/todolist.js",
+              "src/assets/js/dashboard.js"
+=======
+              "src/assets/vendors/css/vendor.bundle.base.css",
+              "src/assets/vendors/mdi/css/materialdesignicons.min.css",
+              "src/assets/vendors/jvectormap/jquery-jvectormap.css",
+              "src/assets/vendors/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/vendors/owl-carousel-2/owl.carousel.min.css",
+              "src/assets/vendors/owl-carousel-2/owl.theme.default.min.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/style.css"
+            ],
+            "scripts": [
+              "src/assets/vendors/js/vendor.bundle.base.js",
+              "src/assets/vendors/chart.js/Chart.min.js",
+              "src/assets/vendors/progressbar.js/progressbar.min.js",
+              "src/assets/jvectormap/jquery-jvectormap.min.js",
+              "src/assets/jvectormap/jquery-jvectormap-world-mill-en.js",
+              "src/assets/vendors/owl-carousel-2/owl.carousel.min.js",
+              "src/assets/js/off-canvas.js",
+              "src/assets/js/hoverable-collapse.js","assets/js/misc.js","assets/js/settings.js","assets/js/todolist.js",
+              "src/assets/js/dashboard.js",
+              "src/assets/js/main.js"
+>>>>>>> Stashed changes
+            ],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "payroll-management-system:build:production"
+            },
+            "development": {
+              "buildTarget": "payroll-management-system:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/cyan-orange.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "2d7cbd4b-cc74-40a0-80f1-c0cd4a0c9820"
+  }
+}

@@ -1,0 +1,126 @@
+<!-- Navbar -->
+<!-- <div class="m-3 sticky-top top">
+  <h1> Class System </h1>
+  <h6> Md Raju Ahmed</h6>
+</div>
+ -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">TRAJ
+      <!-- <img src="/src/assets/images/logo3.png" alt="" width="30" height="30"> -->
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        </li>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Student Panel
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/createstudent">Add Student</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="/student">View Student</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="#">Student Profile</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Location Panel
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/createlocation">Add Location</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="/location">View Location</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="#">Location Details</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Admin Panel </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/reg">Create Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="/user">View Registered Profile</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="/userprofile">Current User Profile</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </ul>
+
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Profile </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item  text-success" routerLink="/login">Log In</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item text-warning" routerLink="/logout">Log Out</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" routerLink="#">Forget Password?</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+
+      <form class="d-flex me-4" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
+
+    </div>
+  </div>
+</nav>
+<!-- </div> -->

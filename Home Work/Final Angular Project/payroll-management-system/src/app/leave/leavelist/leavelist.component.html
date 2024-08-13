@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Leave List</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaves">
+        <td>{{ leave.employeeName }}</td>
+        <td>{{ leave.startDate }}</td>
+        <td>{{ leave.endDate }}</td>
+        <td>{{ leave.leaveType }}</td>
+        <td>{{ leave.status }}</td>
+        <td>
+          <!-- <button class="btn btn-success me-2 text-white (click)="editLeave(leave.id)">Edit</button> -->
+          <button class="btn btn-danger me-2 text-white" (click)="deleteLeave(leave.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

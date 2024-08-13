@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="container text-center text-success">Employee List</h1>
+  <h4 class="container text-center text-success">List of all employees will be displayed here.</h4>
+
+  <!-- <div *ngIf="employee">
+    <h2>{{ employee.name }}</h2>
+    <p>Email: {{ employee.email }}</p>
+    <p>Position: {{ employee.position }}</p>
+    <p>Salary: {{ employee.salary }}</p>
+    <!-- Add more fields as necessary
+  </div> 
+-->
+
+  <ul class="list-group">
+    <li *ngFor="let employee" class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        Name: <strong>{{ employee.name }}</strong>
+        Email: {{ employee.email }}
+        <div>
+          <em>Position: </em> {{ employee.position}}<br>
+          <em>Salary: </em> {{ employee.salary}}
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-info text-white me-2" (click)="editEmployee(employee)">Edit</button>
+        <button class="btn btn-sm btn-danger me-2" (click)="deleteEmployee(employee.id)">Delete</button>
+      </div>
+    </li>
+  </ul>
+  <ul class="add-student ">
+    <li class="d-flex me-5 py-3">
+      <button class="btn btn-success" routerLink="/eployee-create">Add New Employee</button>
+    </li>
+  </ul>
+</div>

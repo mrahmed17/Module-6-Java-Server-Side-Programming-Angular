@@ -1,0 +1,21 @@
+<div class="feedback-report-container">
+  <h2>Feedback Report</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feedback ID</th>
+        <th>Employee Name</th>
+        <th>Feedback</th>
+        <th>Date Submitted</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks">
+        <td>{{ feedback.id }}</td>
+        <td>{{ feedback.employeeName }}</td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td>{{ feedback.dateSubmitted | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

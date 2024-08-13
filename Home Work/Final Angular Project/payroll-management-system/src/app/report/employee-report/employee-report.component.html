@@ -1,0 +1,27 @@
+<div class="employee-report">
+  <h2>Employee Report</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Hire Date</th>
+        <th>Status</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.hireDate | date }}</td>
+        <td>{{ employee.status }}</td>
+        <td>{{ employee.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

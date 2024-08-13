@@ -1,0 +1,15 @@
+npm i bootstrap@5.3.3
+npm i @fortawesome/fontawesome-free
+npm i json-server@0.17.4
+npm i jsonwebtoken
+
+ng serve --open
+
+====From: Sir===
+npm i bootstrap@5.3.3
+
+npm install -g json-server
+
+npm install jsonwebtoken --save
+
+ng add @fortawesome/angular-fontawesome

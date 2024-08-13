@@ -1,0 +1,166 @@
+<div class="container">
+  <!-- Form Section -->
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center mb-4">Employee Form</h2> <!-- Added Heading -->
+      <div class="form-container">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstName">Name</label>
+              <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" formControlName="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="joiningDate">Joining Date</label>
+              <input type="date" class="form-control" formControlName="joiningDate">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="contact">Contact</label>
+              <input type="text" class="form-control" formControlName="contact">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                formControlName="gender">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                formControlName="gender">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="other" value="other"
+                formControlName="gender">
+              <label class="form-check-label" for="female">Other</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="department">Department:</label>
+              <select class="form-control" formControlName="department">
+                <option *ngFor="let dept of departments" [ngValue]="dept">{{ dept.deptName }}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="salary">Salary</label>
+              <input type="text" class="form-control" formControlName="salary">
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="reset" class="btn btn-secondary mx-2" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-success mx-2" (click)="onSubmit()">Save</button>
+            <button type="button" class="btn btn-warning mx-2" (click)="updateEmployee()">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <!-- Adjusted margin-top -->
+  <!-- <div class="row mt-2"> 
+    <div class="col">
+      <table class="table table-bordered table-striped">
+        <thead class="text-center">
+          <tr>
+            <th>ID</th>
+            <th>Employee Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>Salary</th>
+            <th>Joining Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody> -->
+  <!-- Loop through employees data -->
+  <!-- <tr *ngFor="let row of employees">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.contact}}</td>
+            <td>{{row.department?.deptName}}</td>
+            <td>{{row.gender}}</td>
+            <td>{{row.salary}}</td>
+            <td>{{row.joiningDate}}</td>
+            <td>
+              <button class="btn btn-warning btn-sm mx-1" (click)="editEmployee(row)">Update</button>
+              <button class="btn btn-danger btn-sm mx-1" (click)="deleteEmployee(row.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+</div>
+
+
+<!-- <div class="container">
+  <h2>Create Employee</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" class="form-control" formControlName="name">
+      <div
+        *ngIf="employeeForm.get('name')?.invalid && (employeeForm.get('name')?.dirty || employeeForm.get('name')?.touched)">
+        <div *ngIf="employeeForm.get('name')?.errors?.['required']">
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" class="form-control" formControlName="email">
+      <div
+        *ngIf="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)">
+        <div *ngIf="employeeForm.get('email')?.errors?.['required']">
+          Email is required.
+        </div>
+        <div *ngIf="employeeForm.get('email')?.errors?.['email']">
+          Email must be valid.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input id="position" class="form-control" formControlName="position">
+      <div
+        *ngIf="employeeForm.get('position')?.invalid && (employeeForm.get('position')?.dirty || employeeForm.get('position')?.touched)">
+        <div *ngIf="employeeForm.get('position')?.errors?.['required']">
+          Position is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input id="salary" type="number" class="form-control" formControlName="salary">
+      <div
+        *ngIf="employeeForm.get('salary')?.invalid && (employeeForm.get('salary')?.dirty || employeeForm.get('salary')?.touched)">
+        <div *ngIf="employeeForm.get('salary')?.errors?.['required']">
+          Salary is required.
+        </div>
+        <div *ngIf="employeeForm.get('salary')?.errors?.['min']">
+          Salary must be a positive number.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-2 ms-auto" (click)="employeeForm">Create Employee</button>
+  </form>
+</div> -->

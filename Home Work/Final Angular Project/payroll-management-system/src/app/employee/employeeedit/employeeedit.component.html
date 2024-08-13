@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Edit Employee</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="joiningDate">Joining Date:</label>
+      <input type="date" id="joiningDate" formControlName="joiningDate" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select id="gender" formControlName="gender" class="form-control">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="contact">Contact:</label>
+      <input type="text" id="contact" formControlName="contact" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="department">Department:</label>
+      <select id="department" formControlName="department" class="form-control">
+        <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.deptName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input type="number" id="salary" formControlName="salary" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary text-white me-2">Update</button>
+  </form>
+</div>
+
+
+
+<!-- <div class="container">
+  <h2>Edit Employee</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name" />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email" />
+    </div>
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <input type="text" id="position" class="form-control" formControlName="position" />
+    </div>
+    <div class="mb-3">
+      <label for="salary" class="form-label">Salary</label>
+      <input type="number" id="salary" class="form-control" formControlName="salary" />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Update Employee</button>
+  </form>
+</div> -->
