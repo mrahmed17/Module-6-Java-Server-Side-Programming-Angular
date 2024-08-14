@@ -10,10 +10,11 @@
     },
     {
       "id": "73b4",
-      "name": "Md. Raju",
-      "email": "tamim@gmail.com",
+      "name": "Tamim Ahmed",
+      "email": "tam@gmail.com",
       "password": "123456",
-      "profilePhoto": "https://media.istockphoto.com/id/1346124841/photo/successful-construction-site-worker-thinking.jpg?s=1024x1024&w=is&k=20&c=4SvUvVZDP5JOS7lXFUc05CLyZZQcTGD_kSopYBqsbxc="
+      "profilePhoto": "https://media.istockphoto.com/id/1346124841/photo/successful-construction-site-worker-thinking.jpg?s=1024x1024&w=is&k=20&c=4SvUvVZDP5JOS7lXFUc05CLyZZQcTGD_kSopYBqsbxc=",
+      "role": "User"
     }
   ],
   "locations": [
@@ -207,6 +208,22 @@
         "state": "Bangladesh",
         "photo": "https://angular.io/assets/images/tutorials/faa/ian-macdonald-W8z6aiwfi1E-unsplash.jpg",
         "availableUnits": "19",
+        "wifi": true,
+        "laundry": true
+      }
+    },
+    {
+      "id": "3c68",
+      "name": "Nirjash",
+      "email": "nir@gmail.com",
+      "cellNo": "458458954",
+      "location": {
+        "id": "4",
+        "name": "Panthapath",
+        "city": "Dhaka",
+        "state": "Bangladesh",
+        "photo": "https://angular.io/assets/images/tutorials/faa/krzysztof-hepner-978RAXoXnH4-unsplash.jpg",
+        "availableUnits": "24",
         "wifi": true,
         "laundry": true
       }

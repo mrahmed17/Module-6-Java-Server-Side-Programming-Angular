@@ -19,7 +19,7 @@ import { LogoutComponent } from './registration/logout/logout.component';
 import { UserprofileComponent } from './registration/userprofile/userprofile.component';
 import { FooterComponent } from './dashboard/footer/footer.component';
 import { HeaderComponent } from './dashboard/header/header.component';
-import { NgxPrintModule } from 'ngx-print';
+
 
 
 
@@ -48,7 +48,7 @@ import { NgxPrintModule } from 'ngx-print';
     ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
-    NgxPrintModule
+
   ],
   providers: [
     provideClientHydration(),
