@@ -41,6 +41,8 @@ Tips: Connect component to app-routing.module.ts
 Tips: For reuse the program from tsp to home or home to tsp
 13. npm update (for update to github)
 
+14. Create authguard:
+ng generate guard guard/authguard --implements CanActivate --project projectName
 
 
 For JSON API
