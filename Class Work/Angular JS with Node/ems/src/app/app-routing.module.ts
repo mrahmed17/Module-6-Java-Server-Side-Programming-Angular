@@ -12,6 +12,7 @@ import { AuthGuard } from './registration/guard/authguard.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { LogoutComponent } from './registration/logout/logout.component';
 import { UserprofileComponent } from './registration/userprofile/userprofile.component';
+import { roleGuard } from './registration/guard/role.guard';
 
 
 const routes: Routes = [
@@ -21,18 +22,18 @@ const routes: Routes = [
   },
   { path: 'home', component: HomeComponent },
   {
-    path: 'location', component: LocationComponent, canActivate: [AuthGuard, RoleGuard],
+    path: 'location', component: LocationComponent, canActivate: [AuthGuard, roleGuard],
     data: { role: 'User' }
   },
   {
-    path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard, RoleGuard],
+    path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard, roleGuard],
     data: { role: 'Admin' }
   },
   { path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard] },
   { path: 'student', component: ViewstudentComponent, canActivate: [AuthGuard] },
   {
     path: 'createstudent', component: CreatestudentComponent,
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard, roleGuard],
     data: { role: 'Admin' }
   },
   {
@@ -44,7 +45,7 @@ const routes: Routes = [
   {
     path: 'userprofile',
     component: UserprofileComponent,
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard, roleGuard],
     data: { role: ['Admin', 'User'] }
   }
 
