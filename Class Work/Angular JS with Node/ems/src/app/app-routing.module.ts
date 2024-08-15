@@ -12,42 +12,64 @@ import { AuthGuard } from './registration/guard/authguard.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { LogoutComponent } from './registration/logout/logout.component';
 import { UserprofileComponent } from './registration/userprofile/userprofile.component';
-import { roleGuard } from './registration/guard/role.guard';
+import { RoleGuard } from './registration/guard/role.guard';
+
 
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home', pathMatch: 'full'
+    path: '', redirectTo: 'home',
+    pathMatch: 'full'
   },
-  { path: 'home', component: HomeComponent },
   {
-    path: 'location', component: LocationComponent, canActivate: [AuthGuard, roleGuard],
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'location', component: LocationComponent, canActivate: [AuthGuard, RoleGuard],
     data: { role: 'User' }
   },
   {
-    path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard, roleGuard],
+    path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard, RoleGuard],
     data: { role: 'Admin' }
   },
-  { path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard] },
-  { path: 'student', component: ViewstudentComponent, canActivate: [AuthGuard] },
+  {
+    path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'student', component: ViewstudentComponent, canActivate: [AuthGuard]
+  },
   {
     path: 'createstudent', component: CreatestudentComponent,
-    canActivate: [AuthGuard, roleGuard],
+    canActivate: [AuthGuard, RoleGuard],
     data: { role: 'Admin' }
   },
   {
-    path: 'updatestudent/:id', component: UpdatestudentComponent, canActivate: [AuthGuard]
+    path: 'updatestudent/:id', component: UpdatestudentComponent, canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' }
   },
-  { path: 'reg', component: RegistrationComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
+  {
+    path: 'reg', component: RegistrationComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
   {
     path: 'userprofile',
     component: UserprofileComponent,
-    canActivate: [AuthGuard, roleGuard],
+    canActivate: [AuthGuard, RoleGuard],
     data: { role: ['Admin', 'User'] }
-  }
+  },
+  // {
+  //   path: '**', redirectTo: 'login',
+  //   pathMatch: 'full'
+  // },
+
+
 
   // { path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard] },
   // { path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard] },

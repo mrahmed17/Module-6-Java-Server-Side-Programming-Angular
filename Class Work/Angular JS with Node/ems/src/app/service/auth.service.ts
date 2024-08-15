@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { AuthResponse } from '../model/auth-response';
 
-import { catchError, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
 import { UserModel } from '../model/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 
 
@@ -14,26 +15,37 @@ import { UserModel } from '../model/user.model';
 export class AuthService {
 
   private baseUrl: string = "http://localhost:3000/user";
+  private currentUserSubject: BehaviorSubject<UserModel | null>;
+  public currentUser$: Observable<UserModel | null>;
+
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object  // Injecting PLATFORM_ID to check if it's browser
+  ) {
+    const storedUser = this.isBrowser() ? JSON.parse(localStorage.getItem('currentUser') || 'null') : null;
+    this.currentUserSubject = new BehaviorSubject<UserModel | null>(storedUser);
+    this.currentUser$ = this.currentUserSubject.asObservable();
+  }
 
+
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
   registration(user: UserModel): Observable<AuthResponse> {
-
     return this.http.post<UserModel>(this.baseUrl, user).pipe(
-
       map(
         (newUser: UserModel) => {
           const token = btoa(`${newUser.email}${newUser.password}`);
           return { token, user: newUser } as AuthResponse;
-
-        })
-    )
+        }),
+      catchError(error => {
+        console.error('Registration error:', error);
+        throw error;
+      })
+    );
   }
-
-
 
   login(credentials: { email: string; password: string }): Observable<AuthResponse> {
     let params = new HttpParams();
@@ -45,7 +57,9 @@ export class AuthService {
           const user = users[0];
           if (user.password === credentials.password) {
             const token = btoa(`${user.email}:${user.password}`);
-            this.storeUserProfile(user);
+            this.storeToken(token);
+            this.setCurrentUser(user);
+            // this.storeUserProfile(user);
             return { token, user } as AuthResponse;
           } else {
             throw new Error('Invalid password');
@@ -55,41 +69,81 @@ export class AuthService {
         }
       }),
 
-      catchError(err => {
-        console.error('Login error', err);
-        throw err;
+      catchError(error => {
+        console.error('Login error:', error);
+        throw error;
       })
     );
   }
 
-
-
-  logout(): void {
-    localStorage.removeItem('token');
+  public get currentUserValue(): UserModel | null {
+    return this.currentUserSubject.value;
   }
 
-  storeToken(token: string): void {
-    localStorage.setItem('token', token);
+  logout(): void {
+    this.clearCurrentUser();
+    if (this.isBrowser()) {
+      localStorage.removeItem('token');
+    }
+    // localStorage.removeItem('token');
+  }
+
+  private setCurrentUser(user: UserModel): void {
+    if (this.isBrowser()) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+    this.currentUserSubject.next(user);
+  }
+
+  private clearCurrentUser(): void {
+    if (this.isBrowser()) {
+      localStorage.removeItem('currentUser');
+    }
+    this.currentUserSubject.next(null);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.isBrowser() ? localStorage.getItem('token') : null;
   }
 
+  getUserRole(): any {
+    return this.currentUserValue?.role;
+  }
+
+  storeToken(token: string): void {
+    if (this.isBrowser()) {
+      localStorage.setItem('token', token);
+    }
+  }
+
+  // storeToken(token: string): void {
+  //   localStorage.setItem('token', token);
+  // }
+
   storeUserProfile(user: UserModel): void {
-    localStorage.setItem('userProfile', JSON.stringify(user));
+    if (this.isBrowser()) {
+      localStorage.setItem('userProfile', JSON.stringify(user));
+
+    }
   }
 
   getUserProfileFromStorage(): UserModel | null {
-    const userProfile = localStorage.getItem('userProfile');
-    return userProfile ? JSON.parse(userProfile) : null;
+    if (this.isBrowser()) {
+      const userProfile = localStorage.getItem('userProfile');
+      console.log('User Profile is: ', userProfile);
+      return userProfile ? JSON.parse(userProfile) : null;
+    }
+    return null;
   }
 
   removeUserDetails() {
-    localStorage.clear();
-
+    if (this.isBrowser()) {
+      localStorage.clear();
+    }
   }
-
-
 
 }

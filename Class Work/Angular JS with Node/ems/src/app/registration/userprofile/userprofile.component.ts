@@ -24,6 +24,12 @@ export class UserprofileComponent {
     this.loadUserProfile();
   }
 
+  // ngOnInit(): void {
+  //   this.userProfileService.getUserProfile().subscribe(profile => {
+  //     this.user = profile;
+  //      });
+  //    }
+
   loadUserProfile(): void {
     const sub = this.userProfileService.getUserProfile().subscribe({
       next: (user) => {
@@ -33,6 +39,7 @@ export class UserprofileComponent {
       },
       error: (err) => {
         console.error('Error, loading user profile:', err);
+        // You can handle the error further, e.g., showing an error message to the user
       }
     });
     this.subscription.add(sub);  // Manage the subscription
@@ -41,11 +48,5 @@ export class UserprofileComponent {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();  // Unsubscribe when the component is destroyed
   }
-
-  // ngOnInit(): void {
-  //   this.userProfileService.getUserProfile().subscribe(profile => {
-  //     this.user = profile;
-  //      });
-  //    }
 
 }
