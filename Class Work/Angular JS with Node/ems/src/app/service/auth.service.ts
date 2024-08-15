@@ -28,6 +28,11 @@ export class AuthService {
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
+  // AuthService
+  getUserId(): string | null {
+    return this.currentUserValue?.id || null;
+  }
+
 
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);

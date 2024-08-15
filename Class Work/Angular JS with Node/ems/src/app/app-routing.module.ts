@@ -6,13 +6,14 @@ import { UpdatelocationComponent } from './location/updatelocation/updatelocatio
 import { ViewstudentComponent } from './student/viewstudent/viewstudent.component';
 import { CreatestudentComponent } from './student/createstudent/createstudent.component';
 import { UpdatestudentComponent } from './student/updatestudent/updatestudent.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './registration/createprofile/registration.component';
 import { LoginComponent } from './registration/login/login.component';
 import { AuthGuard } from './registration/guard/authguard.guard';
 import { HomeComponent } from './dashboard/home/home.component';
 import { LogoutComponent } from './registration/logout/logout.component';
 import { UserprofileComponent } from './registration/userprofile/userprofile.component';
 import { RoleGuard } from './registration/guard/role.guard';
+
 
 
 

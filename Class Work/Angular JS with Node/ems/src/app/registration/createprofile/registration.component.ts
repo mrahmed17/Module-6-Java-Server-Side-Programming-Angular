@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserModel } from '../model/user.model';
+import { UserModel } from '../../model/user.model';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { UserModel } from '../model/user.model';
 export class RegistrationComponent {
 
   regForm: FormGroup;
-  selectedFile: File | null = null;
+  // selectedFile: File | null = null;
 
   constructor(
     private authService: AuthService,
@@ -27,7 +27,9 @@ export class RegistrationComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      profilePhoto: ['', Validators.required]
+      role: ['', Validators.required], // Default value set to 'User'
+      profilePhoto: [''],
+
 
       // name:['', Validators.required],
       // email:['', [Validators.required, Validators.email]],
@@ -37,12 +39,12 @@ export class RegistrationComponent {
 
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-    }
-  }
+  // onFileSelected(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files.length > 0) {
+  //     this.selectedFile = input.files[0];
+  //   }
+  // }
 
   onSubmit(): void {
     if (this.regForm.valid) {

@@ -13,7 +13,7 @@ import { CreatestudentComponent } from './student/createstudent/createstudent.co
 import { UpdatestudentComponent } from './student/updatestudent/updatestudent.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './registration/login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './registration/createprofile/registration.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { LogoutComponent } from './registration/logout/logout.component';
 import { UserprofileComponent } from './registration/userprofile/userprofile.component';
