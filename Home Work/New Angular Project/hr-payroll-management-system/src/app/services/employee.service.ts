@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/HttpClient';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from '../model/employee.model';
@@ -7,7 +7,7 @@ import { Employee } from '../model/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://your-api-url.com/employees';
+  private apiUrl = 'http://localhost:3000/employees';
 
   constructor(private http: HttpClient) { }
 
