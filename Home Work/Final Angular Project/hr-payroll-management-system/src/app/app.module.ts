@@ -50,13 +50,13 @@ import { CreateperformanceComponent } from './components/performance/createperfo
 import { EditperformanceComponent } from './components/performance/editperformance/editperformance.component';
 import { ListperformanceComponent } from './components/performance/listperformance/listperformance.component';
 import { ViewperformanceComponent } from './components/performance/viewperformance/viewperformance.component';
-import { EmployeereportComponent } from './reports/employeereport/employeereport.component';
-import { LeavereportComponent } from './reports/leavereport/leavereport.component';
-import { PayrollreportComponent } from './reports/payrollreport/payrollreport.component';
-import { CreatefeedbackComponent } from './reports/feedback/createfeedback/createfeedback.component';
-import { EditfeedbackComponent } from './reports/feedback/editfeedback/editfeedback.component';
-import { ViewfeedbackComponent } from './reports/feedback/viewfeedback/viewfeedback.component';
-import { ListfeedbackComponent } from './reports/feedback/listfeedback/listfeedback.component';
+import { CreatefeedbackComponent } from './components/feedback/createfeedback/createfeedback.component';
+import { EditfeedbackComponent } from './components/feedback/editfeedback/editfeedback.component';
+import { ViewfeedbackComponent } from './components/feedback/viewfeedback/viewfeedback.component';
+import { ListfeedbackComponent } from './components/feedback/listfeedback/listfeedback.component';
+import { CreateemployeereportComponent } from './reports/employeereport/createemployeereport/createemployeereport.component';
+import { EditemployeereportComponent } from './reports/employeereport/editemployeereport/editemployeereport.component';
+
 
 
 @NgModule({
@@ -103,13 +103,13 @@ import { ListfeedbackComponent } from './reports/feedback/listfeedback/listfeedb
     EditperformanceComponent,
     ListperformanceComponent,
     ViewperformanceComponent,
-    EmployeereportComponent,
-    LeavereportComponent,
-    PayrollreportComponent,
     CreatefeedbackComponent,
     EditfeedbackComponent,
     ViewfeedbackComponent,
     ListfeedbackComponent,
+    CreateemployeereportComponent,
+    EditemployeereportComponent,
+
   ],
 
   imports: [

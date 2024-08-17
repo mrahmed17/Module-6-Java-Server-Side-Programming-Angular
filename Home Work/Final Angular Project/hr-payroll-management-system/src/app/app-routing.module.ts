@@ -35,15 +35,12 @@ import { ViewpayrollComponent } from './components/payroll/viewpayroll/viewpayro
 import { CreatePayrollComponent } from './components/payroll/createpayroll/createpayroll.component';
 import { EditpayrollComponent } from './components/payroll/editpayroll/editpayroll.component';
 import { NotfoundComponent } from './errorhandling/notfound/notfound.component';
-import { EmployeereportComponent } from './reports/employeereport/employeereport.component';
-import { LeavereportComponent } from './reports/leavereport/leavereport.component';
-import { PayrollreportComponent } from './reports/payrollreport/payrollreport.component';
 import { AuthGuard } from './authentication/guard/authguard.guard';
 import { RoleGuard } from './authentication/guard/role.guard';
-import { CreatefeedbackComponent } from './reports/feedback/createfeedback/createfeedback.component';
-import { EditfeedbackComponent } from './reports/feedback/editfeedback/editfeedback.component';
-import { ViewfeedbackComponent } from './reports/feedback/viewfeedback/viewfeedback.component';
-import { ListfeedbackComponent } from './reports/feedback/listfeedback/listfeedback.component';
+import { CreatefeedbackComponent } from './components/feedback/createfeedback/createfeedback.component';
+import { EditfeedbackComponent } from './components/feedback/editfeedback/editfeedback.component';
+import { ViewfeedbackComponent } from './components/feedback/viewfeedback/viewfeedback.component';
+import { ListfeedbackComponent } from './components/feedback/listfeedback/listfeedback.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -117,14 +114,14 @@ const routes: Routes = [
       { path: 'list', component: ListdepartmentComponent, canActivate: [AuthGuard] },
     ]
   },
-  {
-    path: 'reports',
-    children: [
-      { path: 'employee', component: EmployeereportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'leave', component: LeavereportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'payroll', component: PayrollreportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-    ]
-  },
+  // {
+  //   path: 'reports',
+  //   children: [
+  //     { path: 'employee', component: EmployeereportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
+  //     { path: 'leave', component: LeavereportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
+  //     { path: 'payroll', component: PayrollreportComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
+  //   ]
+  // },
   {
     path: 'feedbacks',
     children: [
