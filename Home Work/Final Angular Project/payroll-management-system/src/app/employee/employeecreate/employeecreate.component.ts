@@ -29,7 +29,7 @@ export class EmployeeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEmployees();
-    this.loadDepartments();
+    // this.loadDepartments();
     this.initEmployeeForm();
   }
 
@@ -40,15 +40,15 @@ export class EmployeeCreateComponent implements OnInit {
     });
   }
 
-  loadDepartments(): void {
-    this.departmentService.getAllDepartment().subscribe({
-      next: (data: Department[]) => {
-        console.log('Departments:', data);
-        this.departments = data;
-      },
-      error: error => console.error('Error fetching departments:', error)
-    });
-  }
+  // loadDepartments(): void {
+  //   this.departmentService.getAllDepartment().subscribe({
+  //     next: (data: Department[]) => {
+  //       console.log('Departments:', data);
+  //       this.departments = data;
+  //     },
+  //     error: error => console.error('Error fetching departments:', error)
+  //   });
+  // }
 
   initEmployeeForm(): void {
     this.employeeForm = this.fb.group({
@@ -89,19 +89,19 @@ export class EmployeeCreateComponent implements OnInit {
     }
   }
 
-  editEmployee(row: Employee): void {
-    this.selectedEmployeeId = row.id;
+  // editEmployee(row: Employee): void {
+  //   this.selectedEmployeeId = row.id;
 
-    this.employeeForm.patchValue({
-      name: row.name,
-      email: row.email,
-      joiningDate: row.joiningDate,
-      gender: row.gender,
-      contact: row.contact,
-      department: row.department,
-      salary: row.salary
-    });
-  }
+  //   this.employeeForm.patchValue({
+  //     name: row.name,
+  //     email: row.email,
+  //     joiningDate: row.joiningDate,
+  //     gender: row.gender,
+  //     contact: row.contact,
+  //     department: row.department,
+  //     salary: row.salary
+  //   });
+  // }
 
   updateEmployee(): void {
     if (this.selectedEmployeeId && this.employeeForm.valid) {

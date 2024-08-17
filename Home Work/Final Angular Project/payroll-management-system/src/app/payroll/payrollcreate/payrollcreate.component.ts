@@ -45,15 +45,15 @@ export class PayrollcreateComponent implements OnInit {
     });
   }
 
-  loadDepartments(): void {
-    this.departmentService.getAllDepartment().subscribe({
-      next: (data: Department[]) => {
-        console.log('Departments:', data);
-        this.departments = data;
-      },
-      error: error => console.error('Error fetching departments:', error)
-    });
-  }
+  // loadDepartments(): void {
+  //   this.departmentService.getAllDepartment().subscribe({
+  //     next: (data: Department[]) => {
+  //       console.log('Departments:', data);
+  //       this.departments = data;
+  //     },
+  //     error: error => console.error('Error fetching departments:', error)
+  //   });
+  // }
 
   initPayrollForm(): void {
     this.payrollForm = this.fb.group({

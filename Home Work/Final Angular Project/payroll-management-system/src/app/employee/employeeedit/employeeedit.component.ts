@@ -40,7 +40,7 @@ export class EmployeeeditComponent implements OnInit {
   ngOnInit(): void {
     this.employeeId = +this.route.snapshot.paramMap.get('id')!;
     this.initEmployeeForm();
-    this.loadDepartments();
+    // this.loadDepartments();
     this.loadEmployee();
   }
 
@@ -69,14 +69,14 @@ export class EmployeeeditComponent implements OnInit {
     });
   }
 
-  loadDepartments(): void {
-    this.departmentService.getAllDepartment().subscribe({
-      next: (data: Department[]) => {
-        this.departments = data;
-      },
-      error: error => { console.error('Error fetching departments:', error) }
-    });
-  }
+  // loadDepartments(): void {
+  //   this.departmentService.getAllDepartment().subscribe({
+  //     next: (data: Department[]) => {
+  //       this.departments = data;
+  //     },
+  //     error: error => { console.error('Error fetching departments:', error) }
+  //   });
+  // }
 
   loadEmployee(): void {
     this.employeeService.getEmployee(this.employeeId).subscribe({

@@ -27,15 +27,15 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'location', component: LocationComponent, canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'User' }
+    path: 'location', component: LocationComponent, canActivate: [AuthGuard]
   },
   {
     path: 'createlocation', component: CreatelocationComponent, canActivate: [AuthGuard, RoleGuard],
     data: { role: 'Admin' }
   },
   {
-    path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard]
+    path: 'updatelocation/:id', component: UpdatelocationComponent, canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' }
   },
   {
     path: 'student', component: ViewstudentComponent, canActivate: [AuthGuard]
@@ -50,7 +50,8 @@ const routes: Routes = [
     data: { role: 'Admin' }
   },
   {
-    path: 'reg', component: RegistrationComponent, canActivate: [AuthGuard]
+    path: 'reg', component: RegistrationComponent, canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' }
   },
   {
     path: 'login', component: LoginComponent
