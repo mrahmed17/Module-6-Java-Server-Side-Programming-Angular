@@ -1,4 +1,4 @@
-import { UserModel } from "../../registration/user.model";
+import { UserModel } from "../../admin/user.model";
 
 export interface AuthResponse {
     token: string;
