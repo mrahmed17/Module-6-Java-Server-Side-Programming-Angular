@@ -6,20 +6,20 @@ import { UserModel } from '../../admin/user.model';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthService {
-
-  private apiUrl: string = "http://localhost:3000/user";
+  private apiUrl: string = 'http://localhost:3000/user';
   private currentUserSubject: BehaviorSubject<UserModel | null>;
   public currentUser$: Observable<UserModel | null>;
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object  // Injecting PLATFORM_ID to check if it's browser
+    @Inject(PLATFORM_ID) private platformId: Object // Injecting PLATFORM_ID to check if it's browser
   ) {
-    const storedUser = this.isBrowser() ? JSON.parse(localStorage.getItem('currentUser') || 'null') : null;
+    const storedUser = this.isBrowser()
+      ? JSON.parse(localStorage.getItem('currentUser') || 'null')
+      : null;
     this.currentUserSubject = new BehaviorSubject<UserModel | null>(storedUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
@@ -32,26 +32,28 @@ export class AuthService {
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }
-
+  // Registers a new user
   registration(user: UserModel): Observable<AuthResponse> {
     return this.http.post<UserModel>(this.apiUrl, user).pipe(
-      map(
-        (newUser: UserModel) => {
-          const token = btoa(`${newUser.email}${newUser.password}`);
-          return { token, user: newUser } as AuthResponse;
-        }),
-      catchError(error => {
+      map((newUser: UserModel) => {
+        const token = this.generateToken(newUser);
+        return { token, user: newUser } as AuthResponse;
+      }),
+      catchError((error) => {
         console.error('Registration error:', error);
-        throw error;
+        return throwError(() => new Error('Registration failed'));
       })
     );
   }
-
-  login(credentials: { email: string; password: string }): Observable<AuthResponse> {
+  // Logs in a user
+  login(credentials: {
+    email: string;
+    password: string;
+  }): Observable<AuthResponse> {
     let params = new HttpParams().set('email', credentials.email);
 
     return this.http.get<UserModel[]>(this.apiUrl, { params }).pipe(
-      map(users => {
+      map((users) => {
         const user = users[0];
         if (user && user.password === credentials.password) {
           const token = this.generateToken(user);
@@ -61,15 +63,17 @@ export class AuthService {
         }
         throw new Error('Invalid credentials');
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Login error:', error);
-        return throwError(() => new Error('Failed to login. Please check your credentials.'));
+        return throwError(
+          () => new Error('Failed to login. Please check your credentials.')
+        );
       })
     );
   }
 
   private generateToken(user: UserModel): string {
-    // Example of a token generation using JSON.stringify, 
+    // Example of a token generation using JSON.stringify,
     // you should replace this with a more secure JWT or other method
     return btoa(JSON.stringify({ email: user.email, password: user.password }));
   }
@@ -156,7 +160,6 @@ export class AuthService {
   storeUserProfile(user: UserModel): void {
     if (this.isBrowser()) {
       localStorage.setItem('userProfile', JSON.stringify(user));
-
     }
   }
 
@@ -174,5 +177,4 @@ export class AuthService {
       localStorage.clear();
     }
   }
-
 }

@@ -5,39 +5,51 @@ import { UserModel } from './user.model';
 import { catchError, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserprofileService {
+  private apiUrl: string = 'http://localhost:3000/users'; // API URL directly here
 
-  private apiUrl: string = 'http://localhost:3000/users';
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) { }
+  // Helper method to set headers including Authorization
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken(); // Assuming AuthService has a method to get the token
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+  }
 
   // Create a new user
   createUser(user: UserModel): Observable<UserModel> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<UserModel>(this.apiUrl, user, { headers })
+    const headers = this.getAuthHeaders();
+    return this.http
+      .post<UserModel>(this.apiUrl, user, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Get a single user by ID
   getUser(id: string): Observable<UserModel> {
-    return this.http.get<UserModel>(`${this.apiUrl}/${id}`)
+    const headers = this.getAuthHeaders();
+    return this.http
+      .get<UserModel>(`${this.apiUrl}/${id}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Get all users
   getAllUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(this.apiUrl)
+    const headers = this.getAuthHeaders();
+    return this.http
+      .get<UserModel[]>(this.apiUrl, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Delete a user
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+    const headers = this.getAuthHeaders();
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -45,12 +57,15 @@ export class UserprofileService {
   getUserProfile(): Observable<UserModel | null> {
     const userId = this.authService.getUserId();
     if (userId) {
-      return this.http.get<UserModel>(`${this.apiUrl}/${userId}`).pipe(
-        catchError(err => {
-          console.error('Error fetching user profile:', err);
-          return of(null);
-        })
-      );
+      const headers = this.getAuthHeaders();
+      return this.http
+        .get<UserModel>(`${this.apiUrl}/${userId}`, { headers })
+        .pipe(
+          catchError((err) => {
+            console.error('Error fetching user profile:', err);
+            return of(null);
+          })
+        );
     }
     return of(null); // Return an observable with null if userId is not available
   }
@@ -58,10 +73,10 @@ export class UserprofileService {
   // Update the logged-in user's profile
   updateUserProfile(user: UserModel): Observable<UserModel> {
     if (user && user.id) {
-      // Update local storage with the new user profile
+      const headers = this.getAuthHeaders();
       localStorage.setItem('userProfile', JSON.stringify(user));
-      // Make the API call to update the profile
-      return this.http.put<UserModel>(`${this.apiUrl}/${user.id}`, user)
+      return this.http
+        .put<UserModel>(`${this.apiUrl}/${user.id}`, user, { headers })
         .pipe(catchError(this.handleError));
     } else {
       return throwError(() => new Error('Invalid user data'));
@@ -70,14 +85,33 @@ export class UserprofileService {
 
   // Error handling method
   private handleError(error: any): Observable<never> {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage: string;
+
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Client-side error: ${error.error.message}`;
     } else {
-      // Server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      switch (error.status) {
+        case 400:
+          errorMessage = `Bad Request: ${error.message}`;
+          break;
+        case 401:
+          errorMessage = `Unauthorized: ${error.message}`;
+          break;
+        case 403:
+          errorMessage = `Forbidden: ${error.message}`;
+          break;
+        case 404:
+          errorMessage = `Not Found: ${error.message}`;
+          break;
+        case 500:
+          errorMessage = `Internal Server Error: ${error.message}`;
+          break;
+        default:
+          errorMessage = `Unexpected Error: ${error.message}`;
+          break;
+      }
     }
+
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }

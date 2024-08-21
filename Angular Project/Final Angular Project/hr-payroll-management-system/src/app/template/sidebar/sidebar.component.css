@@ -1,30 +1,60 @@
-.submenu-list {
-  display: none;
-  list-style: none;
-  padding-left: 18px;
-  color: rgb(24, 205, 255);
+/* Custom styles for the admin dashboard */
+
+body {
+  font-family: Arial, sans-serif;
 }
 
-.submenu-toggle.active+.submenu-list {
-  display: block;
+#wrapper {
+  display: flex;
+  align-items: stretch;
 }
 
-.submenu-toggle::after {
-  content: '\25BC';
-  /* Down arrow */
-  float: right;
+#sidebar-wrapper {
+  min-width: 250px;
+  max-width: 250px;
+  background-color: #343a40;
 }
 
-.submenu-toggle.active::after {
-  content: '\25B2';
-  /* Up arrow */
+#sidebar-wrapper .sidebar-heading {
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: white;
+  background-color: #343a40;
 }
 
-.collapse {
-  transition: height 0.3s ease;
-  overflow: hidden;
+#sidebar-wrapper .list-group {
+  width: 100%;
 }
 
-.collapse.show {
-  display: block;
+#page-content-wrapper {
+  width: 100%;
+}
+
+.navbar {
+  padding: 1rem;
+}
+
+.card {
+  margin: 20px 0;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+/* Toggle sidebar */
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: -250px;
 }

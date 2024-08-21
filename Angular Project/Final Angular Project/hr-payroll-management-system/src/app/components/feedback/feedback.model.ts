@@ -1,8 +1,8 @@
+import { UserModel } from '../../admin/user.model';
+
 export class FeedbackModel {
   id?: string;
-  employeeId!: number;
-  departmentId!: number;
-  employeeName!: string;
+  user!: UserModel;
   rating!: number;
   comments!: string;
   feedbackDate!: Date;

@@ -1,6 +1,8 @@
+import { UserModel } from '../../admin/user.model';
+
 export class PayrollModel {
   id!: string; // Primary Key
-  employeeId!: string; // Foreign Key to Employee
+  user!: UserModel; // Foreign Key to Employee
   basicSalary!: number; // Basic salary amount
   bonuses?: number; // Optional: Bonuses or incentives
   deductions?: number; // Optional: Deductions (e.g., tax, insurance)
@@ -12,11 +14,9 @@ export class PayrollModel {
   status!: 'Paid' | 'Pending' | 'Overdue'; // Status of the payroll
 }
 
-
 //     export class PayrollModel {
 //     id!: string;
-//     name!: string;
-//     gender!: string;
+//
 //     hireDate!: string;
 //     jobTitle/role!: string;
 //     annualSalary!: string;
