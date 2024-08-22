@@ -1,4 +1,4 @@
-import { UserModel } from '../../admin/user.model';
+import { UserModel } from '../models/user.model';
 
 export class LeaveModel {
   id?: string;

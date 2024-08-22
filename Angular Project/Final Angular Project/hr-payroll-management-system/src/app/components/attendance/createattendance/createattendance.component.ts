@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AttendanceService } from '../../attendance/attendance.service';
+import { AttendanceService } from '../../../services/attendance.service';
 import { Router } from '@angular/router';
-import { AttendanceModel } from '../attendance.model';
+import { AttendanceModel } from '../../../models/attendance.model';
 
 @Component({
   selector: 'app-createattendance',
   templateUrl: './createattendance.component.html',
-  styleUrls: ['./createattendance.component.css']
+  styleUrls: ['./createattendance.component.css'],
 })
 export class CreateAttendanceComponent implements OnInit {
-
   attendanceForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private attendanceService: AttendanceService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -41,8 +40,8 @@ export class CreateAttendanceComponent implements OnInit {
         contact: [''],
         salary: [''],
         departmentId: [''],
-        locationId: ['']
-      })
+        locationId: [''],
+      }),
     });
   }
 
@@ -56,7 +55,7 @@ export class CreateAttendanceComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating attendance:', err);
-        }
+        },
       });
     } else {
       console.log('Form is invalid');

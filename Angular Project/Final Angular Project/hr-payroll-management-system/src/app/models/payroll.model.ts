@@ -1,4 +1,4 @@
-import { UserModel } from '../../admin/user.model';
+import { UserModel } from './user.model';
 
 export class PayrollModel {
   id!: string; // Primary Key

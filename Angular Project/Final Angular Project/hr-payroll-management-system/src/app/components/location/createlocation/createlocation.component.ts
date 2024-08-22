@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../location.service';
+import { LocationService } from '../../../services/location.service';
 import { Router } from '@angular/router';
-import { LocationModel } from '../location.model';
+import { LocationModel } from '../../../models/location.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-createlocation',
   templateUrl: './createlocation.component.html',
-  styleUrls: ['./createlocation.component.css']
+  styleUrls: ['./createlocation.component.css'],
 })
 export class CreatelocationComponent implements OnInit {
   locationForm!: FormGroup;
@@ -15,9 +15,8 @@ export class CreatelocationComponent implements OnInit {
   constructor(
     private locationService: LocationService,
     private formBuilder: FormBuilder,
-    private router: Router,
-  ) {
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
@@ -27,9 +26,8 @@ export class CreatelocationComponent implements OnInit {
       photo: [''],
       availableUnits: ['', [Validators.required, Validators.min(1)]],
       wifi: [false],
-      laundry: [false]
-    }
-    );
+      laundry: [false],
+    });
   }
 
   onSubmit(): void {
@@ -43,7 +41,7 @@ export class CreatelocationComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating location:', err);
-        }
+        },
       });
     } else {
       console.log('Form is invalid');

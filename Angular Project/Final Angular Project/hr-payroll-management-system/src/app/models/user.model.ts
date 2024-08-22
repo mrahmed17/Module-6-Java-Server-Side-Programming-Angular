@@ -1,6 +1,4 @@
-import { DepartmentModel } from '../components/department/department.model';
-import { EmployeeModel } from '../components/employee/employee.model';
-import { LocationModel } from '../components/location/location.model';
+import { DepartmentModel } from '../models/department.model';
 
 export class UserModel {
   id!: string; // Primary Key

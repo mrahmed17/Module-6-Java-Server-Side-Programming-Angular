@@ -1,5 +1,5 @@
-import { DepartmentModel } from '../department/department.model';
-import { LocationModel } from '../location/location.model';
+import { DepartmentModel } from '../models/department.model';
+import { LocationModel } from '../models/location.model';
 
 export class EmployeeModel {
   id!: string; //Primary Key

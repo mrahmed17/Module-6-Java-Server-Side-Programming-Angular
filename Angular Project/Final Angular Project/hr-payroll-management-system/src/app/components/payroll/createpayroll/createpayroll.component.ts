@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PayrollService } from '../../payroll/payroll.service';
-import { PayrollModel } from '../payroll.model';
+import { PayrollService } from '../../../services/payroll.service';
+import { PayrollModel } from '../../../models/payroll.model';
 
 @Component({
   selector: 'app-createpayroll',
   templateUrl: './createpayroll.component.html',
-  styleUrls: ['./createpayroll.component.css']
+  styleUrls: ['./createpayroll.component.css'],
 })
 export class CreatePayrollComponent implements OnInit {
   payrollForm!: FormGroup;
@@ -17,7 +17,7 @@ export class CreatePayrollComponent implements OnInit {
     private formBuilder: FormBuilder,
     private payrollService: PayrollService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -31,7 +31,7 @@ export class CreatePayrollComponent implements OnInit {
       deductions: [0, Validators.min(0)],
       tax: [0, Validators.min(0)],
       netPay: [0],
-      payrollStatus: ['', Validators.required]
+      payrollStatus: ['', Validators.required],
     });
 
     this.payrollForm.valueChanges.subscribe(() => {
@@ -60,7 +60,7 @@ export class CreatePayrollComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating payroll:', err);
-        }
+        },
       });
     } else {
       console.log('Form is invalid');
