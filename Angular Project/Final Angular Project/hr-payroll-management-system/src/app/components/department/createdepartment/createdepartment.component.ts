@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DepartmentModel } from '../department.model';
-import { DepartmentService } from '../../department/department.service';
-import { LocationService } from '../../location/location.service'; // Import if you need locations
-
+import { DepartmentModel } from '../../../models/department.model';
+import { DepartmentService } from '../../../services/department.service';
+import { LocationService } from '../../../services/location.service'; // Import if you need locations
 
 @Component({
   selector: 'app-createdepartment',
   templateUrl: './createdepartment.component.html',
-  styleUrls: ['./createdepartment.component.css']
+  styleUrls: ['./createdepartment.component.css'],
 })
 export class CreatedepartmentComponent implements OnInit {
   departmentForm!: FormGroup;
@@ -20,7 +19,7 @@ export class CreatedepartmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private locationService: LocationService, // If you need to load locations
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.departmentForm = this.formBuilder.group({
@@ -34,8 +33,8 @@ export class CreatedepartmentComponent implements OnInit {
         baseHours: ['', Validators.required],
         overtimeRate: ['', Validators.required],
         overtimeCapping: [''],
-        overtimeExemptEmployees: [[]]
-      })
+        overtimeExemptEmployees: [[]],
+      }),
     });
     // Load locations if necessary
     this.loadLocations();
@@ -48,7 +47,7 @@ export class CreatedepartmentComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching locations:', err);
-      }
+      },
     });
   }
 
@@ -63,7 +62,7 @@ export class CreatedepartmentComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating department:', err);
-        }
+        },
       });
     } else {
       console.log('Form is invalid');

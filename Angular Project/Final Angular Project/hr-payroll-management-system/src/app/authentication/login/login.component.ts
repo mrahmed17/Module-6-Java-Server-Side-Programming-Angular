@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../guard/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-
   loginForm!: FormGroup;
 
   constructor(
@@ -17,10 +16,9 @@ export class LoginComponent {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-
     this.loginForm = this.formBuilder.group({
       email: [''],
-      password: ['']
+      password: [''],
     });
   }
 
@@ -38,9 +36,8 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Error logging in:', err);
-        }
+        },
       });
     }
   }
-
 }

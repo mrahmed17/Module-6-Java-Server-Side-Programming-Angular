@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../authentication/guard/auth.service';
-import { UserModel } from './user.model';
+import { AuthService } from '../services/auth.service';
+import { UserModel } from '../models/user.model';
 import { catchError, Observable, of, throwError } from 'rxjs';
 
 @Injectable({

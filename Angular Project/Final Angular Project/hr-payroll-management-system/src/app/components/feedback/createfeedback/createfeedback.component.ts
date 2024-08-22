@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FeedbackModel } from '../feedback.model';
-import { FeedbackService } from '../../feedback/feedback.service';
+import { FeedbackModel } from '../../../models/feedback.model';
+import { FeedbackService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-createfeedback',
   templateUrl: './createfeedback.component.html',
-  styleUrls: ['./createfeedback.component.css']
+  styleUrls: ['./createfeedback.component.css'],
 })
 export class CreatefeedbackComponent implements OnInit {
   feedbackForm!: FormGroup;
@@ -17,7 +17,7 @@ export class CreatefeedbackComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private feedbackService: FeedbackService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -49,7 +49,8 @@ export class CreatefeedbackComponent implements OnInit {
       },
       (error) => {
         console.error('Error creating feedback:', error);
-        this.errorMessage = 'An error occurred while creating the feedback. Please try again.';
+        this.errorMessage =
+          'An error occurred while creating the feedback. Please try again.';
       }
     );
   }

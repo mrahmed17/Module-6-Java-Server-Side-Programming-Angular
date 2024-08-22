@@ -1,4 +1,4 @@
-import { LocationModel } from '../location/location.model';
+import { LocationModel } from '../models/location.model';
 
 export class DepartmentModel {
   id!: string; // Primary Key

@@ -1,7 +1,7 @@
-import { UserModel } from '../../admin/user.model';
+import { UserModel } from '../models/user.model';
 
 export class FeedbackModel {
-  id?: string;
+  id!: string;
   user!: UserModel;
   rating!: number;
   comments!: string;

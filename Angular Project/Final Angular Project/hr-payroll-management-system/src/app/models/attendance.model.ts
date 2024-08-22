@@ -1,5 +1,4 @@
-import { UserModel } from '../../admin/user.model';
-import { EmployeeModel } from '../employee/employee.model';
+import { UserModel } from '../models/user.model';
 
 export class AttendanceModel {
   id?: string; // Attendance ID, optional

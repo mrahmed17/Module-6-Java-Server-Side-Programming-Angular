@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { AuthResponse } from '../guard/auth-response';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
-import { UserModel } from '../../admin/user.model';
+import { UserModel } from '../../models/user.model';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
