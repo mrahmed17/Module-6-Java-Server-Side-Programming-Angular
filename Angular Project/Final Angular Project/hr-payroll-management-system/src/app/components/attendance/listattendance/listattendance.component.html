@@ -1,1 +1,19 @@
-<p>listattendance works!</p>
+<div class="container">
+  <h1>Attendance List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let attendance of attendances">
+        <!-- <td>{{ attendance.employeeId }}</td> -->
+        <td>{{ attendance.date }}</td>
+        <td>{{ attendance.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

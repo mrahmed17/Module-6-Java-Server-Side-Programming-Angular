@@ -1,7 +1,7 @@
-export interface Attendance {
+export class Attendance {
   id?: string | null; // Attendance ID, optional and nullable
   date?: Date | null; // Date of attendance, optional and nullable
-  status: 'Present' | 'Absent' | 'Leave' | null; // Restricts status to specific values
+  status!: 'Present' | 'Absent' | 'Leave' | null; // Restricts status to specific values
   checkInTime?: string | null; // Time when the employee checked in, optional and nullable
   checkOutTime?: string | null; // Time when the employee checked out, optional and nullable
 
@@ -12,7 +12,6 @@ export interface Attendance {
     position: string; // Required field, specifies employee's position
   } | null; // Employee object itself can be null
 }
-
 
 // export interface Attendance {
 //   id?: string | null;
