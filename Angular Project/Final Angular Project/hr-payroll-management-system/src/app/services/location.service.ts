@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { LocationModel } from '../../models/location.model';
+import { LocationModel } from '../models/location.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +49,6 @@ export class LocationService {
   }
 
   getById(id: string): Observable<any> {
-    return this.httpClient.get(this.apiUrl + '/' + id);
+    return this.httpClient.get(`${this.apiUrl}/${id}`);
   }
 }

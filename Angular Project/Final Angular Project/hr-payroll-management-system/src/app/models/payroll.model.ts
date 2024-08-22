@@ -1,4 +1,4 @@
-import { UserModel } from './user.model';
+import { UserModel } from '../models/user.model';
 
 export class PayrollModel {
   id!: string; // Primary Key
@@ -11,6 +11,12 @@ export class PayrollModel {
   payPeriodStart!: Date; // Start date of the pay period
   payPeriodEnd!: Date; // End date of the pay period
   paymentDate!: Date; // Date when payment was made
+  overtimeExemption!: string;
+  overtimeHourlyRate!: string;
+  monthlySickDay!: string;
+  monthlyHolidays!: string;
+  insurance!: string;
+  medicare!: string;
   status!: 'Paid' | 'Pending' | 'Overdue'; // Status of the payroll
 }
 
