@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceModel } from '../attendance.model';
-import { AttendanceService } from '../attendance.service';
+import { AttendanceModel } from '../../../models/attendance.model';
+import { AttendanceService } from '../../../services/attendance.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { PayrollService } from '../../../services/payroll.service';
 import { PayrollModel } from '../../../models/payroll.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createpayroll',
@@ -12,6 +12,8 @@ import { PayrollModel } from '../../../models/payroll.model';
 export class CreatePayrollComponent implements OnInit {
   payrollForm!: FormGroup;
   payrollStatuses: string[] = ['Pending', 'Paid', 'Failed'];
+  errorMessage: string | null = null;
+  isSubmitting = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,50 +22,68 @@ export class CreatePayrollComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
-  }
-
-  private initForm(): void {
     this.payrollForm = this.formBuilder.group({
-      employeeId: ['', Validators.required],
-      basicSalary: ['', [Validators.required, Validators.min(0)]],
-      bonuses: [0, Validators.min(0)],
-      deductions: [0, Validators.min(0)],
-      tax: [0, Validators.min(0)],
-      netPay: [0],
-      payrollStatus: ['', Validators.required],
+      user: ['', Validators.required],
+      basicSalary: [null, [Validators.required, Validators.min(0)]],
+      bonuses: [0, [Validators.min(0)]],
+      deductions: [0, [Validators.min(0)]],
+      tax: [0, [Validators.min(0)]],
+      netPay: [{ value: 0, disabled: true }],
+      payPeriodStart: [null, Validators.required],
+      payPeriodEnd: [null, Validators.required],
+      paymentDate: [null, Validators.required],
+      overtimeExemption: [''],
+      overtimeHourlyRate: [''],
+      monthlySickDay: [''],
+      monthlyHolidays: [''],
+      insurance: [''],
+      medicare: [''],
+      status: ['Pending', Validators.required],
     });
 
+    // Recalculate netPay whenever relevant fields change
     this.payrollForm.valueChanges.subscribe(() => {
       this.calculateNetPay();
     });
   }
 
   private calculateNetPay(): void {
-    const basicSalary = this.payrollForm.get('basicSalary')?.value || 0;
-    const bonuses = this.payrollForm.get('bonuses')?.value || 0;
-    const deductions = this.payrollForm.get('deductions')?.value || 0;
-    const tax = this.payrollForm.get('tax')?.value || 0;
+    const { basicSalary, bonuses, deductions, tax } = this.payrollForm.value;
+    const totalDeductions = (deductions || 0) + (tax || 0);
+    const totalBonuses = bonuses || 0;
+    const netPay = (basicSalary || 0) + totalBonuses - totalDeductions;
 
-    const netPay = basicSalary + bonuses - (deductions + tax);
-    this.payrollForm.get('netPay')?.setValue(netPay, { emitEvent: false });
+    this.payrollForm.patchValue({ netPay }, { emitEvent: false });
+
+    //   const basicSalary = this.payrollForm.get('basicSalary')?.value || 0;
+    //   const bonuses = this.payrollForm.get('bonuses')?.value || 0;
+    //   const deductions = this.payrollForm.get('deductions')?.value || 0;
+    //   const tax = this.payrollForm.get('tax')?.value || 0;
+
+    //   const netPay = basicSalary + bonuses - (deductions + tax);
+    //   this.payrollForm.get('netPay')?.setValue(netPay, { emitEvent: false });
   }
 
   onSubmit(): void {
     if (this.payrollForm.valid) {
-      const payroll: PayrollModel = this.payrollForm.getRawValue();
+      this.isSubmitting = true;
+      this.errorMessage = null; // Clear any previous errors
 
-      this.payrollService.createPayroll(payroll).subscribe({
+      this.payrollService.createPayroll(this.payrollForm.value).subscribe({
         next: (res) => {
           console.log('Payroll created successfully:', res);
           this.router.navigate(['/payrolls']);
         },
         error: (err) => {
           console.error('Error creating payroll:', err);
+          this.errorMessage = 'Failed to create payroll. Please try again.';
+        },
+        complete: () => {
+          this.isSubmitting = false; // Ensure this is set regardless of success or error
         },
       });
     } else {
-      console.log('Form is invalid');
+      this.errorMessage = 'Please fill in all required fields correctly.';
     }
   }
 

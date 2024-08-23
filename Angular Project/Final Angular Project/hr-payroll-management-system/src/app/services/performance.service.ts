@@ -1,47 +1,64 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { PerformanceModel } from '../models/performance.model'; // Ensure this import points to the correct location
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PerformanceService {
-  private apiUrl = 'http://localhost:3000/performances';
+  private apiUrl: string = 'http://localhost:3000/performances';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAllPerformance(): Observable<Performance[]> {
-    return this.http.get<Performance[]>(this.apiUrl).pipe(
-      catchError(this.handleError)
-    );
+  // Get all performance records
+  getAllPerformance(): Observable<PerformanceModel[]> {
+    return this.http
+      .get<PerformanceModel[]>(this.apiUrl)
+      .pipe(catchError(this.handleError));
   }
 
-  getPerformance(id: number): Observable<Performance> {
-    return this.http.get<Performance>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+  // Get a specific performance record by ID
+  getPerformance(id: number): Observable<PerformanceModel> {
+    return this.http
+      .get<PerformanceModel>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  createPerformance(performance: Performance): Observable<Performance> {
-    return this.http.post<Performance>(this.apiUrl, performance).pipe(
-      catchError(this.handleError)
-    );
+  // Create a new performance record
+  createPerformance(
+    performance: PerformanceModel
+  ): Observable<PerformanceModel> {
+    return this.http
+      .post<PerformanceModel>(this.apiUrl, performance)
+      .pipe(catchError(this.handleError));
   }
 
-  updatePerformance(id: number, performance: Performance): Observable<Performance> {
-    return this.http.put<Performance>(`${this.apiUrl}/${id}`, performance).pipe(
-      catchError(this.handleError)
-    );
+  // Update an existing performance record
+  updatePerformance(
+    id: number,
+    performance: PerformanceModel
+  ): Observable<PerformanceModel> {
+    return this.http
+      .put<PerformanceModel>(`${this.apiUrl}/${id}`, performance)
+      .pipe(catchError(this.handleError));
   }
 
+  // Delete a performance record
   deletePerformance(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  private handleError(error: any) {
-    console.error('An error occurred:', error);
-    return throwError(() => new Error('Something went wrong; please try again later.'));
+  // Handle errors from HTTP requests
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    // Log error to the console (or send to a remote logging infrastructure)
+    console.error('An error occurred:', error.message);
+    // Return an observable with a user-facing error message
+    return throwError(
+      () => new Error('Something went wrong; please try again later.')
+    );
   }
 }

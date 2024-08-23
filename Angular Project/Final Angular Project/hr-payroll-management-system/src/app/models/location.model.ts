@@ -1,5 +1,5 @@
 export class LocationModel {
-  id!: string; // Optional, primary key
+  id!: string; //primary key
   name!: string;
   addressLine!: string;
   city!: string;
@@ -9,5 +9,5 @@ export class LocationModel {
   isActive!: boolean; // A boolean flag indicating whether the location is currently active or inactive.
   createdAt!: Date; //The timestamp when the location was created.
   updatedAt!: Date; // The timestamp when the location was last updated.
-  photo?: string;
+  photo!: string;
 }

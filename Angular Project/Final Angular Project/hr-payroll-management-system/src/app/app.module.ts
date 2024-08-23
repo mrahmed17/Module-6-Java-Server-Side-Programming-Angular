@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
-
 
 import { LocationComponent } from './components/location/viewlocation/location.component';
 import { CreatelocationComponent } from './components/location/createlocation/createlocation.component';
@@ -86,8 +91,6 @@ import { ViewperformancereportComponent } from './reports/performancereport/view
 import { CreateperformancereportComponent } from './reports/performancereport/createperformancereport/createperformancereport.component';
 import { EditperformancereportComponent } from './reports/performancereport/editperformancereport/editperformancereport.component';
 import { ListperformancereportComponent } from './reports/performancereport/listperformancereport/listperformancereport.component';
-
-
 
 @NgModule({
   declarations: [
@@ -169,7 +172,6 @@ import { ListperformancereportComponent } from './reports/performancereport/list
     CreateperformancereportComponent,
     EditperformancereportComponent,
     ListperformancereportComponent,
-
   ],
 
   imports: [
@@ -178,16 +180,9 @@ import { ListperformancereportComponent } from './reports/performancereport/list
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AppRoutingModule,
     HttpClientModule,
-
   ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient(
-      withFetch()
-    )
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

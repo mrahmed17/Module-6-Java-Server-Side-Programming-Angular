@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { AuthResponse } from '../guard/auth-response';
+import { AuthResponse } from '../models/auth-response';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../models/user.model';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -24,11 +24,12 @@ export class AuthService {
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
-  // AuthService
+  // Get the current user ID
   getUserId(): string | null {
     return this.currentUserValue?.id || null;
   }
 
+  // Check if the platform is a browser
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }
@@ -37,6 +38,8 @@ export class AuthService {
     return this.http.post<UserModel>(this.apiUrl, user).pipe(
       map((newUser: UserModel) => {
         const token = this.generateToken(newUser);
+        this.storeToken(token);
+        this.setCurrentUser(newUser);
         return { token, user: newUser } as AuthResponse;
       }),
       catchError((error) => {
@@ -60,8 +63,9 @@ export class AuthService {
           this.storeToken(token);
           this.setCurrentUser(user);
           return { token, user } as AuthResponse;
+        } else {
+          throw new Error('Invalid credentials');
         }
-        throw new Error('Invalid credentials');
       }),
       catchError((error) => {
         console.error('Login error:', error);
@@ -72,6 +76,7 @@ export class AuthService {
     );
   }
 
+  // Generates a token (use a more secure method in production)
   private generateToken(user: UserModel): string {
     // Example of a token generation using JSON.stringify,
     // you should replace this with a more secure JWT or other method
@@ -109,10 +114,12 @@ export class AuthService {
   //   );
   // }
 
+  // Gets the current user value
   public get currentUserValue(): UserModel | null {
     return this.currentUserSubject.value;
   }
 
+  // Logs out the current user
   logout(): void {
     this.clearCurrentUser();
     if (this.isBrowser()) {
@@ -121,6 +128,7 @@ export class AuthService {
     // localStorage.removeItem('token');
   }
 
+  // Sets the current user and stores in localStorage
   private setCurrentUser(user: UserModel): void {
     if (this.isBrowser()) {
       localStorage.setItem('currentUser', JSON.stringify(user));
@@ -128,6 +136,7 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
+  // Clears the current user from localStorage
   private clearCurrentUser(): void {
     if (this.isBrowser()) {
       localStorage.removeItem('currentUser');
@@ -135,18 +144,22 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  // Checks if the user is authenticated
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
+  // Retrieves the token from localStorage
   getToken(): string | null {
     return this.isBrowser() ? localStorage.getItem('token') : null;
   }
 
-  getUserRole(): any {
+  // Retrieves the user role
+  getUserRole(): string | undefined {
     return this.currentUserValue?.role;
   }
 
+  // Stores the token in localStorage
   storeToken(token: string): void {
     if (this.isBrowser()) {
       localStorage.setItem('token', token);
@@ -157,21 +170,23 @@ export class AuthService {
   //   localStorage.setItem('token', token);
   // }
 
+  // Stores the user profile in localStorage
   storeUserProfile(user: UserModel): void {
     if (this.isBrowser()) {
       localStorage.setItem('userProfile', JSON.stringify(user));
     }
   }
 
+  // Retrieves the user profile from localStorage
   getUserProfileFromStorage(): UserModel | null {
     if (this.isBrowser()) {
       const userProfile = localStorage.getItem('userProfile');
-      console.log('User Profile is: ', userProfile);
       return userProfile ? JSON.parse(userProfile) : null;
     }
     return null;
   }
 
+  // Clears all user details from localStorage
   removeUserDetails() {
     if (this.isBrowser()) {
       localStorage.clear();

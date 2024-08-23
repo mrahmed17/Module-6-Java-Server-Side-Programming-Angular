@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { UserModel } from '../models/user.model';
 import { catchError, Observable, of, throwError } from 'rxjs';
@@ -8,7 +8,7 @@ import { catchError, Observable, of, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class UserprofileService {
-  private apiUrl: string = 'http://localhost:3000/users'; // API URL directly here
+  private apiUrl: string = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -74,7 +74,7 @@ export class UserprofileService {
   updateUserProfile(user: UserModel): Observable<UserModel> {
     if (user && user.id) {
       const headers = this.getAuthHeaders();
-      localStorage.setItem('userProfile', JSON.stringify(user));
+      // localStorage.setItem('userProfile', JSON.stringify(user));
       return this.http
         .put<UserModel>(`${this.apiUrl}/${user.id}`, user, { headers })
         .pipe(catchError(this.handleError));

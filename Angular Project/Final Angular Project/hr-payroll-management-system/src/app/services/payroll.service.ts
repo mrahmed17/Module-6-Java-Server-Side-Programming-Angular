@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { PayrollModel } from '../../models/payroll.model';
+import { PayrollModel } from '../models/payroll.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PayrollService {
-  private apiUrl = 'http://localhost:3000/payrolls';
+  private apiUrl: string = 'http://localhost:3000/payrolls';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -57,9 +57,9 @@ export class PayrollService {
   }
 
   // Handle any errors in the HTTP request
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     // Log error to the console (or send to a remote logging infrastructure)
-    console.error('An error occurred:', error.error.message);
+    console.error('An error occurred:', error.message);
     // Return an observable with a user-facing error message
     return throwError(
       () => new Error('Something went wrong; please try again later.')

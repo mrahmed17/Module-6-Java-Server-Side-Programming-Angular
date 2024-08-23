@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { EmployeeModel } from '../../../models/employee.model';
 import { EmployeeService } from '../../../services/employee.service';
-import { DepartmentService } from '../../../services/department.service'; // Import if you need departments
-import { LocationService } from '../../../services/location.service'; // Import if you need locations
+import { DepartmentService } from '../../../services/department.service';
+import { LocationService } from '../../../services/location.service';
+import { UserprofileService } from '../../../services/userprofile.service';
+import { DepartmentModel } from '../../../models/department.model';
+import { LocationModel } from '../../../models/location.model';
+import { EmployeeModel } from '../../../models/employee.model';
+import { UserModel } from '../../../models/user.model';
 
 @Component({
   selector: 'app-createemployee',
@@ -13,8 +16,10 @@ import { LocationService } from '../../../services/location.service'; // Import 
 })
 export class CreateemployeeComponent implements OnInit {
   employeeForm!: FormGroup;
-  departments: any[] = []; // Assuming you have departments to choose from
-  locations: any[] = []; // Assuming you have locations to choose from
+  departments: DepartmentModel[] = [];
+  locations: LocationModel[] = [];
+  users: UserModel[] = [];
+  errorMessage: string = '';
   // departments!: DepartmentModel[];
   // locations!: Location[];
   // employees: EmployeeModel[] = [];
@@ -23,74 +28,99 @@ export class CreateemployeeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
-    private departmentService: DepartmentService, // If you need to load departments
-    private locationService: LocationService, // If you need to load locations
-    private router: Router
+    private departmentService: DepartmentService,
+    private locationService: LocationService,
+    private userService: UserprofileService
   ) {}
 
   ngOnInit(): void {
-    // Initialize form with validation
+    this.initForm();
+    this.loadDepartments();
+    this.loadLocations();
+    this.loadUsers();
+  }
+
+  // Initialize the form
+  initForm(): void {
     this.employeeForm = this.formBuilder.group({
+      id: [null],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      joiningDate: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['Male', Validators.required],
       contact: ['', Validators.required],
+      joiningDate: ['', Validators.required],
+      profilePhoto: [''],
       position: ['', Validators.required],
-      salary: ['', Validators.required],
-      departmentId: ['', Validators.required],
-      locationId: ['', Validators.required],
+      salary: [0, [Validators.required, Validators.min(0)]],
+      departmentId: [null, Validators.required],
+      locationId: [null, Validators.required],
     });
-
-    // Load departments and locations if necessary
-    this.loadDepartments();
-    this.loadLocations();
   }
 
+  // Load all departments
   loadDepartments(): void {
     // Fetch departments from the service if needed
-    this.departmentService.getAllDepartment().subscribe({
+    this.departmentService.getAllDepartments().subscribe({
       next: (res) => {
         this.departments = res; // Assuming the response is an array of departments
       },
       error: (err) => {
         console.error('Error fetching departments:', err);
+        this.errorMessage = 'Failed to load departments. Please try again.';
       },
     });
   }
 
+  // Load all locations
   loadLocations(): void {
     // Fetch locations from the service if needed
-    this.locationService.getAllLocation().subscribe({
+    this.locationService.getAllLocations().subscribe({
       next: (res) => {
         this.locations = res; // Assuming the response is an array of locations
       },
       error: (err) => {
         console.error('Error fetching locations:', err);
+        this.errorMessage = 'Failed to load locations. Please try again.';
       },
     });
   }
 
-  onSubmit(): void {
-    if (this.employeeForm.valid) {
-      const employee: EmployeeModel = this.employeeForm.value;
-
-      this.employeeService.createEmployee(employee).subscribe({
-        next: (res) => {
-          console.log('Employee created successfully:', res);
-          this.router.navigate(['/employees']); // Redirect to employees list
-        },
-        error: (err) => {
-          console.error('Error creating employee:', err);
-        },
-      });
-    } else {
-      console.log('Form is invalid');
-    }
+  // Load all users
+  loadUsers(): void {
+    this.userService.getAllUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (error) => {
+        console.error('Failed to load users', error);
+        this.errorMessage = 'Failed to load users. Please try again.';
+      },
+    });
   }
 
+  // Submit the form to create a new employee
+  onSubmit(): void {
+    if (this.employeeForm.invalid) {
+      return;
+    }
+    const employeeData: EmployeeModel = this.employeeForm.value;
+    this.employeeService.createEmployee(employeeData).subscribe({
+      next: (res) => {
+        console.log('Employee created successfully:', res);
+        this.resetForm();
+        // this.router.navigate(['/employees']); // Redirect to employees list
+      },
+      error: (err) => {
+        console.error('Error creating employee:', err);
+        this.errorMessage = 'Failed to create employee. Please try again.';
+      },
+    });
+  }
+
+  // Reset the form and error message
   resetForm(): void {
     this.employeeForm.reset();
+    this.errorMessage = '';
   }
 }

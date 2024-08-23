@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AttendanceModel } from '../attendance.model';
+import { AttendanceModel } from '../../../models/attendance.model';
+import { AttendanceService } from '../../../services/attendance.service';
 import { Router } from '@angular/router';
-import { AttendanceService } from '../attendance.service';
 import { NotificationService } from '../../../template/notification/notification.service';
 
 @Component({

@@ -34,8 +34,17 @@ export class RegistrationComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
+        role: ['Employee', Validators.required], // Default role is 'Employee'
         position: [''], // Optional field for the position
-        role: ['User'], // Default role is 'User'
+        salary: [''], // Optional field for the salary
+        joiningDate: [''], // Optional field for the joining date
+        gender: ['Male'], // Default gender
+        contactNumber: [''],
+        departmentId: [''],
+        locationId: [''],
+        isActive: [true],
+        createdAt: [new Date()],
+        updatedAt: [new Date()],
       },
       { validator: this.passwordMatchValidator }
     );
