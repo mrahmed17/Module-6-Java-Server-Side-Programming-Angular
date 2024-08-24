@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CreatePayrollComponent implements OnInit {
   payrollForm!: FormGroup;
-  payrollStatuses: string[] = ['Pending', 'Paid', 'Failed'];
+  payrollStatuses: string[] = ['Pending', 'Paid', 'Overdue'];
   errorMessage: string | null = null;
   isSubmitting = false;
 
@@ -23,7 +23,7 @@ export class CreatePayrollComponent implements OnInit {
   ngOnInit(): void {
     this.payrollForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      employeeId: ['', Validators.required],
+      employeeId: ['', Validators.required], // Assuming employeeId is a string or number
       basicSalary: [null, [Validators.required, Validators.min(0)]],
       bonuses: [0, [Validators.min(0)]],
       deductions: [0, [Validators.min(0)]],
@@ -33,11 +33,11 @@ export class CreatePayrollComponent implements OnInit {
       payPeriodEnd: [null, Validators.required],
       paymentDate: [null, Validators.required],
       overtimeExemption: [''],
-      overtimeHourlyRate: [0],
+      overtimeHourlyRate: [0, [Validators.min(0)]], // Assuming it is a number
       yearlySickDay: [''],
       monthlyHolidays: [''],
-      insurance: [0],
-      medicare: [0],
+      insurance: [0, [Validators.min(0)]], // Assuming it is a number
+      medicare: [0, [Validators.min(0)]], // Assuming it is a number
       status: ['Pending', Validators.required],
     });
 

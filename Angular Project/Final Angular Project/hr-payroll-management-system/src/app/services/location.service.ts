@@ -53,7 +53,7 @@ export class LocationService {
   }
 
   // Method to get a location by ID
-  getById(id: string): Observable<LocationModel> {
+  getLocationById(id: string): Observable<LocationModel> {
     return this.httpClient
       .get<LocationModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
