@@ -1,18 +1,30 @@
 <div class="container">
-  <h1>Attendance List</h1>
-  <table class="table">
+  <h2>Attendance Records</h2>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>Employee ID</th>
         <th>Date</th>
         <th>Status</th>
+        <th>Check-In Time</th>
+        <th>Check-Out Time</th>
+        <th>Employee</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let attendance of attendances">
-        <!-- <td>{{ attendance.employeeId }}</td> -->
-        <td>{{ attendance.date }}</td>
+        <td>{{ attendance.date | date: 'longDate' }}</td>
         <td>{{ attendance.status }}</td>
+        <td>{{ attendance.checkInTime }}</td>
+        <td>{{ attendance.checkOutTime }}</td>
+        <td>{{ attendance.employeeId.firstName }} {{ attendance.employeeId.lastName }}</td>
+        <td>
+          <!-- <button class="btn btn-primary btn-sm" (click)="editAttendance(attendance.id)">Edit</button> -->
+          <button class="btn btn-danger btn-sm" (click)="deleteAttendance(attendance.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

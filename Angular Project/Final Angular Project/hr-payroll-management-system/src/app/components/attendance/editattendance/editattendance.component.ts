@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceModel } from '../../../models/attendance.model';
 import { AttendanceService } from '../../../services/attendance.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserModel } from '../../../models/user.model';
+import { UserprofileService } from '../../../services/userprofile.service';
 
 @Component({
   selector: 'app-editattendance',
@@ -10,59 +11,87 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./editattendance.component.css'],
 })
 export class EditattendanceComponent implements OnInit {
-  attendanceForm: FormGroup;
-  attendanceId: string | null = null;
+  attendanceForm!: FormGroup;
+  attendanceId!: string;
+  employees: UserModel[] = [];
+  errorMessage: string = '';
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
+    private attendanceService: AttendanceService,
+    private formBuilder: FormBuilder,
+    private userService: UserprofileService,
     private route: ActivatedRoute,
-    private attendanceService: AttendanceService
-  ) {
-    this.attendanceForm = this.fb.group({
-      date: [''],
-      status: [''],
-      checkInTime: [''],
-      checkOutTime: [''],
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+    this.loadEmployees();
+    this.route.params.subscribe((params) => {
+      this.attendanceId = params['id'];
+      this.loadAttendance(this.attendanceId);
     });
   }
 
-  ngOnInit(): void {
-    // Get the ID from the route
-    this.attendanceId = this.route.snapshot.paramMap.get('id');
-
-    if (this.attendanceId) {
-      // Load the attendance data
-      this.attendanceService.getAttendance(this.attendanceId).subscribe({
-        next: (attendance) => {
-          this.attendanceForm.patchValue(attendance);
-        },
-        error: (error) => {
-          console.error('Failed to load attendance:', error);
-          alert('Failed to load attendance data. Please try again.');
-        },
-      });
-    }
+  // Initialize the form
+  initForm(): void {
+    this.attendanceForm = this.formBuilder.group({
+      id: [null],
+      date: ['', Validators.required],
+      status: ['', Validators.required],
+      checkInTime: ['', Validators.required],
+      checkOutTime: ['', Validators.required],
+      employeeId: ['', Validators.required],
+    });
   }
 
+  // Load the attendance record to edit
+  loadAttendance(id: string): void {
+    this.attendanceService.getAttendance(id).subscribe(
+      (attendance) => {
+        this.attendanceForm.patchValue(attendance);
+      },
+      (error) => {
+        console.error('Failed to load attendance', error);
+        this.errorMessage = 'Failed to load attendance. Please try again.';
+      }
+    );
+  }
+
+  // Load all employees
+  loadEmployees(): void {
+    this.userService.getAllUsers().subscribe(
+      (data) => {
+        this.employees = data;
+      },
+      (error) => {
+        console.error('Failed to load employees', error);
+      }
+    );
+  }
+
+  // Submit the form to update the attendance record
   onSubmit(): void {
-    if (this.attendanceForm.valid && this.attendanceId) {
-      const updatedAttendance: AttendanceModel = this.attendanceForm.value;
-      this.attendanceService
-        .updateAttendance(this.attendanceId, updatedAttendance)
-        .subscribe({
-          next: (response) => {
-            console.log('Attendance updated:', response);
-            alert('Attendance updated successfully!');
-            this.router.navigate(['/attendances']);
-          },
-          error: (error) => {
-            console.error('Error updating attendance:', error);
-            alert('Failed to update attendance. Please try again.');
-          },
-        });
-    } else {
-      alert('Please fill in all required fields.');
+    if (this.attendanceForm.invalid) {
+      return;
     }
+    const attendanceData = this.attendanceForm.value;
+    this.attendanceService
+      .updateAttendance(this.attendanceId, attendanceData)
+      .subscribe(
+        (response) => {
+          this.router.navigate(['/attendances']);
+        },
+        (error) => {
+          console.error('Failed to update attendance', error);
+          this.errorMessage = 'Failed to update attendance. Please try again.';
+        }
+      );
+  }
+
+  // Reset the form and clear the state
+  resetForm(): void {
+    this.attendanceForm.reset();
+    this.errorMessage = '';
   }
 }

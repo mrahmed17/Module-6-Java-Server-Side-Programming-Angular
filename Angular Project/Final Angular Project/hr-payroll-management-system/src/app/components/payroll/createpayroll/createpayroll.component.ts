@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PayrollService } from '../../../services/payroll.service';
-import { PayrollModel } from '../../../models/payroll.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +22,8 @@ export class CreatePayrollComponent implements OnInit {
 
   ngOnInit(): void {
     this.payrollForm = this.formBuilder.group({
-      user: ['', Validators.required],
+      userName: ['', Validators.required],
+      employeeId: ['', Validators.required],
       basicSalary: [null, [Validators.required, Validators.min(0)]],
       bonuses: [0, [Validators.min(0)]],
       deductions: [0, [Validators.min(0)]],
@@ -33,11 +33,11 @@ export class CreatePayrollComponent implements OnInit {
       payPeriodEnd: [null, Validators.required],
       paymentDate: [null, Validators.required],
       overtimeExemption: [''],
-      overtimeHourlyRate: [''],
-      monthlySickDay: [''],
+      overtimeHourlyRate: [0],
+      yearlySickDay: [''],
       monthlyHolidays: [''],
-      insurance: [''],
-      medicare: [''],
+      insurance: [0],
+      medicare: [0],
       status: ['Pending', Validators.required],
     });
 

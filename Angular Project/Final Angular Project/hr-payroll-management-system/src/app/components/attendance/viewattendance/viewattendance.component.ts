@@ -1,64 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { AttendanceModel } from '../../../models/attendance.model';
 import { AttendanceService } from '../../../services/attendance.service';
-import { Router } from '@angular/router';
-import { NotificationService } from '../../../template/notification/notification.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-viewattendance',
   templateUrl: './viewattendance.component.html',
-  styleUrl: './viewattendance.component.css',
+  styleUrls: ['./viewattendance.component.css'],
 })
 export class ViewattendanceComponent implements OnInit {
-  attendanceForm: FormGroup;
-  attendances: AttendanceModel[] = [];
+  attendance: AttendanceModel | null = null;
+  errorMessage: string = '';
 
   constructor(
-    private attendanceService: AttendanceService,
+    private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder,
-    private notificationService: NotificationService
-  ) {
-    this.attendanceForm = this.fb.group({
-      employeeId: [''],
-      amount: [''],
-      date: [''],
-    });
-  }
+    private attendanceService: AttendanceService
+  ) {}
 
   ngOnInit(): void {
-    this.loadAttendances();
-  }
-
-  loadAttendances() {
-    this.attendanceService.getAllAttendances().subscribe((data) => {
-      this.attendances = data;
-    });
-  }
-
-  onSubmit(): void {
-    if (this.attendanceForm.valid) {
-      const newAttendance: AttendanceModel = this.attendanceForm.value;
-      this.attendanceService.createAttendance(newAttendance).subscribe({
-        next: (response) => {
-          console.log('Attendance created:', response);
-          this.notificationService.showNotification(
-            'Attendance added successfully!'
-          );
-          this.router.navigate(['/attendances']);
-        },
-        error: (error) => {
-          console.error('Error creating attendance:', error);
-          this.notificationService.showNotification(
-            'Failed to add attendance. Please try again.'
-          );
-        },
-      });
-    } else {
-      this.notificationService.showNotification(
-        'Please fill in all required fields.'
-      );
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.loadAttendance(id);
     }
+  }
+
+  // Load a single attendance record
+  loadAttendance(id: string): void {
+    this.attendanceService.getAttendance(id).subscribe(
+      (data) => {
+        this.attendance = data;
+      },
+      (error) => {
+        console.error('Failed to load attendance details', error);
+        this.errorMessage =
+          'Failed to load attendance details. Please try again.';
+      }
+    );
+  }
+
+  // Navigate back to the list
+  goBack(): void {
+    this.router.navigate(['/attendance/list']);
   }
 }

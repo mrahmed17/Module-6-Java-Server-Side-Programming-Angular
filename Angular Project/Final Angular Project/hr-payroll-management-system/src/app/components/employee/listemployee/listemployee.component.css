@@ -1,0 +1,21 @@
+.container {
+  max-width: 1200px;
+}
+
+.table {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table th,
+.table td {
+  text-align: center;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.btn {
+  margin-right: 5px;
+}

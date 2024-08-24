@@ -1,5 +1,4 @@
 import { LocationModel } from '../models/location.model';
-import { PayrollModel } from './payroll.model';
 import { UserModel } from './user.model';
 
 export class DepartmentModel {

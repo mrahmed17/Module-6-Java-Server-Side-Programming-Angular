@@ -20,7 +20,7 @@ export class LeaveService {
   }
 
   // Method to get a leave by ID
-  getLeave(id: number): Observable<LeaveModel> {
+  getLeave(id: string): Observable<LeaveModel> {
     return this.httpClient
       .get<LeaveModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
@@ -34,14 +34,14 @@ export class LeaveService {
   }
 
   // Method to update an existing leave
-  updateLeave(id: number, leave: LeaveModel): Observable<LeaveModel> {
+  updateLeave(id: string, leave: LeaveModel): Observable<LeaveModel> {
     return this.httpClient
       .put<LeaveModel>(`${this.apiUrl}/${id}`, leave)
       .pipe(catchError(this.handleError));
   }
 
   // Method to delete a leave by ID
-  deleteLeave(id: number): Observable<void> {
+  deleteLeave(id: string): Observable<void> {
     return this.httpClient
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));

@@ -20,7 +20,7 @@ export class PerformanceService {
   }
 
   // Get a specific performance record by ID
-  getPerformance(id: number): Observable<PerformanceModel> {
+  getPerformance(id: string): Observable<PerformanceModel> {
     return this.http
       .get<PerformanceModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
@@ -46,7 +46,7 @@ export class PerformanceService {
   }
 
   // Delete a performance record
-  deletePerformance(id: number): Observable<void> {
+  deletePerformance(id: string): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));

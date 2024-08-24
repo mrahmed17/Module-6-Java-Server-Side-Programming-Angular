@@ -1,0 +1,23 @@
+.container {
+  max-width: 800px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+img {
+  max-width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn {
+  margin-top: 20px;
+}

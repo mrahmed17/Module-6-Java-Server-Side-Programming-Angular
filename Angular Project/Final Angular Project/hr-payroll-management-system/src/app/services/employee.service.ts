@@ -19,7 +19,7 @@ export class EmployeeService {
   }
 
   // Fetch an employee by ID
-  getEmployeeById(id: number): Observable<EmployeeModel> {
+  getEmployeeById(id: string): Observable<EmployeeModel> {
     return this.http
       .get<EmployeeModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
@@ -34,7 +34,7 @@ export class EmployeeService {
 
   // Update an existing employee by ID
   updateEmployee(
-    id: number,
+    id: string,
     employee: EmployeeModel
   ): Observable<EmployeeModel> {
     return this.http
@@ -43,7 +43,7 @@ export class EmployeeService {
   }
 
   // Delete an employee by ID
-  deleteEmployee(id: number): Observable<void> {
+  deleteEmployee(id: string): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));

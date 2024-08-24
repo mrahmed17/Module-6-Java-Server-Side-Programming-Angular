@@ -186,6 +186,10 @@ export class AuthService {
     return null;
   }
 
+  forgetPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/forgetpassword`, { email });
+  }
+
   // Clears all user details from localStorage
   removeUserDetails(): void {
     if (this.isBrowser()) {

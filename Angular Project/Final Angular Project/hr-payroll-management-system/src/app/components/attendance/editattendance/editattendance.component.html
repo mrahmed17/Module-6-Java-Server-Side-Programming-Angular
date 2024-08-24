@@ -1,1 +1,46 @@
-<p>editattendance works!</p>
+<div class="container">
+  <h2>Edit Attendance</h2>
+  <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" formControlName="date" />
+    </div>
+
+    <div>
+      <label for="status">Status:</label>
+      <select id="status" formControlName="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="On Leave">On Leave</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="checkInTime">Check-In Time:</label>
+      <input type="time" id="checkInTime" formControlName="checkInTime" />
+    </div>
+
+    <div>
+      <label for="checkOutTime">Check-Out Time:</label>
+      <input type="time" id="checkOutTime" formControlName="checkOutTime" />
+    </div>
+
+    <div>
+      <label for="employeeId">Employee:</label>
+      <select id="employeeId" formControlName="employeeId">
+        <option *ngFor="let employee of employees" [value]="employee.id">
+          {{ employee.firstName }} {{ employee.lastName }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="attendanceForm.invalid">Update</button>
+      <button type="button" (click)="resetForm()">Cancel</button>
+    </div>
+  </form>
+</div>
