@@ -9,10 +9,10 @@ export class EmployeeModel {
   email!: string; // Foreign Key to UserModel
   gender!: 'Male' | 'Female' | 'Other'; // Foreign Key to UserModel
   contact!: string; // Foreign Key to UserModel
-  joiningDate!: Date; // Foreign Key to UserModel
   profilePhoto!: string; // Foreign Key to UserModel
+  joiningDate!: Date; // Foreign Key to UserModel
   position!: string; // Foreign Key to UserModel
-  salary!: number; // Foreign Key to UserModel
+  salary!: UserModel; // Foreign Key to UserModel
   departmentId!: DepartmentModel; // Foreign Key to DepartmentModel
   locationId!: LocationModel; // Foreign Key to LocationModel
 }

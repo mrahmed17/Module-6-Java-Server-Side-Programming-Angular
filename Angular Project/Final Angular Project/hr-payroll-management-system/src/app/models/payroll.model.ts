@@ -1,8 +1,10 @@
 import { UserModel } from '../models/user.model';
+import { EmployeeModel } from './employee.model';
 
 export class PayrollModel {
   id!: string; // Primary Key
-  user!: UserModel; // Foreign Key to Employee
+  userName!: UserModel; // Foreign Key to Employee
+  employeeId!: EmployeeModel;
   basicSalary!: number; // Basic salary amount
   bonuses!: number; // Optional: Bonuses or incentives
   deductions!: number; // Optional: Deductions (e.g., tax, insurance)
@@ -11,12 +13,12 @@ export class PayrollModel {
   payPeriodStart!: Date; // Start date of the pay period
   payPeriodEnd!: Date; // End date of the pay period
   paymentDate!: Date; // Date when payment was made
-  overtimeExemption!: string;
-  overtimeHourlyRate!: string;
-  monthlySickDay!: string;
+  overtimeExemption!: string; // Newcomer and older than 50 years.
+  overtimeHourlyRate!: number;
+  yearlySickDay!: string;
   monthlyHolidays!: string;
-  insurance!: string;
-  medicare!: string;
+  insurance!: number;
+  medicare!: number;
   status!: 'Paid' | 'Pending' | 'Overdue'; // Status of the payroll
 }
 

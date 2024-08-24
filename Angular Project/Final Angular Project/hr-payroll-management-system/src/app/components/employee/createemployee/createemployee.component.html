@@ -50,7 +50,7 @@
     <div class="form-group">
       <label for="locationId">Location:</label>
       <select id="locationId" formControlName="locationId" class="form-control">
-        <option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</option>
+        <option *ngFor="let location of locations" [value]="location.id">{{ location.locationName }}</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

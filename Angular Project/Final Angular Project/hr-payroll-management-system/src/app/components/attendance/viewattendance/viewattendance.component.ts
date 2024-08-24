@@ -32,7 +32,7 @@ export class ViewattendanceComponent implements OnInit {
   }
 
   loadAttendances() {
-    this.attendanceService.getAttendances().subscribe((data) => {
+    this.attendanceService.getAllAttendances().subscribe((data) => {
       this.attendances = data;
     });
   }

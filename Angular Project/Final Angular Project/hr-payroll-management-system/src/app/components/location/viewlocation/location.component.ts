@@ -16,14 +16,14 @@ export class LocationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.locations = this.locationService.getAllLocation();
+    this.locations = this.locationService.getAllLocations();
   }
 
   deleteLocation(id: string) {
     if (confirm('Are you sure you want to delete this employee?')) {
       this.locationService.deleteLocation(id).subscribe({
         next: (res) => {
-          this.locations = this.locationService.getAllLocation();
+          this.locations = this.locationService.getAllLocations();
           this.router.navigate(['location']);
           console.log('Employee deleted');
         },

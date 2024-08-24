@@ -1,6 +1,6 @@
 export class LocationModel {
   id!: string; //primary key
-  name!: string;
+  locationName!: string;
   addressLine!: string;
   city!: string;
   state!: string;

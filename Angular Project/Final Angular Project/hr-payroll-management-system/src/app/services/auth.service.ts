@@ -33,6 +33,7 @@ export class AuthService {
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }
+
   // Registers a new user
   registration(user: UserModel): Observable<AuthResponse> {
     return this.http.post<UserModel>(this.apiUrl, user).pipe(
@@ -48,6 +49,7 @@ export class AuthService {
       })
     );
   }
+
   // Logs in a user
   login(credentials: {
     email: string;
@@ -125,7 +127,6 @@ export class AuthService {
     if (this.isBrowser()) {
       localStorage.removeItem('token');
     }
-    // localStorage.removeItem('token');
   }
 
   // Sets the current user and stores in localStorage
@@ -148,7 +149,6 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
-
   // Retrieves the token from localStorage
   getToken(): string | null {
     return this.isBrowser() ? localStorage.getItem('token') : null;
@@ -187,7 +187,7 @@ export class AuthService {
   }
 
   // Clears all user details from localStorage
-  removeUserDetails() {
+  removeUserDetails(): void {
     if (this.isBrowser()) {
       localStorage.clear();
     }

@@ -5,13 +5,13 @@ export class UserModel {
   firstName!: string;
   lastName!: string;
   email!: string; // Email address, must be unique
-  username!: string; // Username for login
+  userName!: string; // Username for login
   password!: string; // Password for authentication
-  profilePhoto!: string; //User must have a profile photo
   role!: 'HR' | 'Employee'; // Role of the user, restricted to specific values
-  contactNumber!: string; // Contact number
+  profilePhoto!: string; //User must have a profile photo
+  contact!: string; // Contact number
   gender!: 'Male' | 'Female' | 'Other';
-  nidNumber!: number; //National number must be provide and unique
+  nidNo!: number; //National number must be provide and unique
   joiningDate!: string; //For payment calculation
   salary!: string; //User or role base salary
   department!: DepartmentModel; // Foreign Key to Department
