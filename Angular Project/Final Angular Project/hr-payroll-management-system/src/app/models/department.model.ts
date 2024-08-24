@@ -1,13 +1,16 @@
-import { LocationModel } from '../models/location.model';
-import { UserModel } from './user.model';
-
 export class DepartmentModel {
   id!: string; // Primary Key
   departmentName!: string; //Must be provide department name
   description!: string;
-  headOfDepartment!: UserModel; //Foreign key to userModel for dep head.
   numberOfEmployees!: number; //No of working will show here by declaration
-  payrollCalculationMethod!: string; //Payroll calculationed base on others facilities
+  payrollCalculationMethod!: 'Weekly' | 'Monthly' | 'Yearly';
   overtimeRules!: string; // After finishing the daily work hour
-  location!: LocationModel; //Which locations are department situated
+
+  UserModel!: {
+    role: 'HR' | 'Employee' | undefined;
+  };
+
+  LocationModel!: {
+    locationName: string | undefined;
+  };
 }

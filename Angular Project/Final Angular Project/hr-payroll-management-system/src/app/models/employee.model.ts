@@ -1,7 +1,3 @@
-import { DepartmentModel } from '../models/department.model';
-import { LocationModel } from '../models/location.model';
-import { UserModel } from './user.model';
-
 export class EmployeeModel {
   id!: string; //Primary Key
   firstName!: string; // Foreign Key to UserModel
@@ -12,7 +8,16 @@ export class EmployeeModel {
   profilePhoto!: string; // Foreign Key to UserModel
   joiningDate!: Date; // Foreign Key to UserModel
   position!: string; // Foreign Key to UserModel
-  salary!: UserModel; // Foreign Key to UserModel
-  departmentId!: DepartmentModel; // Foreign Key to DepartmentModel
-  locationId!: LocationModel; // Foreign Key to LocationModel
+
+  UserModel!: {
+    salary: number | undefined;
+  };
+
+  DepartmentModel!: {
+    id: string | undefined;
+  };
+
+  LocationModel!: {
+    id: string | undefined;
+  };
 }

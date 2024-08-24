@@ -8,12 +8,13 @@ import { LocationService } from '../../../services/location.service';
 @Component({
   selector: 'app-viewemployee',
   templateUrl: './viewemployee.component.html',
-  styleUrl: './viewemployee.component.css',
+  styleUrls: ['./viewemployee.component.css'],
 })
 export class ViewemployeeComponent implements OnInit {
   employee!: EmployeeModel;
   departmentName: string | undefined;
   locationName: string | undefined;
+  errorMessage: '' | undefined;
 
   constructor(
     private route: ActivatedRoute,

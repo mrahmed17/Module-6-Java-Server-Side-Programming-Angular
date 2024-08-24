@@ -157,7 +157,7 @@
       "joiningDate": "01/16/2024",
       "position": "Dep. Head",
       "salary": {
-        "salary": "50000"
+        "salary": 50000
       },
       "departmentId": {
         "id": "0"

@@ -21,7 +21,7 @@ export class UpdatelocationComponent implements OnInit {
   ngOnInit(): void {
     this.location = new LocationModel();
     this.id = this.route.snapshot.params['id'];
-    this.locationService.getById(this.id).subscribe({
+    this.locationService.getLocationById(this.id).subscribe({
       next: (res) => {
         this.location = res;
         console.log(res);
