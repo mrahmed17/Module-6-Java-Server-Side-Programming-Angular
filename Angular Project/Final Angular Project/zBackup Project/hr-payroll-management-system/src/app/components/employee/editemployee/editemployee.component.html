@@ -1,1 +1,117 @@
-<p>editemployee works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Edit Employee</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input id="firstName" formControlName="firstName" type="text" class="form-control"
+        placeholder="Enter first name" />
+      <div *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched" class="text-danger">
+        First name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" formControlName="lastName" type="text" class="form-control" placeholder="Enter last name" />
+      <div *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched" class="text-danger">
+        Last name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" class="form-control" placeholder="Enter email"
+        required="required" />
+      <div *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" class="text-danger">
+        <!-- <div *ngIf="employeeForm.get('email')?.errors?.required">Email is required.</div> -->
+        <div>Email is required.</div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select id="gender" formControlName="gender" class="form-control">
+        <option value="">Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <div *ngIf="employeeForm.get('gender')?.invalid && employeeForm.get('gender')?.touched" class="text-danger">
+        Gender is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="contact">Contact:</label>
+      <input id="contact" formControlName="contact" type="text" class="form-control"
+        placeholder="Enter contact number" />
+      <div *ngIf="employeeForm.get('contact')?.invalid && employeeForm.get('contact')?.touched" class="text-danger">
+        Contact number is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="profilePhoto">Profile Photo URL:</label>
+      <input id="profilePhoto" formControlName="profilePhoto" type="text" class="form-control"
+        placeholder="Enter profile photo URL" />
+    </div>
+
+    <div class="form-group">
+      <label for="joiningDate">Joining Date:</label>
+      <input id="joiningDate" formControlName="joiningDate" type="date" class="form-control" />
+      <div *ngIf="employeeForm.get('joiningDate')?.invalid && employeeForm.get('joiningDate')?.touched"
+        class="text-danger">
+        Joining date is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="position">Position:</label>
+      <input id="position" formControlName="position" type="text" class="form-control" placeholder="Enter position" />
+      <div *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched" class="text-danger">
+        Position is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input id="salary" formControlName="salary" type="text" class="form-control" placeholder="Enter salary" />
+      <div *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched" class="text-danger">
+        Salary is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="departmentId">Department:</label>
+      <input id="departmentId" formControlName="departmentId" type="text" class="form-control"
+        placeholder="Enter department ID" />
+      <div *ngIf="employeeForm.get('departmentId')?.invalid && employeeForm.get('departmentId')?.touched"
+        class="text-danger">
+        Department ID is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="locationId">Location:</label>
+      <input id="locationId" formControlName="locationId" type="text" class="form-control"
+        placeholder="Enter location ID" />
+      <div *ngIf="employeeForm.get('locationId')?.invalid && employeeForm.get('locationId')?.touched"
+        class="text-danger">
+        Location ID is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save</button>
+    <button type="button" class="btn btn-secondary ml-2" (click)="goBack()">Cancel</button>
+  </form>
+  <div *ngIf="errorMessage" class="mt-3 alert alert-danger">{{ errorMessage }}</div>
+</div>

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../authentication/guard/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserModel } from '../user.model';
-import { UserprofileService } from '../userprofile.service';
+import { UserModel } from '../../models/user.model';
+import { UserprofileService } from '../../services/userprofile.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
@@ -20,22 +20,34 @@ export class RegistrationComponent implements OnInit {
     private userService: UserprofileService,
     private router: Router,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
   private initForm(): void {
-    this.registrationForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      position: [''],  // Optional field for the position
-      role: ['User']   // Default role is 'User'
-    }, { validator: this.passwordMatchValidator });
+    this.registrationForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+        role: ['Employee', Validators.required], // Default role is 'Employee'
+        position: [''], // Optional field for the position
+        salary: [''], // Optional field for the salary
+        joiningDate: [''], // Optional field for the joining date
+        gender: ['Male'], // Default gender
+        contactNumber: [''],
+        departmentId: [''],
+        locationId: [''],
+        isActive: [true],
+        createdAt: [new Date()],
+        updatedAt: [new Date()],
+      },
+      { validator: this.passwordMatchValidator }
+    );
   }
 
   private passwordMatchValidator(formGroup: FormGroup) {
@@ -47,7 +59,17 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registrationForm.invalid) {
-      return;
+      const user: UserModel = this.registrationForm.value;
+      this.authService.registration(user).subscribe({
+        next: (res) => {
+          console.log('User registered successfully:', res);
+          this.authService.storeToken(res.token);
+          this.router.navigate(['/']); // Navigate to a protected route after registration
+        },
+        error: (err) => {
+          console.error('Error registering user:', err);
+        },
+      });
     }
     const newUser: UserModel = this.registrationForm.value;
     this.userService.createUser(newUser).subscribe({
@@ -58,7 +80,7 @@ export class RegistrationComponent implements OnInit {
       error: (error) => {
         this.errorMessage = 'Registration failed. Please try again.';
         console.error('Registration error:', error);
-      }
+      },
     });
   }
 }

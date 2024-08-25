@@ -47,72 +47,195 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'register', component: RegistrationComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-  { path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard, RoleGuard], data: { role: ['Admin', 'User'] } },
+  {
+    path: 'register',
+    component: RegistrationComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' },
+  },
+  {
+    path: 'userprofile',
+    component: UserprofileComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: ['Admin', 'User'] },
+  },
   { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'forgot-password', component: ForgetpasswordComponent },  // Add this path for the Forget Password functionality
+  { path: 'forgetpassword', component: ForgetpasswordComponent }, // Add this path for the Forget Password functionality
 
   {
     path: 'employees',
     children: [
-      { path: 'create', component: CreateemployeeComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewemployeeComponent, canActivate: [AuthGuard] },
-      { path: 'edit/:id', component: EditemployeeComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'list', component: ListemployeeComponent, canActivate: [AuthGuard] },
-    ]
+      {
+        path: 'create',
+        component: CreateemployeeComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewemployeeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit/:id',
+        component: EditemployeeComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'list',
+        component: ListemployeeComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'locations',
     children: [
-      { path: 'create', component: CreatelocationComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'edit/:id', component: UpdatelocationComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: LocationComponent, canActivate: [AuthGuard] }
-    ]
+      {
+        path: 'create',
+        component: CreatelocationComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'edit/:id',
+        component: UpdatelocationComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: LocationComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'attendance',
     children: [
-      { path: 'create', component: CreateAttendanceComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'edit/:id', component: EditattendanceComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewattendanceComponent, canActivate: [AuthGuard] },
-      { path: 'list', component: ListattendanceComponent, canActivate: [AuthGuard] },
-    ]
+      {
+        path: 'create',
+        component: CreateAttendanceComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'edit/:id',
+        component: EditattendanceComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewattendanceComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'list',
+        component: ListattendanceComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'leave',
     children: [
-      { path: 'create', component: CreateleaveComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'edit/:id', component: EditleaveComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
+      {
+        path: 'create',
+        component: CreateleaveComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'edit/:id',
+        component: EditleaveComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
       { path: 'list', component: ListleaveComponent, canActivate: [AuthGuard] },
-    ]
+    ],
   },
   {
     path: 'performance',
     children: [
-      { path: 'create', component: CreateperformanceComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'edit/:id', component: EditperformanceComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewperformanceComponent, canActivate: [AuthGuard] },
-      { path: 'list', component: ListperformanceComponent, canActivate: [AuthGuard] },
-    ]
+      {
+        path: 'create',
+        component: CreateperformanceComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'edit/:id',
+        component: EditperformanceComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewperformanceComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'list',
+        component: ListperformanceComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'payroll',
     children: [
-      { path: 'create', component: CreatePayrollComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'edit/:id', component: EditpayrollComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewpayrollComponent, canActivate: [AuthGuard] },
-      { path: 'list', component: ListpayrollComponent, canActivate: [AuthGuard] },
-    ]
+      {
+        path: 'create',
+        component: CreatePayrollComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'edit/:id',
+        component: EditpayrollComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewpayrollComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'list',
+        component: ListpayrollComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'departments',
     children: [
-      { path: 'create', component: CreatedepartmentComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewdepartmentComponent, canActivate: [AuthGuard] },
-      { path: 'list', component: ListdepartmentComponent, canActivate: [AuthGuard] },
-    ]
+      {
+        path: 'create',
+        component: CreatedepartmentComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewdepartmentComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'list',
+        component: ListdepartmentComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   // {
   //   path: 'reports',
@@ -126,13 +249,28 @@ const routes: Routes = [
     path: 'feedbacks',
     children: [
       { path: 'create', component: CreatefeedbackComponent },
-      { path: 'edit/:id', component: EditfeedbackComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'view/:id', component: ViewfeedbackComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-      { path: 'list', component: ListfeedbackComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'Admin' } },
-    ]
+      {
+        path: 'edit/:id',
+        component: EditfeedbackComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'view/:id',
+        component: ViewfeedbackComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'list',
+        component: ListfeedbackComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'Admin' },
+      },
+    ],
   },
 
-  { path: '**', component: NotfoundComponent }
+  { path: '**', component: NotfoundComponent },
 
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: 'home', component: HomeComponent },
@@ -180,6 +318,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

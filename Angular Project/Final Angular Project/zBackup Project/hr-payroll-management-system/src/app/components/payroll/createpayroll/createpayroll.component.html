@@ -1,58 +1,227 @@
-<div class="container mt-5">
+<!-- createpayroll.component.html -->
+<div class="container">
   <h2>Create Payroll</h2>
+
   <form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
+      <label for="userName">Username</label>
+      <input id="userName" formControlName="userName" type="text" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('userName')?.invalid && (payrollForm.get('userName')?.touched || payrollForm.get('userName')?.dirty)"
+        class="text-danger">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="employeeId">Employee ID</label>
-      <input type="text" id="employeeId" formControlName="employeeId" class="form-control"
-        placeholder="Enter Employee ID">
-      <div *ngIf="payrollForm.get('employeeId')?.invalid && payrollForm.get('employeeId')?.touched" class="text-danger">
-        Employee ID is required
+      <input id="employeeId" formControlName="employeeId" type="text" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('employeeId')?.invalid && (payrollForm.get('employeeId')?.touched || payrollForm.get('employeeId')?.dirty)"
+        class="text-danger">
+        Employee ID is required.
       </div>
     </div>
 
     <div class="form-group">
       <label for="basicSalary">Basic Salary</label>
-      <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control"
-        placeholder="Enter Basic Salary">
-      <div *ngIf="payrollForm.get('basicSalary')?.invalid && payrollForm.get('basicSalary')?.touched"
+      <input id="basicSalary" formControlName="basicSalary" type="number" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('basicSalary')?.invalid && (payrollForm.get('basicSalary')?.touched || payrollForm.get('basicSalary')?.dirty)"
         class="text-danger">
-        Basic Salary is required and must be a positive number
+        Basic Salary is required and must be a positive number.
       </div>
     </div>
 
     <div class="form-group">
       <label for="bonuses">Bonuses</label>
-      <input type="number" id="bonuses" formControlName="bonuses" class="form-control" placeholder="Enter Bonuses">
+      <input id="bonuses" formControlName="bonuses" type="number" class="form-control" />
     </div>
 
     <div class="form-group">
       <label for="deductions">Deductions</label>
-      <input type="number" id="deductions" formControlName="deductions" class="form-control"
-        placeholder="Enter Deductions">
+      <input id="deductions" formControlName="deductions" type="number" class="form-control" />
     </div>
 
     <div class="form-group">
       <label for="tax">Tax</label>
-      <input type="number" id="tax" formControlName="tax" class="form-control" placeholder="Enter Tax">
+      <input id="tax" formControlName="tax" type="number" class="form-control" />
     </div>
 
     <div class="form-group">
       <label for="netPay">Net Pay</label>
-      <input type="number" id="netPay" formControlName="netPay" class="form-control" readonly>
+      <input id="netPay" formControlName="netPay" type="text" class="form-control" readonly />
     </div>
 
     <div class="form-group">
-      <label for="payrollStatus">Payroll Status</label>
-      <select id="payrollStatus" formControlName="payrollStatus" class="form-control">
-        <option *ngFor="let status of payrollStatuses" [value]="status">{{ status }}</option>
-      </select>
-      <div *ngIf="payrollForm.get('payrollStatus')?.invalid && payrollForm.get('payrollStatus')?.touched"
+      <label for="payPeriodStart">Pay Period Start</label>
+      <input id="payPeriodStart" formControlName="payPeriodStart" type="date" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('payPeriodStart')?.invalid && (payrollForm.get('payPeriodStart')?.touched || payrollForm.get('payPeriodStart')?.dirty)"
         class="text-danger">
-        Payroll Status is required
+        Pay Period Start is required.
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="payrollForm.invalid">Submit</button>
-    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+    <div class="form-group">
+      <label for="payPeriodEnd">Pay Period End</label>
+      <input id="payPeriodEnd" formControlName="payPeriodEnd" type="date" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('payPeriodEnd')?.invalid && (payrollForm.get('payPeriodEnd')?.touched || payrollForm.get('payPeriodEnd')?.dirty)"
+        class="text-danger">
+        Pay Period End is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="paymentDate">Payment Date</label>
+      <input id="paymentDate" formControlName="paymentDate" type="date" class="form-control" />
+      <div
+        *ngIf="payrollForm.get('paymentDate')?.invalid && (payrollForm.get('paymentDate')?.touched || payrollForm.get('paymentDate')?.dirty)"
+        class="text-danger">
+        Payment Date is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="overtimeExemption">Overtime Exemption</label>
+      <input id="overtimeExemption" formControlName="overtimeExemption" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="overtimeHourlyRate">Overtime Hourly Rate</label>
+      <input id="overtimeHourlyRate" formControlName="overtimeHourlyRate" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="yearlySickDay">Yearly Sick Day</label>
+      <input id="yearlySickDay" formControlName="yearlySickDay" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="monthlyHolidays">Monthly Holidays</label>
+      <input id="monthlyHolidays" formControlName="monthlyHolidays" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="insurance">Insurance</label>
+      <input id="insurance" formControlName="insurance" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="medicare">Medicare</label>
+      <input id="medicare" formControlName="medicare" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option *ngFor="let status of payrollStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
   </form>
 </div>
+
+
+<!-- <div class="container">
+  <h2>Create Payroll</h2>
+
+  <form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="user">Employee:</label>
+      <input type="text" id="user" formControlName="user" required>
+    </div>
+
+    <div class="form-group">
+      <label for="basicSalary">Basic Salary</label>
+      <input id="basicSalary" formControlName="basicSalary" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="bonuses">Bonuses</label>
+      <input id="bonuses" formControlName="bonuses" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="deductions">Deductions</label>
+      <input id="deductions" formControlName="deductions" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="tax">Tax</label>
+      <input id="tax" formControlName="tax" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="netPay">Net Pay:</label>
+      <input type="number" id="netPay" formControlName="netPay" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="payPeriodStart">Pay Period Start</label>
+      <input id="payPeriodStart" formControlName="payPeriodStart" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="payPeriodEnd">Pay Period End</label>
+      <input id="payPeriodEnd" formControlName="payPeriodEnd" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="paymentDate">Payment Date</label>
+      <input id="paymentDate" formControlName="paymentDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="overtimeExemption">Overtime Exemption</label>
+      <input id="overtimeExemption" formControlName="overtimeExemption" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="overtimeHourlyRate">Overtime Hourly Rate</label>
+      <input id="overtimeHourlyRate" formControlName="overtimeHourlyRate" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="monthlySickDay">Monthly Sick Day</label>
+      <input id="monthlySickDay" formControlName="monthlySickDay" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="monthlyHolidays">Monthly Holidays</label>
+      <input id="monthlyHolidays" formControlName="monthlyHolidays" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="insurance">Insurance</label>
+      <input id="insurance" formControlName="insurance" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="medicare">Medicare</label>
+      <input id="medicare" formControlName="medicare" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option value="Paid">Paid</option>
+        <option value="Pending">Pending</option>
+        <option value="Overdue">Overdue</option>
+      </select>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">Submit</button>
+  </form>
+</div> -->

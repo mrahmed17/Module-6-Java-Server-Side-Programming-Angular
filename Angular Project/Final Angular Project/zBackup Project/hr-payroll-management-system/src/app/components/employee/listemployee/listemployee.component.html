@@ -1,1 +1,38 @@
-<p>listemployee works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Employee List</h2>
+
+  <!-- Error Message Display -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Employee Table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.UserModel.id }}</td>
+        <td>{{ employee.UserModel.firstName }} {{ employee.UserModel.lastName }}</td>
+        <td>{{ employee.UserModel.email }}</td>
+        <td>{{ employee.UserModel.role }}</td>
+        <td>{{ employee.DepartmentModel.departmentName }}</td>
+        <td>{{ employee.LocationModel.locationName }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="viewEmployee(employee.UserModel.id)">View</button>
+          <button class="btn btn-warning btn-sm" (click)="editEmployee(employee.UserModel.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.UserModel.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

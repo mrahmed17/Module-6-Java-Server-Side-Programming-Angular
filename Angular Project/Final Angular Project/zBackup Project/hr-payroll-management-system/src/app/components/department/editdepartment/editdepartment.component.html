@@ -1,1 +1,45 @@
-<p>editdepartment works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Edit Department</h2>
+  <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group mb-3">
+      <label for="departmentName">Department Name</label>
+      <input type="text" id="departmentName" formControlName="departmentName" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group mb-3">
+      <label for="headOfDepartment">Head of Department</label>
+      <input type="text" id="headOfDepartment" formControlName="headOfDepartment" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="numberOfEmployees">Number of Employees</label>
+      <input type="number" id="numberOfEmployees" formControlName="numberOfEmployees" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="payrollCalculationMethod">Payroll Calculation Method</label>
+      <input type="text" id="payrollCalculationMethod" formControlName="payrollCalculationMethod"
+        class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="overtimeRules">Overtime Rules</label>
+      <input type="text" id="overtimeRules" formControlName="overtimeRules" class="form-control" />
+    </div>
+    <div class="form-group mb-3">
+      <label for="location">Location</label>
+      <select id="location" formControlName="location" class="form-control">
+        <option *ngFor="let location of locations" [value]="location.id">
+          {{ location.locationName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group text-center mb-3">
+      <button type="submit" class="btn btn-primary">Update Department</button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+    </div>
+    <div *ngIf="errorMessage" class="text-danger text-center">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

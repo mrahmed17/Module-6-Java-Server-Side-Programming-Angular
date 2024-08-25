@@ -1,59 +1,47 @@
-<div class="location-form container mt-md-2 mb-3">
-  <h2 class="container text-center text-success">Create Location Form </h2>
-
+<div class="container">
+  <h2>Create New Location</h2>
   <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
-        <label for="name">Name:</label>
-        <input id="name" placeholder="Name is required." formControlName="name" type="text" />
-        <div *ngIf="locationForm.get('name')?.invalid && locationForm.get('name')?.touched">
-        </div>
-      </div>
-
-      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
-        <label for="city">City:</label>
-        <input id="city" placeholder="City is required." formControlName="city" type="text" />
-        <div *ngIf="locationForm.get('city')?.invalid && locationForm.get('city')?.touched">
-        </div>
-      </div>
+    <div class="form-group">
+      <label for="locationName">Location Name</label>
+      <input id="locationName" formControlName="locationName" type="text" class="form-control" />
     </div>
 
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
-        <label for="state">State:</label>
-        <input id="state" placeholder="State is required." formControlName="state" type="text" />
-        <div *ngIf="locationForm.get('state')?.invalid && locationForm.get('state')?.touched">
-        </div>
-      </div>
-
-      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
-        <label for="availableUnits">Available Units:</label>
-        <input placeholder="Available units must be at least 1." id="availableUnits" formControlName="availableUnits"
-          type="number" />
-        <div *ngIf="locationForm.get('availableUnits')?.invalid && locationForm.get('availableUnits')?.touched">
-        </div>
-      </div>
+    <div class="form-group">
+      <label for="addressLine">Address Line</label>
+      <input id="addressLine" formControlName="addressLine" type="text" class="form-control" />
     </div>
 
-    <div>
-      <label for="photo">Photo URL:</label>
-      <input id="photo" placeholder="Enter Your Photo URL" formControlName="photo" type="text" />
+    <div class="form-group">
+      <label for="city">City</label>
+      <input id="city" formControlName="city" type="text" class="form-control" />
     </div>
 
-
-    <div>
-      <label for="wifi">WiFi Available:</label>
-      <input id="wifi" formControlName="wifi" type="checkbox" />
+    <div class="form-group">
+      <label for="state">State</label>
+      <input id="state" formControlName="state" type="text" class="form-control" />
     </div>
 
-    <div>
-      <label for="laundry">Laundry Available:</label>
-      <input id="laundry" formControlName="laundry" type="checkbox" />
+    <div class="form-group">
+      <label for="postalCode">Postal Code</label>
+      <input id="postalCode" formControlName="postalCode" type="text" class="form-control" />
     </div>
 
-    <div>
-      <button type="submit" [disabled]="locationForm.invalid">Create Location</button>
-      <button type="button" (click)="resetForm()">Reset</button>
+    <div class="form-group">
+      <label for="countryName">Country Name</label>
+      <input id="countryName" formControlName="countryName" type="text" class="form-control" />
     </div>
+
+    <div class="form-group">
+      <label for="isActive">Is Active</label>
+      <input id="isActive" formControlName="isActive" type="checkbox" class="form-check-input" />
+    </div>
+
+    <div class="form-group">
+      <label for="photo">Photo (optional)</label>
+      <input id="photo" formControlName="photo" type="text" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Location</button>
+    <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
   </form>
 </div>

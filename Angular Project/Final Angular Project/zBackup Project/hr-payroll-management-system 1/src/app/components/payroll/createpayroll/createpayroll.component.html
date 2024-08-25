@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <h2>Create Payroll</h2>
+  <form [formGroup]="payrollForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="employeeId">Employee ID</label>
+      <input type="text" id="employeeId" formControlName="employeeId" class="form-control"
+        placeholder="Enter Employee ID">
+      <div *ngIf="payrollForm.get('employeeId')?.invalid && payrollForm.get('employeeId')?.touched" class="text-danger">
+        Employee ID is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="basicSalary">Basic Salary</label>
+      <input type="number" id="basicSalary" formControlName="basicSalary" class="form-control"
+        placeholder="Enter Basic Salary">
+      <div *ngIf="payrollForm.get('basicSalary')?.invalid && payrollForm.get('basicSalary')?.touched"
+        class="text-danger">
+        Basic Salary is required and must be a positive number
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="bonuses">Bonuses</label>
+      <input type="number" id="bonuses" formControlName="bonuses" class="form-control" placeholder="Enter Bonuses">
+    </div>
+
+    <div class="form-group">
+      <label for="deductions">Deductions</label>
+      <input type="number" id="deductions" formControlName="deductions" class="form-control"
+        placeholder="Enter Deductions">
+    </div>
+
+    <div class="form-group">
+      <label for="tax">Tax</label>
+      <input type="number" id="tax" formControlName="tax" class="form-control" placeholder="Enter Tax">
+    </div>
+
+    <div class="form-group">
+      <label for="netPay">Net Pay</label>
+      <input type="number" id="netPay" formControlName="netPay" class="form-control" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="payrollStatus">Payroll Status</label>
+      <select id="payrollStatus" formControlName="payrollStatus" class="form-control">
+        <option *ngFor="let status of payrollStatuses" [value]="status">{{ status }}</option>
+      </select>
+      <div *ngIf="payrollForm.get('payrollStatus')?.invalid && payrollForm.get('payrollStatus')?.touched"
+        class="text-danger">
+        Payroll Status is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="payrollForm.invalid">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+  </form>
+</div>

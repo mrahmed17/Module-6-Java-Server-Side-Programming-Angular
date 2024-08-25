@@ -1,38 +1,47 @@
 <div class="container">
-  <form (ngSubmit)="updateLocation()">
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Location Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="location.locationName">
-
+  <h2>Update Location</h2>
+  <form [formGroup]="locationForm" (ngSubmit)="updateLocation()">
+    <div class="form-group">
+      <label for="locationName">Location Name</label>
+      <input id="locationName" formControlName="locationName" type="text" class="form-control" />
     </div>
 
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Address Line</label>
-      <input type="text" class="form-control" name="addressLine" [(ngModel)]="location.addressLine">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">City</label>
-      <input type="text" class="form-control" name="city" [(ngModel)]="location.city">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">State</label>
-      <input type="text" class="form-control" name="state" [(ngModel)]="location.state">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Postal Code</label>
-      <input type="text" class="form-control" name="postalCode" [(ngModel)]="location.postalCode">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Country Name</label>
-      <input type="text" class="form-control" name="countryName" [(ngModel)]="location.countryName">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Photo</label>
-      <input type="text" class="form-control" name="photo" [(ngModel)]="location.photo">
+    <div class="form-group">
+      <label for="addressLine">Address Line</label>
+      <input id="addressLine" formControlName="addressLine" type="text" class="form-control" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input id="city" formControlName="city" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="state">State</label>
+      <input id="state" formControlName="state" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="postalCode">Postal Code</label>
+      <input id="postalCode" formControlName="postalCode" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="countryName">Country Name</label>
+      <input id="countryName" formControlName="countryName" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="isActive">Is Active</label>
+      <input id="isActive" formControlName="isActive" type="checkbox" class="form-check-input" />
+    </div>
+
+    <div class="form-group">
+      <label for="photo">Photo (optional)</label>
+      <input id="photo" formControlName="photo" type="text" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Location</button>
+    <button type="button" (click)="locationForm.reset()" class="btn btn-secondary">Reset</button>
   </form>
-
 </div>

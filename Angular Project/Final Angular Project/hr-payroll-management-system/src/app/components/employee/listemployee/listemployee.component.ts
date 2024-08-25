@@ -26,6 +26,7 @@ export class ListemployeeComponent implements OnInit {
     this.employeeService.getAllEmployees().subscribe(
       (data: EmployeeModel[]) => {
         this.employees = data;
+        console.log('Employees loaded:', this.employees); // Debugging
       },
       (error) => {
         console.error('Failed to load employees', error);

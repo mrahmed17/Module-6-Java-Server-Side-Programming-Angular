@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Create Attendance</h2>
+  <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+
+    <!-- Attendance Details -->
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" id="date" class="form-control" formControlName="date">
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" class="form-control" formControlName="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="On Leave">On Leave</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="checkInTime">Check-In Time</label>
+      <input type="time" id="checkInTime" class="form-control" formControlName="checkInTime">
+    </div>
+
+    <div class="form-group">
+      <label for="checkOutTime">Check-Out Time</label>
+      <input type="time" id="checkOutTime" class="form-control" formControlName="checkOutTime">
+    </div>
+
+    <!-- Employee Details -->
+    <h3>Employee Details</h3>
+
+    <div class="form-group">
+      <label for="name">Employee Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input type="text" id="position" class="form-control" formControlName="position">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Attendance</button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+  </form>
+</div>

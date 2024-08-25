@@ -1,76 +1,171 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { DepartmentModel } from '../department.model';
-import { DepartmentService } from '../../department/department.service';
-import { LocationService } from '../../location/location.service'; // Import if you need locations
-
+import { DepartmentService } from '../../../services/department.service';
+import { DepartmentModel } from '../../../models/department.model';
+import { UserModel } from '../../../models/user.model';
+import { LocationModel } from '../../../models/location.model';
+import { PayrollModel } from '../../../models/payroll.model';
+import { UserprofileService } from '../../../services/userprofile.service';
+import { LocationService } from '../../../services/location.service';
+import { PayrollService } from '../../../services/payroll.service';
 
 @Component({
   selector: 'app-createdepartment',
   templateUrl: './createdepartment.component.html',
-  styleUrls: ['./createdepartment.component.css']
+  styleUrls: ['./createdepartment.component.css'],
 })
 export class CreatedepartmentComponent implements OnInit {
   departmentForm!: FormGroup;
-  locations: any[] = []; // Assuming you have locations to choose from
+  departments: DepartmentModel[] = [];
+  users: UserModel[] = [];
+  locations: LocationModel[] = [];
+  payrolls: PayrollModel[] = [];
+  isEditMode: boolean = false;
+  errorMessage: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
     private departmentService: DepartmentService,
-    private locationService: LocationService, // If you need to load locations
-    private router: Router
-  ) { }
+    private formBuilder: FormBuilder,
+    private userService: UserprofileService,
+    private locationService: LocationService,
+    private payrollService: PayrollService
+  ) {}
 
   ngOnInit(): void {
-    this.departmentForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      locationId: ['', Validators.required],
-      headOfDepartment: ['', Validators.required],
-      numberOfEmployees: ['', [Validators.required, Validators.min(0)]],
-      payrollCalculationMethod: ['', Validators.required],
-      overtimeRules: this.formBuilder.group({
-        baseHours: ['', Validators.required],
-        overtimeRate: ['', Validators.required],
-        overtimeCapping: [''],
-        overtimeExemptEmployees: [[]]
-      })
-    });
-    // Load locations if necessary
+    this.initForm();
+    this.loadDepartments();
+    this.loadUsers();
     this.loadLocations();
+    this.loadPayrolls();
   }
 
-  loadLocations(): void {
-    this.locationService.getAllLocation().subscribe({
-      next: (res) => {
-        this.locations = res; // Assuming the response is an array of locations
-      },
-      error: (err) => {
-        console.error('Error fetching locations:', err);
-      }
+  // Initialize the form
+  initForm(): void {
+    this.departmentForm = this.formBuilder.group({
+      id: [null],
+      departmentName: ['', Validators.required],
+      headOfDepartment: [null, Validators.required],
+      numberOfEmployees: [0, Validators.required],
+      payrollCalculationMethod: [null, Validators.required],
+      overtimeRules: ['', Validators.required],
+      location: [null, Validators.required],
     });
   }
 
-  onSubmit(): void {
-    if (this.departmentForm.valid) {
-      const department: DepartmentModel = this.departmentForm.value;
+  // Load all departments
+  loadDepartments(): void {
+    this.departmentService.getAllDepartments().subscribe(
+      (data) => {
+        this.departments = data;
+      },
+      (error) => {
+        console.error('Failed to load departments', error);
+        this.errorMessage = 'Failed to load departments. Please try again.';
+      }
+    );
+  }
 
-      this.departmentService.createDepartmentModel(department).subscribe({
-        next: (res) => {
-          console.log('Department created successfully:', res);
-          this.router.navigate(['/departments']); // Redirect to departments list
-        },
-        error: (err) => {
-          console.error('Error creating department:', err);
-        }
-      });
+  // Load all users (for head of department selection)
+  loadUsers(): void {
+    this.userService.getAllUsers().subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.error('Failed to load users', error);
+        this.errorMessage = 'Failed to load users. Please try again.';
+      }
+    );
+  }
+
+  // Load all locations (for location selection)
+  loadLocations(): void {
+    this.locationService.getAllLocations().subscribe(
+      (data) => {
+        this.locations = data;
+      },
+      (error) => {
+        console.error('Failed to load locations', error);
+        this.errorMessage = 'Failed to load locations. Please try again.';
+      }
+    );
+  }
+
+  // Load all payrolls (for payroll calculation method selection)
+  loadPayrolls(): void {
+    this.payrollService.getAllPayrolls().subscribe(
+      (data) => {
+        this.payrolls = data;
+      },
+      (error) => {
+        console.error('Failed to load payrolls', error);
+        this.errorMessage = 'Failed to load payrolls. Please try again.';
+      }
+    );
+  }
+
+  // Submit the form (Create or Update)
+  onSubmit(): void {
+    if (this.departmentForm.invalid) {
+      return;
+    }
+
+    const departmentData: DepartmentModel = this.departmentForm.value;
+
+    if (this.isEditMode) {
+      this.departmentService
+        .updateDepartment(departmentData.id, departmentData)
+        .subscribe(
+          (response) => {
+            this.loadDepartments();
+            this.resetForm();
+            this.isEditMode = false;
+          },
+          (error) => {
+            console.error('Failed to update department', error);
+            this.errorMessage =
+              'Failed to update department. Please try again.';
+          }
+        );
     } else {
-      console.log('Form is invalid');
+      this.departmentService.createDepartment(departmentData).subscribe(
+        (response) => {
+          this.loadDepartments();
+          this.resetForm();
+        },
+        (error) => {
+          console.error('Failed to create department', error);
+          this.errorMessage = 'Failed to create department. Please try again.';
+        }
+      );
     }
   }
 
+  // Edit an existing department
+  editDepartment(department: DepartmentModel): void {
+    this.departmentForm.patchValue(department);
+    this.isEditMode = true;
+  }
+
+  // Delete a department
+  deleteDepartment(id: string): void {
+    if (confirm('Are you sure you want to delete this department?')) {
+      this.departmentService.deleteDepartment(id).subscribe(
+        () => {
+          this.loadDepartments();
+        },
+        (error) => {
+          console.error('Failed to delete department', error);
+          this.errorMessage = 'Failed to delete department. Please try again.';
+        }
+      );
+    }
+  }
+
+  // Reset the form and state
   resetForm(): void {
     this.departmentForm.reset();
+    this.isEditMode = false;
+    this.errorMessage = '';
   }
 }

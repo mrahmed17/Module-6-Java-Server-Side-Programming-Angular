@@ -2,333 +2,288 @@
   "user": [
     {
       "id": "1",
-      "name": "Raju Ahmed",
+      "firstName": "Md. Raju",
+      "lastName": "Ahmed",
       "email": "raju@gmail.com",
+      "userName": "traj",
       "password": "123456",
       "role": "Admin",
-      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ="
+      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "contact": "0123456",
+      "gender": "Male",
+      "nidNo": "987654",
+      "joiningDate": "16/01/2024",
+      "salary": "50000",
+      "department": "All",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm"
     },
     {
       "id": "73b4",
-      "name": "Tamim Ahmed",
+      "firstName": "Tamim Ahmed",
+      "lastName": "Raju",
       "email": "tamim@gmail.com",
+      "userName": "tamim",
       "password": "123456",
       "role": "User",
-      "profilePhoto": "https://media.istockphoto.com/id/1346124841/photo/successful-construction-site-worker-thinking.jpg?s=1024x1024&w=is&k=20&c=4SvUvVZDP5JOS7lXFUc05CLyZZQcTGD_kSopYBqsbxc="
+      "profilePhoto": "https://media.istockphoto.com/id/1346124841/photo/successful-construction-site-worker-thinking.jpg?s=1024x1024&w=is&k=20&c=4SvUvVZDP5JOS7lXFUc05CLyZZQcTGD_kSopYBqsbxc=",
+      "contact": "0123456",
+      "gender": "Male",
+      "nidNo": "987654",
+      "joiningDate": "16/01/2024",
+      "salary": "50000",
+      "department": "Management",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm"
     }
   ],
   "locations": [
     {
       "id": "0",
-      "name": "Lalbagh",
+      "locationName": "Lalbagh",
+      "addressLine": "*********",
       "city": "Dhaka",
-      "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
-      "availableUnits": "40",
-      "wifi": true,
-      "laundry": true
+      "state": "Dhaka South",
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/bernard-hermant-CLKGGwIBTaY-unsplash.jpg"
     },
     {
       "id": "1",
-      "name": "Azimpur",
+      "locationName": "Azimpur",
+      "addressLine": "*********",
       "city": "Dhaka",
-      "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/saru-robert-9rP3mxf8qWI-unsplash.jpg",
-      "availableUnits": "25",
-      "wifi": true,
-      "laundry": true
+      "state": "Dhaka South",
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/saru-robert-9rP3mxf8qWI-unsplash.jpg"
     },
     {
       "id": "2",
-      "name": "Mirpur 10",
+      "locationName": "Mirpur 10",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/i-do-nothing-but-love-lAyXdl1-Wmc-unsplash.jpg",
-      "availableUnits": "18",
-      "wifi": true,
-      "laundry": true
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/i-do-nothing-but-love-lAyXdl1-Wmc-unsplash.jpg"
     },
     {
       "id": "3",
-      "name": "Mohammadpur",
+      "locationName": "Mohammadpur",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/ian-macdonald-W8z6aiwfi1E-unsplash.jpg",
-      "availableUnits": "19",
-      "wifi": true,
-      "laundry": true
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/ian-macdonald-W8z6aiwfi1E-unsplash.jpg"
     },
     {
       "id": "4",
-      "name": "Panthapath",
+      "locationName": "Panthapath",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/krzysztof-hepner-978RAXoXnH4-unsplash.jpg",
-      "availableUnits": "24",
-      "wifi": true,
-      "laundry": true
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/krzysztof-hepner-978RAXoXnH4-unsplash.jpg"
     },
     {
       "id": "5",
-      "name": "Malibag",
+      "locationName": "Malibag",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-JvQ0Q5IkeMM-unsplash.jpg",
-      "availableUnits": "28",
-      "wifi": true,
-      "laundry": true
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-JvQ0Q5IkeMM-unsplash.jpg"
     },
     {
       "id": "6",
-      "name": "Kollanpur",
+      "locationName": "Kollanpur",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/phil-hearing-IYfp2Ixe9nM-unsplash.jpg",
-      "availableUnits": "26",
-      "wifi": true,
-      "laundry": true
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/phil-hearing-IYfp2Ixe9nM-unsplash.jpg"
     },
     {
       "id": "330e",
-      "name": "Dhanmondi",
+      "locationName": "Dhanmondi",
+      "addressLine": "*********",
       "city": "Dhaka",
       "state": "Bangladesh",
-      "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-GGupkreKwxA-unsplash.jpg",
-      "availableUnits": "32",
-      "wifi": true,
-      "laundry": true
-    }
-  ],
-  "students": [
-    {
-      "id": "f9cb",
-      "name": "Md. Raju Ahmed",
-      "email": "traj@gmail.com",
-      "cellNo": "12345",
-      "location": {
-        "id": "0",
-        "name": "Lalbagh",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
-        "availableUnits": "40",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "bfeb",
-      "name": "Sanullah",
-      "email": "sanaullahtarget2030@gmail.com",
-      "cellNo": "22564894",
-      "location": {
-        "id": "330e",
-        "name": "Dhanmondi",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-GGupkreKwxA-unsplash.jpg",
-        "availableUnits": "32",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "6c57",
-      "name": "Kutub",
-      "email": "kutub@gmail.com",
-      "cellNo": "6484",
-      "location": {
-        "id": "330e",
-        "name": "Dhanmondi",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-GGupkreKwxA-unsplash.jpg",
-        "availableUnits": "32",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "3c1b",
-      "name": "Rabiul",
-      "email": "rabiul@gmail.com",
-      "cellNo": "5456",
-      "location": {
-        "id": "3",
-        "name": "Mohammadpur",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/ian-macdonald-W8z6aiwfi1E-unsplash.jpg",
-        "availableUnits": "19",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "1100",
-      "name": "Rizvi",
-      "email": "rizvi@gmail.com",
-      "cellNo": "+982+92+8",
-      "location": {
-        "id": "1",
-        "name": "Azimpur",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/saru-robert-9rP3mxf8qWI-unsplash.jpg",
-        "availableUnits": "25",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "a340",
-      "name": "Nusrat",
-      "email": "nusrat@gmail.com",
-      "cellNo": "7897+97",
-      "location": {
-        "id": "2",
-        "name": "Mirpur 10",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/i-do-nothing-but-love-lAyXdl1-Wmc-unsplash.jpg",
-        "availableUnits": "18",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "0955",
-      "name": "Nyamul",
-      "email": "nyamul@gmail.com",
-      "cellNo": "94971988",
-      "location": {
-        "id": "3",
-        "name": "Mohammadpur",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/ian-macdonald-W8z6aiwfi1E-unsplash.jpg",
-        "availableUnits": "19",
-        "wifi": true,
-        "laundry": true
-      }
-    },
-    {
-      "id": "3c68",
-      "name": "Nirjash",
-      "email": "nir@gmail.com",
-      "cellNo": "458458954",
-      "location": {
-        "id": "4",
-        "name": "Panthapath",
-        "city": "Dhaka",
-        "state": "Bangladesh",
-        "photo": "https://angular.io/assets/images/tutorials/faa/krzysztof-hepner-978RAXoXnH4-unsplash.jpg",
-        "availableUnits": "24",
-        "wifi": true,
-        "laundry": true
-      }
+      "postalCode": "1211",
+      "countryName": "Bangladesh",
+      "isActive": "Yes",
+      "createdAt": "2.50 pm",
+      "updatedAt": "7.03 pm",
+      "photo": "https://angular.io/assets/images/tutorials/faa/r-architecture-GGupkreKwxA-unsplash.jpg"
     }
   ],
   "employees": [
     {
-      "firstName": "Md. Raju",
-      "lastName": "Ahmed",
-      "email": "traj@gmail.com",
-      "joiningDate": "08/17/2024",
+      "id": null,
+      "firstName": "Rezvi",
+      "lastName": "Mostafa",
+      "email": "rezvi@gmail.com",
       "gender": "Male",
-      "contact": "5464564",
-      "position": "Dep. Head",
-      "salary": "100000",
-      "departments": "HR",
-      "location": "",
-      "id": "5cc0"
+      "contact": "12346",
+      "joiningDate": "2024-08-25",
+      "profilePhoto": "Nai",
+      "position": "HR",
+      "salary": 50000,
+      "departmentId": "6c48",
+      "locationId": "1"
+    },
+    {
+      "id": null,
+      "firstName": "Raju",
+      "lastName": "Ahmed",
+      "email": "raj@t.com",
+      "gender": "Male",
+      "contact": "123456",
+      "joiningDate": "2024-08-25",
+      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "position": "HR",
+      "salary": 50000,
+      "departmentId": "6c48",
+      "locationId": "1"
+    },
+    {
+      "id": null,
+      "firstName": "afadsf",
+      "lastName": "asfdadfs",
+      "email": "adsfa@fasfads",
+      "gender": "Female",
+      "contact": "65465465",
+      "joiningDate": "2024-08-25",
+      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "position": "Employee",
+      "salary": 40000,
+      "departmentId": "6c48",
+      "locationId": "3"
     }
   ],
   "payrolls": [
     {
       "id": "7f8f",
-      "employeeId": "HR-1",
+      "userName": {
+        "firstName": "Md. Raju",
+        "lastName": "Ahmed"
+      },
       "basicSalary": 50000,
       "bonuses": 10000,
       "deductions": 2000,
       "tax": 2000,
       "netPay": 56000,
-      "payrollStatus": "Paid"
-    },
-    {
-      "id": "3ed4",
-      "employeeId": "HR-2",
-      "basicSalary": 50000,
-      "bonuses": 5000,
-      "deductions": 2000,
-      "tax": 1000,
-      "netPay": 52000,
-      "payrollStatus": "Paid"
-    },
-    {
-      "id": "aa40",
-      "employeeId": "HR-2",
-      "basicSalary": 50000,
-      "bonuses": 10000,
-      "deductions": 2000,
-      "tax": 1000,
-      "netPay": 57000,
-      "payrollStatus": "Paid"
+      "payPeriodStart": "03:00 pm",
+      "payPeriodEnd": "07:00 pm",
+      "paymentDate": "31/01/2024",
+      "overtimeExemption": "Newcomer and older than 50 years.",
+      "overtimeHourlyRate": 300,
+      "yearlySickDay": "10",
+      "monthlyHolidays": "4",
+      "insurance": 1000,
+      "medicare": 500,
+      "status": "Paid",
+      "employeeId": {
+        "id": "5cc0",
+        "departmentId": {
+          "id": "0"
+        },
+        "locationId": {
+          "id": "0",
+          "locationName": "Lalbagh"
+        }
+      }
     }
   ],
-  "attendances": [
-    {
-      "date": "17/08/2024",
-      "status": "Present",
-      "checkInTime": "02:25 PM",
-      "checkOutTime": "03:25 PM",
-      "employeeName": "Md. Raju Ahmed",
-      "position": "Admin",
-      "email": "tam2@gmail.com",
-      "id": "b69e"
-    }
-  ],
+  "attendances": [],
   "departments": [
     {
+      "id": "6c48",
       "departmentName": "HR",
       "description": "Human Resources (HR) manages employee recruitment, hiring, training, benefits, and performance to ensure a productive and compliant workplace.",
-      "location": "Lalbag",
-      "headOfDepartment": "Md. Raju Ahmed",
-      "numberOfEmployees": "50",
+      "headOfDepartment": {
+        "id": "1",
+        "firstName": "Md. Raju",
+        "lastName": "Ahmed",
+        "role": "Admin",
+        "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+        "joiningDate": "16/01/2024",
+        "salary": "50000"
+      },
+      "numberOfEmployees": 50,
       "payrollCalculationMethod": "Monthly",
-      "baseHours": "8",
-      "overtimeRate": "200",
-      "overtimeCapping": "4",
-      "overtimeExemptEmployees": "Older than 50 years and newcomer.",
-      "id": "6c48"
+      "overtimeRules": "After finishing the daily work hour",
+      "location": {
+        "id": "0",
+        "locationName": "Lalbagh",
+        "addressLine": "*********",
+        "city": "Dhaka",
+        "state": "Dhaka South",
+        "postalCode": "1211",
+        "countryName": "Bangladesh",
+        "isActive": "Yes",
+        "photo": "https://angular.io/assets/images/tutorials/faa/bernard-hermant-CLKGGwIBTaY-unsplash.jpg"
+      }
     }
   ],
   "feedbacks": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "f9be",
+      "employeeId": 2,
+      "departmentId": 648,
+      "employeeName": "Rezvi",
+      "rating": 5,
+      "comments": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "feedbackDate": "2024-08-25"
     }
   ],
   "leaves": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "f9be",
+      "employeeId": "fdg",
+      "employeeName": "fdg"
     }
   ],
   "performances": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "dg",
+      "employeeId": "fdg",
+      "employeeName": "dfgdf"
     }
   ],
   "reports": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "dfgdf",
+      "employeeId": "dfgfd",
+      "employeeName": "dfgfd"
     }
   ]
 }

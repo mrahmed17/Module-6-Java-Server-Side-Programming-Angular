@@ -147,24 +147,46 @@
   ],
   "employees": [
     {
-      "id": "5cc0",
-      "firstName": "Md. Raju",
-      "lastName": "Ahmed",
-      "email": "traj@gmail.com",
+      "id": null,
+      "firstName": "Rezvi",
+      "lastName": "Mostafa",
+      "email": "rezvi@gmail.com",
       "gender": "Male",
-      "contact": "5464564",
+      "contact": "12346",
+      "joiningDate": "2024-08-25",
+      "profilePhoto": "Nai",
+      "position": "HR",
+      "salary": 50000,
+      "departmentId": "6c48",
+      "locationId": "1"
+    },
+    {
+      "id": null,
+      "firstName": "Raju",
+      "lastName": "Ahmed",
+      "email": "raj@t.com",
+      "gender": "Male",
+      "contact": "123456",
+      "joiningDate": "2024-08-25",
       "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
-      "joiningDate": "01/16/2024",
-      "position": "Dep. Head",
-      "salary": {
-        "salary": 50000
-      },
-      "departmentId": {
-        "id": "0"
-      },
-      "locationId": {
-        "id": "0"
-      }
+      "position": "HR",
+      "salary": 50000,
+      "departmentId": "6c48",
+      "locationId": "1"
+    },
+    {
+      "id": null,
+      "firstName": "afadsf",
+      "lastName": "asfdadfs",
+      "email": "adsfa@fasfads",
+      "gender": "Female",
+      "contact": "65465465",
+      "joiningDate": "2024-08-25",
+      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "position": "Employee",
+      "salary": 40000,
+      "departmentId": "6c48",
+      "locationId": "3"
     }
   ],
   "payrolls": [
@@ -201,20 +223,7 @@
       }
     }
   ],
-  "attendances": [
-    {
-      "id": "b69e",
-      "date": "17/08/2024",
-      "status": "Present",
-      "checkInTime": "02:25 PM",
-      "checkOutTime": "03:25 PM",
-      "employeeId": {
-        "firstName": "Md. Raju",
-        "lastName": "Ahmed",
-        "position": "Admin"
-      }
-    }
-  ],
+  "attendances": [],
   "departments": [
     {
       "id": "6c48",
@@ -247,35 +256,34 @@
   ],
   "feedbacks": [
     {
-      "id": "",
-      "userName": {
-        "firstName": "Md. Raju",
-        "lastName": "Ahmed"
-      },
-      "rating": "8",
-      "comments": "sadfhklsjfd",
-      "feedbackDate": "16/01/2024"
+      "id": "f9be",
+      "employeeId": 2,
+      "departmentId": 648,
+      "employeeName": "Rezvi",
+      "rating": 5,
+      "comments": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ=",
+      "feedbackDate": "2024-08-25"
     }
   ],
   "leaves": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "f9be",
+      "employeeId": "fdg",
+      "employeeName": "fdg"
     }
   ],
   "performances": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "dg",
+      "employeeId": "fdg",
+      "employeeName": "dfgdf"
     }
   ],
   "reports": [
     {
-      "id": "",
-      "employeeId": "",
-      "employeeName": ""
+      "id": "dfgdf",
+      "employeeId": "dfgfd",
+      "employeeName": "dfgfd"
     }
   ]
 }

@@ -20,19 +20,22 @@ export class CreatelocationComponent implements OnInit {
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      locationName: ['', Validators.required],
+      addressLine: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      countryName: ['', Validators.required],
+      isActive: [false],
       photo: [''],
-      availableUnits: ['', [Validators.required, Validators.min(1)]],
-      wifi: [false],
-      laundry: [false],
     });
   }
 
   onSubmit(): void {
     if (this.locationForm.valid) {
-      const location: LocationModel = this.locationForm.value;
+      // const location: LocationModel = this.locationForm.value;
+      const location = this.locationForm.value;
+      console.log('Form Values:', location);
 
       this.locationService.createLocation(location).subscribe({
         next: (res) => {

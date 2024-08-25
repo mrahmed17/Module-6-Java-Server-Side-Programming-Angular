@@ -1,0 +1,208 @@
+<div class="registration-container">
+  <h2>Register</h2>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Registration Form -->
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" formControlName="firstName" class="form-control" placeholder="Enter your first name">
+      <div *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched"
+        class="text-danger">
+        First name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" formControlName="lastName" class="form-control" placeholder="Enter your last name">
+      <div *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched"
+        class="text-danger">
+        Last name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+      <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched" class="text-danger">
+        Valid email is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" class="form-control"
+        placeholder="Enter your password">
+      <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+        class="text-danger">
+        Password must be at least 6 characters long.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control"
+        placeholder="Confirm your password">
+      <div *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword')?.touched"
+        class="text-danger">
+        Passwords must match.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select id="role" formControlName="role" class="form-control">
+        <option value="User">User</option>
+        <option value="Employee">Employee</option>
+        <option value="Admin">Admin</option>
+        <option value="Manager">Manager</option>
+        <option value="HR">HR</option>
+      </select>
+    </div>
+
+    <!-- Optional fields for Employee role -->
+    <div *ngIf="registrationForm.get('role')?.value === 'Employee'">
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input id="position" formControlName="position" class="form-control" placeholder="Enter your position">
+      </div>
+
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input id="salary" formControlName="salary" class="form-control" placeholder="Enter your salary">
+      </div>
+
+      <div class="form-group">
+        <label for="joiningDate">Joining Date</label>
+        <input type="date" id="joiningDate" formControlName="joiningDate" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" formControlName="gender" class="form-control">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Register</button>
+  </form>
+</div>
+
+
+<!-- <div class="container">
+  <h2>User Registration</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" class="form-control" formControlName="username" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" class="form-control" formControlName="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" class="form-control" formControlName="password" />
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select id="role" class="form-control" formControlName="role">
+        <option value="Admin">Admin</option>
+        <option value="Employee">Employee</option>
+        <option value="Manager">Manager</option>
+        <option value="HR">HR</option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="isEmployee()">
+      <h3>Employee Details</h3>
+      <label for="position">Position</label>
+      <input id="position" class="form-control" formControlName="position" />
+
+      <label for="salary">Salary</label>
+      <input id="salary" class="form-control" formControlName="salary" />
+
+      <label for="joiningDate">Joining Date</label>
+      <input id="joiningDate" type="date" class="form-control" formControlName="joiningDate" />
+
+      <label for="gender">Gender</label>
+      <select id="gender" class="form-control" formControlName="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div> -->
+
+
+<!-- <div class="profile-form container">
+  <h2 class="container text-center text-success">Profile Registration Form </h2>
+
+  <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter name"
+          required="required">
+      </div>
+
+      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email"
+          required="required">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control"
+          placeholder="Enter password" required="required">
+      </div>
+
+      <div class="col-lg-6 col-md-12 col-12 mt-md-2 mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" formControlName="role" class="form-select" [disabled]="true">
+          <option value="User" selected>User</option> -->
+<!-- <option value="Admin">Admin</option> -->
+<!-- </select>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-12 mt-md-2 mb-3">
+      <label for="profilePhoto" class="form-label">Profile Photo URL</label>
+      <input type="text" id="profilePhoto" formControlName="profilePhoto" class="form-control"
+        placeholder="Enter profile photo URL" required="required">
+    </div> -->
+
+<!-- if upload from localstorage -->
+
+<!-- <div class="form-group">
+      <label for="profilePhoto" class="form-label">Profile Photo</label>
+      <input type="file" id="profilePhoto" (change)="onFileSelected($event)" formControlName="profilePhoto">
+    </div> -->
+
+<!-- <button type="submit" class="btn btn-primary">Create User</button>
+
+  </form>
+</div> -->

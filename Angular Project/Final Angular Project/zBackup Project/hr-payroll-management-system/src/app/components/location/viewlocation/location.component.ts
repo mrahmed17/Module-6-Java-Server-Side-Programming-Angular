@@ -1,42 +1,49 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../../services/location.service';
+import { LocationModel } from '../../../models/location.model';
 import { Router } from '@angular/router';
-import { LocationService } from '../location.service';
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
-  styleUrl: './location.component.css'
+  styleUrls: ['./location.component.css'],
 })
 export class LocationComponent implements OnInit {
-  locations: any;
+  locations: LocationModel[] = []; // Initialize as an empty array
 
   constructor(
     private locationService: LocationService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.locations = this.locationService.getAllLocation();
+    this.locationService.getAllLocations().subscribe({
+      next: (locations) => {
+        this.locations = locations;
+      },
+      error: (error) => {
+        console.log('Error fetching locations:', error);
+      },
+    });
   }
 
-  deleteLocation(id: string) {
-    if (confirm('Are you sure you want to delete this employee?')) {
-      this.locationService.deleteLocation(id)
-        .subscribe({
-          next: res => {
-            this.locations = this.locationService.getAllLocation();
-            this.router.navigate(['location']);
-            console.log('Employee deleted');
-          },
-          error: error => {
-            console.log('Error deleting employee:', error);
-          }
-        });
+  deleteLocation(id: string): void {
+    if (confirm('Are you sure you want to delete this location?')) {
+      this.locationService.deleteLocation(id).subscribe({
+        next: () => {
+          this.locations = this.locations.filter(
+            (location) => location.id !== id
+          ); // Remove deleted location from the array
+          console.log('Location deleted');
+        },
+        error: (error) => {
+          console.log('Error deleting location:', error);
+        },
+      });
     }
   }
 
-
-  updateLocation(id: string) {
+  updateLocation(id: string): void {
     this.router.navigate(['updatelocation', id]);
   }
 }

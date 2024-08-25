@@ -1,21 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserModel } from '../user.model';
-import { UserprofileService } from '../userprofile.service';
+import { UserModel } from '../../models/user.model';
+import { UserprofileService } from '../../services/userprofile.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
-  styleUrl: './userprofile.component.css'
+  styleUrl: './userprofile.component.css',
 })
 export class UserprofileComponent implements OnInit, OnDestroy {
-
   user: UserModel | null = null;
   private subscription: Subscription = new Subscription();
 
-  constructor(
-    private userProfileService: UserprofileService,
-  ) { }
+  constructor(private userProfileService: UserprofileService) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -34,7 +31,7 @@ export class UserprofileComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Error loading user profile:', err);
-      }
+      },
     });
     this.subscription.add(sub);
   }
@@ -55,7 +52,6 @@ export class UserprofileComponent implements OnInit, OnDestroy {
   // }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();  // Unsubscribe when the component is destroyed
+    this.subscription.unsubscribe(); // Unsubscribe when the component is destroyed
   }
-
 }

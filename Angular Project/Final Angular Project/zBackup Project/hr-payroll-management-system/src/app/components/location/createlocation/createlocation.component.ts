@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../location.service';
+import { LocationService } from '../../../services/location.service';
 import { Router } from '@angular/router';
-import { LocationModel } from '../location.model';
+import { LocationModel } from '../../../models/location.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-createlocation',
   templateUrl: './createlocation.component.html',
-  styleUrls: ['./createlocation.component.css']
+  styleUrls: ['./createlocation.component.css'],
 })
 export class CreatelocationComponent implements OnInit {
   locationForm!: FormGroup;
@@ -15,26 +15,27 @@ export class CreatelocationComponent implements OnInit {
   constructor(
     private locationService: LocationService,
     private formBuilder: FormBuilder,
-    private router: Router,
-  ) {
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      locationName: ['', Validators.required],
+      addressLine: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      countryName: ['', Validators.required],
+      isActive: [false],
       photo: [''],
-      availableUnits: ['', [Validators.required, Validators.min(1)]],
-      wifi: [false],
-      laundry: [false]
-    }
-    );
+    });
   }
 
   onSubmit(): void {
     if (this.locationForm.valid) {
-      const location: LocationModel = this.locationForm.value;
+      // const location: LocationModel = this.locationForm.value;
+      const location = this.locationForm.value;
+      console.log('Form Values:', location);
 
       this.locationService.createLocation(location).subscribe({
         next: (res) => {
@@ -43,7 +44,7 @@ export class CreatelocationComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating location:', err);
-        }
+        },
       });
     } else {
       console.log('Form is invalid');
