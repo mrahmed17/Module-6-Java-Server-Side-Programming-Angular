@@ -38,11 +38,24 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/tiny-slider.css",
+              "src/assets/css/aos.css",
+              "src/assets/css/glightbox.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/flatpickr.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/sidebar-toggle.js"
+              "src/assets/sidebar-toggle.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/tiny-slider.js",
+              "src/assets/js/flatpickr.min.js",
+              "src/assets/js/aos.js",
+              "src/assets/js/glightbox.min.js",
+              "src/assets/js/navbar.js",
+              "src/assets/js/counter.js",
+              "src/assets/js/custom.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
