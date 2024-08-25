@@ -97,7 +97,7 @@
           <td>{{ attendance.status }}</td>
           <td>{{ attendance.checkInTime }}</td>
           <td>{{ attendance.checkOutTime }}</td>
-          <td>{{ attendance.employeeId.firstName }} {{ attendance.employeeId.lastName }}</td>
+          <td>{{ attendance.UserModel.firstName }} {{ attendance.UserModel.lastName }}</td>
           <td>
             <button class="btn btn-sm btn-warning" (click)="editAttendance(attendance)">Edit</button>
             <button class="btn btn-sm btn-danger" (click)="deleteAttendance(attendance.id)">Delete</button>

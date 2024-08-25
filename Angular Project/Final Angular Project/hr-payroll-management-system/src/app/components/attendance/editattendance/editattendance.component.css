@@ -2,7 +2,7 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -10,82 +10,46 @@
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  font-family: Arial, sans-serif;
-  color: #333;
 }
 
-form div {
+.form-group {
   margin-bottom: 15px;
 }
 
-label {
-  display: block;
+.form-group label {
   font-weight: bold;
-  margin-bottom: 5px;
-  font-family: Arial, sans-serif;
-  color: #555;
 }
 
-input[type="date"],
-input[type="time"],
-select,
-button {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
+.form-control.is-invalid {
+  border-color: #dc3545;
 }
 
-input[type="date"]:focus,
-input[type="time"]:focus,
-select:focus,
-button:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-button[type="submit"] {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button[type="button"] {
-  background-color: #6c757d;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button[type="submit"]:hover,
-button[type="button"]:hover {
-  opacity: 0.9;
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
 }
 
 .error-message {
-  color: #d9534f;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  color: #dc3545;
+  margin-top: 15px;
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
 
-  button[type="submit"],
-  button[type="button"] {
-    font-size: 14px;
-    padding: 8px;
-  }
+.btn {
+  margin-right: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
 }

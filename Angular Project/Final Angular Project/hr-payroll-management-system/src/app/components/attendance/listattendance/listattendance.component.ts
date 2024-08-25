@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AttendanceModel } from '../../../models/attendance.model';
 import { AttendanceService } from '../../../services/attendance.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listattendance',
@@ -11,7 +12,10 @@ export class ListattendanceComponent implements OnInit {
   attendances: AttendanceModel[] = [];
   errorMessage: string = '';
 
-  constructor(private attendanceService: AttendanceService) {}
+  constructor(
+    private attendanceService: AttendanceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadAttendances();
@@ -31,10 +35,10 @@ export class ListattendanceComponent implements OnInit {
     );
   }
 
-  // // Edit an existing attendance record
-  // editAttendance(attendance: AttendanceModel): void {
-  //   // Logic to navigate to the edit component
-  // }
+  // Edit an existing attendance record
+  editAttendance(attendance: AttendanceModel): void {
+    this.router.navigate(['/edit-attendance', attendance.id]);
+  }
 
   // Delete an attendance record
   deleteAttendance(id: string): void {

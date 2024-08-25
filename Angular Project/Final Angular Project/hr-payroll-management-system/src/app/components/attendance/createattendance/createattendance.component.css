@@ -49,6 +49,7 @@
   background-color: #fff;
   border: 1px solid #dee2e6;
   border-radius: 8px;
+  overflow: hidden; /* To ensure rounded corners are visible */
 }
 
 .table th,
@@ -68,8 +69,12 @@
 
 .btn-warning {
   color: #fff;
+  background-color: #ffc107; /* Ensure background color is set */
+  border-color: #ffc107; /* Ensure border color is set */
 }
 
 .btn-danger {
   color: #fff;
+  background-color: #dc3545; /* Ensure background color is set */
+  border-color: #dc3545; /* Ensure border color is set */
 }

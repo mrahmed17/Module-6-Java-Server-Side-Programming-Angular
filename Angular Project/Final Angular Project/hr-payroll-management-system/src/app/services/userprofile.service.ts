@@ -54,8 +54,9 @@ export class UserprofileService {
   }
 
   // Get the logged-in user's profile
+  // In userprofile.service.ts
   getUserProfile(): Observable<UserModel | null> {
-    const userId = this.authService.getUserId();
+    const userId = this.authService.getUserId(); // Make sure this method is available and returns a valid userId
     if (userId) {
       const headers = this.getAuthHeaders();
       return this.http
@@ -63,7 +64,7 @@ export class UserprofileService {
         .pipe(
           catchError((err) => {
             console.error('Error fetching user profile:', err);
-            return of(null);
+            return of(null); // Return an observable with null if user profile cannot be fetched
           })
         );
     }

@@ -1,27 +1,34 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Employee Details</h2>
+
+  <!-- Error message display -->
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
+
+  <!-- Display employee details -->
   <div *ngIf="employee">
     <div class="row">
+      <!-- Employee details -->
       <div class="col-md-6">
         <p><strong>ID:</strong> {{ employee.id }}</p>
-        <p><strong>Name:</strong> {{ employee.firstName }} {{ employee.lastName }}</p>
-        <p><strong>Email:</strong> {{ employee.email }}</p>
-        <p><strong>Contact:</strong> {{ employee.contact }}</p>
-        <p><strong>Gender:</strong> {{ employee.gender }}</p>
-        <p><strong>Joining Date:</strong> {{ employee.joiningDate | date }}</p>
-        <p><strong>Position:</strong> {{ employee.position }}</p>
-        <p><strong>Salary:</strong> {{ employee.salary }}</p>
-        <p><strong>Department:</strong> {{ employee.department.departmentName }}</p>
-        <p><strong>Location:</strong> {{ employee.location.locationName }}</p>
+        <p><strong>Name:</strong> {{ employee.UserModel.firstName }} {{ employee.UserModel.lastName }}</p>
+        <p><strong>Email:</strong> {{ employee.UserModel.email }}</p>
+        <p><strong>Contact:</strong> {{ employee.UserModel.contact }}</p>
+        <p><strong>Gender:</strong> {{ employee.UserModel.gender }}</p>
+        <p><strong>Joining Date:</strong> {{ employee.UserModel.joiningDate | date }}</p>
+        <p><strong>Position:</strong> {{ employee.UserModel.role }}</p>
+        <p><strong>Salary:</strong> {{ employee.UserModel.salary | currency }}</p>
+        <p><strong>Department:</strong> {{ employee.DepartmentModel.departmentName || 'N/A' }}</p>
+        <p><strong>Location:</strong> {{ employee.LocationModel.locationName || 'N/A' }}</p>
       </div>
+      <!-- Profile photo -->
       <div class="col-md-6">
-        <img *ngIf="employee.profilePhoto" [src]="employee.profilePhoto" alt="Profile Photo"
+        <img *ngIf="employee.UserModel.profilePhoto" [src]="employee.UserModel.profilePhoto" alt="Profile Photo"
           class="img-fluid rounded-circle" />
       </div>
     </div>
+    <!-- Back to list button -->
     <button class="btn btn-primary mt-4" (click)="goBack()">Back to List</button>
   </div>
 </div>

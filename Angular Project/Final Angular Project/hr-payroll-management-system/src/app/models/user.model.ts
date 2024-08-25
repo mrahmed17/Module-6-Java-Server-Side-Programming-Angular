@@ -6,9 +6,9 @@ export class UserModel {
   userName!: string; // Username for login
   password!: string; // Password for authentication
   role!: 'Admin' | 'HR' | 'Employee'; // Role of the user, restricted to specific values
-  profilePhoto!: string; //User must have a profile photo
-  contact!: string; // Contact number
+  profilePhoto?: string; //User must have a profile photo
   gender!: 'Male' | 'Female' | 'Other';
+  contact!: string; // Contact number
   nidNo!: number; //National number must be provide and unique
   joiningDate!: Date; //For payment calculation
   salary!: number; //User or role base salary
@@ -18,5 +18,7 @@ export class UserModel {
 
   DepartmentModel!: {
     departmentName: string | undefined;
+    payrollCalculationMethod: 'Weekly' | 'Monthly' | 'Yearly' | undefined;
+    overtimeRules: string | undefined;
   };
 }

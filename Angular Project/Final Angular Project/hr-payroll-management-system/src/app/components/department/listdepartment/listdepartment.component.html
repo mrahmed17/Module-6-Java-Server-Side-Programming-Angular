@@ -23,7 +23,7 @@
         <td>{{ department.id }}</td>
         <td>{{ department.departmentName }}</td>
         <td>{{ department.description }}</td>
-        <td>{{ department.headOfDepartment.firstName }} {{ department.headOfDepartment.lastName }}</td>
+        <td>{{ department.UserModel.firstName }} {{ department.UserModel.lastName }}</td>
         <td>{{ department.numberOfEmployees }}</td>
         <td>
           <button class="btn btn-info btn-sm" (click)="viewDepartment(department.id)">View</button>

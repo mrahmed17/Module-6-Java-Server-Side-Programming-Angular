@@ -8,7 +8,7 @@
     <p><strong>Check-Out Time:</strong> {{ attendance.checkOutTime }}</p>
     <p>
       <strong>Employee:</strong>
-      {{ attendance.employeeId.firstName }} {{ attendance.employeeId.lastName }}
+      {{ attendance.UserModel.firstName }} {{ attendance.UserModel.lastName }}
     </p>
     <button class="btn btn-primary" (click)="goBack()">Back</button>
   </div>

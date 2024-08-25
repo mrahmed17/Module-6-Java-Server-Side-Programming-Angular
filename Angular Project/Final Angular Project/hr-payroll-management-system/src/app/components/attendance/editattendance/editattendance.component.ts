@@ -29,7 +29,9 @@ export class EditattendanceComponent implements OnInit {
     this.loadEmployees();
     this.route.params.subscribe((params) => {
       this.attendanceId = params['id'];
-      this.loadAttendance(this.attendanceId);
+      if (this.attendanceId) {
+        this.loadAttendance(this.attendanceId);
+      }
     });
   }
 
@@ -49,7 +51,11 @@ export class EditattendanceComponent implements OnInit {
   loadAttendance(id: string): void {
     this.attendanceService.getAttendance(id).subscribe(
       (attendance) => {
-        this.attendanceForm.patchValue(attendance);
+        if (attendance) {
+          this.attendanceForm.patchValue(attendance);
+        } else {
+          this.errorMessage = 'Attendance record not found.';
+        }
       },
       (error) => {
         console.error('Failed to load attendance', error);
@@ -61,11 +67,12 @@ export class EditattendanceComponent implements OnInit {
   // Load all employees
   loadEmployees(): void {
     this.userService.getAllUsers().subscribe(
-      (data) => {
+      (data: UserModel[]) => {
         this.employees = data;
       },
       (error) => {
         console.error('Failed to load employees', error);
+        this.errorMessage = 'Failed to load employees. Please try again.';
       }
     );
   }

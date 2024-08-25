@@ -4,12 +4,14 @@
     <div class="department-details">
       <p><strong>Department Name:</strong> {{ department.departmentName }}</p>
       <p><strong>Description:</strong> {{ department.description }}</p>
-      <p><strong>Head of Department:</strong> {{ department.headOfDepartment.firstName }} {{
-        department.headOfDepartment.lastName }}</p>
+      <p><strong>Head of Department:</strong> {{ department.UserModel.firstName }} {{
+        department.UserModel.lastName }}</p>
+      <p><strong>Role of Head:</strong> {{ department.UserModel.role }}</p>
       <p><strong>Number of Employees:</strong> {{ department.numberOfEmployees }}</p>
       <p><strong>Payroll Calculation Method:</strong> {{ department.payrollCalculationMethod }}</p>
       <p><strong>Overtime Rules:</strong> {{ department.overtimeRules }}</p>
-      <p><strong>Location:</strong> {{ department.location.locationName }}</p>
+      <p><strong>Location:</strong> {{ department.LocationModel.addressLine }}, {{ department.LocationModel.locationName
+        }}, {{ department.LocationModel.postalCode }}</p>
     </div>
     <button class="btn btn-primary" (click)="goBack()">Back</button>
   </div>

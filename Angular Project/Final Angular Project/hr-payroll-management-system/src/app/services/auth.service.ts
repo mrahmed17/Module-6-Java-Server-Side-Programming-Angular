@@ -39,9 +39,15 @@ export class AuthService {
     return this.http.post<UserModel>(this.apiUrl, user).pipe(
       map((newUser: UserModel) => {
         const token = this.generateToken(newUser);
-        this.storeToken(token);
+        const authResponse: AuthResponse = {
+          token,
+          expiresIn: 3600, // Example expiration time in seconds
+          issuedAt: new Date(),
+          role: newUser.role as 'Admin' | 'HR' | 'Employee', // Adjust based on your logic
+        };
+        this.storeToken(authResponse.token);
         this.setCurrentUser(newUser);
-        return { token, user: newUser } as AuthResponse;
+        return authResponse;
       }),
       catchError((error) => {
         console.error('Registration error:', error);
@@ -55,16 +61,22 @@ export class AuthService {
     email: string;
     password: string;
   }): Observable<AuthResponse> {
-    let params = new HttpParams().set('email', credentials.email);
+    const params = new HttpParams().set('email', credentials.email);
 
     return this.http.get<UserModel[]>(this.apiUrl, { params }).pipe(
       map((users) => {
         const user = users[0];
         if (user && user.password === credentials.password) {
           const token = this.generateToken(user);
-          this.storeToken(token);
+          const authResponse: AuthResponse = {
+            token,
+            expiresIn: 3600, // Example expiration time in seconds
+            issuedAt: new Date(),
+            role: user.role as 'Admin' | 'HR' | 'Employee', // Adjust based on your logic
+          };
+          this.storeToken(authResponse.token);
           this.setCurrentUser(user);
-          return { token, user } as AuthResponse;
+          return authResponse;
         } else {
           throw new Error('Invalid credentials');
         }
@@ -77,6 +89,10 @@ export class AuthService {
       })
     );
   }
+
+  // Read this
+
+  // The generateToken method you provided is a simplistic approach to token generation, using btoa to encode user details.However, in a real - world application, this is not secure because it merely encodes the information and doesn't provide actual security. Normally, tokens like JSON Web Tokens (JWT) are generated on the server-side using secure algorithms and include signatures to ensure the integrity and authenticity of the token.
 
   // Generates a token (use a more secure method in production)
   private generateToken(user: UserModel): string {

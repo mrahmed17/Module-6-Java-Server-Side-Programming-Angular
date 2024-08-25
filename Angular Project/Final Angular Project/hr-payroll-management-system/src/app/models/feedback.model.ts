@@ -1,8 +1,13 @@
-import { UserModel } from './user.model';
-
 export class FeedbackModel {
   id!: string;
-  userName!: UserModel; // Optional: Link feedback to a user
+
+  UserModel!: {
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+  };
+
   rating!: number; //user rating will show here
   comments!: string; // user comments
   feedbackDate!: Date; //feedback creation date

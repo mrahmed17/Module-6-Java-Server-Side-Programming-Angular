@@ -9,5 +9,7 @@ export class AttendanceModel {
     id: string | undefined;
     firstName: string | undefined;
     lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
   };
 }

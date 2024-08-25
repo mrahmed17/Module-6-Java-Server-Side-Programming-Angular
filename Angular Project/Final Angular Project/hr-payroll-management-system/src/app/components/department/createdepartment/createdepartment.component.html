@@ -63,7 +63,7 @@
       <tbody>
         <tr *ngFor="let department of departments">
           <td>{{ department.departmentName }}</td>
-          <td>{{ department.headOfDepartment.firstName }} {{ department.headOfDepartment.lastName }}</td>
+          <td>{{ department.UserModel.firstName }} {{ department.UserModel.lastName }}</td>
           <td>{{ department.numberOfEmployees }}</td>
           <td>{{ department.payrollCalculationMethod }}</td>
           <td>{{ department.overtimeRules }}</td>

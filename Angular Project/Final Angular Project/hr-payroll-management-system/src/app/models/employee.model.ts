@@ -1,23 +1,34 @@
 export class EmployeeModel {
   id!: string; //Primary Key
-  firstName!: string; // Foreign Key to UserModel
-  lastName!: string; // Foreign Key to UserModel
-  email!: string; // Foreign Key to UserModel
-  gender!: 'Male' | 'Female' | 'Other'; // Foreign Key to UserModel
-  contact!: string; // Foreign Key to UserModel
-  profilePhoto!: string; // Foreign Key to UserModel
-  joiningDate!: Date; // Foreign Key to UserModel
-  position!: string; // Foreign Key to UserModel
 
   UserModel!: {
+    id: string;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    email: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+    gender: 'Male' | 'Female' | 'Other' | undefined;
+    contact: string | undefined;
+    nidNo: number | undefined;
+    joiningDate: Date | undefined;
     salary: number | undefined;
   };
 
   DepartmentModel!: {
-    id: string | undefined;
+    id: string;
+    departmentName: string | undefined;
+    payrollCalculationMethod: 'Weekly' | 'Monthly' | 'Yearly' | undefined;
+    overtimeRules: string | undefined;
   };
 
   LocationModel!: {
-    id: string | undefined;
+    id: string;
+    locationName: string | undefined;
+    addressLine: string | undefined;
+    city: string | undefined;
+    state: string | undefined;
+    postalCode: string | undefined;
+    countryName: string | undefined;
   };
 }
