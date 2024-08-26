@@ -9,9 +9,9 @@
         <app-sidebar></app-sidebar>
       </div>
       <div [class.col-md-10]="isAuthenticated" [class.col-md-12]="!isAuthenticated" class="bg-white">
-        <app-breadcrumb></app-breadcrumb>
-
         <app-notification></app-notification>
+
+        <app-breadcrumb></app-breadcrumb>
 
         <router-outlet></router-outlet>
 
