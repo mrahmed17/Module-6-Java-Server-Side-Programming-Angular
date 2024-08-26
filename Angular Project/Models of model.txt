@@ -1,0 +1,288 @@
+On my angular project, location model is the base model. A company has many houses in a country. But location will be the fixed number i.e 5 or 7 places in whole country. Every location has a house for this company. That's why I want to create my project base on the location. For all locations or this company has an Admin, who maintain or overlook or handle everything.
+
+Example of a Location model.
+
+export class LocationModel {
+  id!: string; //primary key
+  locationName!: string;
+  addressLine!: string;
+  city!: string;
+  state!: string;
+  postalCode!: string;
+  countryName!: string;
+  isActive!: boolean; // A boolean flag indicating whether the location is currently active or inactive.
+  createdAt!: Date; //The timestamp when the location was created.
+  updatedAt!: Date; // The timestamp when the location was last updated.
+  photo?: string; // Optional field for the location's photo
+}
+
+Every house has a fixed number of department i.e. 4 or 6 departments on a location base house. Every Department has a fixed Department Head.
+Example of a Department model.
+
+export class DepartmentModel {
+  id!: string; // Primary Key
+  departmentName!: string; //Must be provide department name
+  description?: string;
+  numberOfEmployees?: number; //No of working will show here by declaration
+  payrollCalculationMethod!: 'Weekly' | 'Monthly' | 'Yearly';
+  overtimeRules!: string; // After finishing the daily work hour
+
+  LocationModel!: {
+    locationName: string | undefined;
+    addressLine: string | undefined;
+    city: string | undefined;
+    state: string | undefined;
+    postalCode: string | undefined;
+    countryName: string | undefined;
+  };
+
+  UserModel!: {
+    firstName: string;
+    lastName: string;
+    role: 'HR' | 'Employee' | undefined;
+  };
+}
+
+
+
+Every department has an unfixed number of employees. They come and leave from the house. That's why I want to keep their record's.
+Example of a employee model.
+
+export class EmployeeModel {
+  id!: string; //Primary Key
+
+  UserModel!: {
+    id: string;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    email: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+    gender: 'Male' | 'Female' | 'Other' | undefined;
+    contact: string | undefined;
+    nidNo: number | undefined;
+    joiningDate: Date | undefined;
+    hourRate: number | undefined; // hour rate 150 for employees and 250 for HR,
+  };
+
+  DepartmentModel!: {
+    id: string;
+    departmentName: string | undefined;
+    payrollCalculationMethod: 'Weekly' | 'Monthly' | 'Yearly' | undefined;
+    overtimeRules: string | undefined;
+  };
+
+  LocationModel!: {
+    id: string;
+    locationName: string | undefined;
+    addressLine: string | undefined;
+    city: string | undefined;
+    state: string | undefined;
+    postalCode: string | undefined;
+    countryName: string | undefined;
+  };
+}
+
+
+
+
+All the user has a role of their own or provided by the Admin.
+Admin Account will be the fixed account on this system. Admin specially can create departments head. Employee can't create or register account on this system. Departments head can create employee. I call department head as a HR. Total 3 types of user we found in this project.
+
+Example of a role base authentication Model.
+
+export interface AuthResponse {
+  token: string; //Generate and sotre token
+
+  expiresIn?: number; // Token expiration time in seconds
+  issuedAt?: Date; // When the token was issued
+
+  role: 'Admin' | 'HR' | 'Employee';
+}
+
+
+I want to create a dynamic registration page, where has 2 options. When Admin log in on his dashboad and want to create HR, or when HR log in on his dashboard and want to create employee one common html page will show where will have a necessary data collection form.
+
+Example of a User Model.
+
+export class UserModel {
+  id!: string; // Primary Key
+  firstName!: string;
+  lastName!: string;
+  email!: string; // Email address, must be unique
+  userName!: string; // Username for login
+  password!: string; // Password for authentication
+  role!: 'Admin' | 'HR' | 'Employee'; // Role of the user, restricted to specific values
+  profilePhoto?: string; //User must have a profile photo
+  gender!: 'Male' | 'Female' | 'Other';
+  contact!: string; // Contact number
+  nidNo!: number; //National number must be provide and unique
+  joiningDate!: Date; //For payment calculation
+  salary!: number; //User or role base salary
+  isActive!: boolean; // Account activation status
+  createdAt!: Date; // Account creation date
+  updatedAt!: Date; // Last update date
+
+  DepartmentModel!: {
+    departmentName: string | undefined;
+    payrollCalculationMethod: 'Weekly' | 'Monthly' | 'Yearly' | undefined;
+    overtimeRules: string | undefined;
+  };
+}
+
+Admin can do all task (CRUD) from this system. But Admin handle or can make payroll, performance, grand leave, check attendance and feedback of  for HR. As well as HR can make payroll, performance, grand leave, check attendance and feedback for employees.
+
+
+Example of a payroll Model.
+
+export class PayrollModel {
+  id!: string; // Primary Key
+
+  UserModel!: {
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+    contact: string | undefined;
+    nidNo: number | undefined;
+    hourRate: number | undefined; // hour rate 150 for employees and 250 for HR,
+  };
+
+  EmployeeModel!: {
+    id: string | undefined; //Using this usermodel employee will create. After create a new employee, has an unique id
+  };
+
+  performanceBonuses!: number; // 1* = 200, 2* = 400, 3* = 600, 4* = 800, 5* = 1600
+  insurance!: number; // 1000 for employee, 3000 for HR monthly
+  medicare!: number; // 5000 for employee, 10000 for HR
+  deductions!: number; // Deductions (e.g., tax, insurance)
+
+  netPay!: number; // Net pay after deductions
+
+  paymentDate!: Date; // Date when payment was made
+
+  payPeriodStart!: Date; // Start date of the pay period
+  payPeriodEnd!: Date; // End date after 30 days from start pay period
+
+  overtimeExemption!: boolean; // Yes, Newcomer or older than 50 years. Or No.
+
+  overtimeHourlyRate!: number; /// overtime hour rate will add half of their main rate. Assume 150/2 = 75 + 150 = 225 for employees and 250/2 = 125 + 250 =375
+
+  yearlySickDay!: number; // 10 Days reserved
+
+  status!: 'Paid' | 'Pending' | 'Overdue'; // Status of the payroll
+  // Create a map that returns netPay
+  // static mapPayroll(payroll: PayrollModel): PayrollModel {
+  //   return {
+  //     ...payroll,
+  //     netPay: payroll.UserModel.salary! - payroll.tax! - payroll.insurance!,
+  //   };
+  // }
+}
+
+// Payment will provide with their attedance where working hour and working calendar month will calculate, performance rating bonus, overtime, sick days salary wil provide, insurance, medicare, deduction
+
+// Hourly Rate: 8 hours a day * per hour rate will calculate. Assume per hour rate 150 for employees and 250 for HR,
+
+// Overtime Rate: overtime hour rate will add half of their main rate. Assume 150/2 = 75 + 150 = 225 for employees and 250/2 = 125 + 250 =375
+
+
+Example of a feedback model.
+
+export class FeedbackModel {
+  id!: string;
+
+  UserModel!: {
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+  };
+
+  rating!: number; //user rating will show here
+  comments!: string; // user comments
+  feedbackDate!: Date; //feedback creation date
+}
+
+
+Example of a performance model.
+
+
+export class PerformanceModel {
+  id!: string; //Unique identifier for the performance record
+
+  goals!: boolean; // Check is he or she achieve the goal
+
+  achievements!: string; //Specific achievements during the review period.
+
+  reviewDate!: Date; //Date when the review was conducted.
+
+  rating!: number; // Example: 1 to 5 scale
+
+  UserModel!: {
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+  };
+
+  comments!: string; // Areas Of Improvement base comments about the employee's performance.
+}
+
+
+Example of a leave model.
+
+export class LeaveModel {
+  id!: string; // Primary key (UUID or generated sequence)
+
+  // Type base: HR or Employee Part
+  EmployeeModel!: {
+    id: string | undefined;
+  };
+  UserModel!: {
+    firstName: string | undefined; // Who requested for leave
+    lastName: string | undefined; // Who requested for leave
+    profilePhoto: string | undefined; // Who requested for leave
+    contact: string | undefined; // Who requested for leave
+    role: 'HR' | 'Employee' | undefined; // Who accept the leave
+  };
+  fromDate!: Date;
+  toDate!: Date;
+  numberOfDays!: number; // Calculate total leave Days:  fromDate to toDate
+  leaveType!: 'Annual' | 'Sick' | 'Unpaid' | undefined;
+  reason!: string;
+
+  submittedOn!: Date;
+  attachment!: string; // Optional, URL or reference to an attachment (e.g., medical certificate)
+  remainingLeave!: number; //remaining leave balances for each employee
+
+  //HR And Admin Part
+  status!: 'Pending' | 'Approved' | 'Denied' | undefined;
+  comments!: string; // Optional: Additional notes or comments
+  approvedOn!: Date; // Date when leave was approved
+  deniedOn!: Date; // Date when leave was denied
+}
+
+
+Example of Attendance model.
+
+export class AttendanceModel {
+  id!: string; //Primary Key
+  date!: Date; // Auto date generate and readonly fixed when click attendance form.
+  checkInTime!: string; // auto generate when check in or fingerprintScanned. Once log in mode it remain in checkin.
+
+  checkOutTime!: string; // auto generate when check in or fingerprintScanned. on log in time if he or she again check, it will count as a checkout time.
+
+  fingerprintScanned!: boolean; // Track if the fingerprint has been scanned and validated.
+
+  //identify who check or give attendance
+  UserModel!: {
+    id: string | undefined;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: 'HR' | 'Employee' | undefined;
+    profilePhoto: string | undefined;
+  };
+
+  status!: 'Present' | 'Absent' | 'On Leave'; // Restricting status to specific values and base on check in or out time. if first time checkin it will count as a present. second time it will count as a On Leave. Otherwise it remain as a absent for all user.
+}

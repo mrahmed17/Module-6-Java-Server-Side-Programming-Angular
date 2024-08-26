@@ -12,7 +12,7 @@ export class EmployeeModel {
     contact: string | undefined;
     nidNo: number | undefined;
     joiningDate: Date | undefined;
-    salary: number | undefined;
+    hourRate: number | undefined; // hour rate 150 for employees and 250 for HR,
   };
 
   DepartmentModel!: {

@@ -26,7 +26,9 @@ export class CreatelocationComponent implements OnInit {
       state: ['', Validators.required],
       postalCode: ['', Validators.required],
       countryName: ['', Validators.required],
-      isActive: [false],
+      isActive: [true, Validators.required],
+      createdAt: ['', Validators.required],
+      updatedAt: ['', Validators.required],
       photo: [''],
     });
   }

@@ -20,10 +20,6 @@ export class CreateemployeeComponent implements OnInit {
   locations: LocationModel[] = [];
   users: UserModel[] = [];
   errorMessage: string = '';
-  // departments!: DepartmentModel[];
-  // locations!: Location[];
-  // employees: EmployeeModel[] = [];
-  // employee: EmployeeModel = new EmployeeModel();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,7 +39,7 @@ export class CreateemployeeComponent implements OnInit {
   // Initialize the form
   initForm(): void {
     this.employeeForm = this.formBuilder.group({
-      id: [null],
+      id: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

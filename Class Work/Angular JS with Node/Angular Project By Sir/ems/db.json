@@ -15,30 +15,6 @@
       "password": "123456",
       "role": "User",
       "profilePhoto": "https://media.istockphoto.com/id/1346124841/photo/successful-construction-site-worker-thinking.jpg?s=1024x1024&w=is&k=20&c=4SvUvVZDP5JOS7lXFUc05CLyZZQcTGD_kSopYBqsbxc="
-    },
-    {
-      "id": "c494",
-      "name": "Md Raju Ahmed",
-      "email": "raj@gmail.com",
-      "password": "123456",
-      "role": "User",
-      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ="
-    },
-    {
-      "id": "83da",
-      "name": "Md. Kutub",
-      "email": "kutub@gmail.com",
-      "password": "123456",
-      "role": "User",
-      "profilePhoto": "https://media.istockphoto.com/id/1388912000/photo/smiling-adult-businessman-making-an-advertisement-for-his-company.jpg?s=1024x1024&w=is&k=20&c=1XLMSctfkZ-DkhSEteFYWDLrjgUJPG7i5cQ03peVEdQ="
-    },
-    {
-      "id": "b5ec",
-      "name": "ffdfdf",
-      "email": "gfdghdhfg@fgghfh",
-      "password": "000000",
-      "role": "User",
-      "profilePhoto": "gfdghdhfg@fgghfh"
     }
   ],
   "locations": [

@@ -43,7 +43,7 @@ import { ViewfeedbackComponent } from './components/feedback/viewfeedback/viewfe
 import { ListfeedbackComponent } from './components/feedback/listfeedback/listfeedback.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },

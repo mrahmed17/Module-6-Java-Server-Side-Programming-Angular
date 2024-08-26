@@ -16,28 +16,30 @@ export class CreateAttendanceComponent implements OnInit {
   employees: UserModel[] = [];
   isEditMode: boolean = false;
   errorMessage: string = '';
+  fingerprintScanned: boolean = false;
 
   constructor(
     private attendanceService: AttendanceService,
     private formBuilder: FormBuilder,
-    private userService: UserprofileService // Inject UserService to fetch employees
+    private userService: UserprofileService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.loadAttendances();
-    this.loadEmployees(); // Load employees when the component initializes
+    this.loadEmployees();
   }
 
   // Initialize the form
   initForm(): void {
     this.attendanceForm = this.formBuilder.group({
-      id: [null],
+      id: [''],
       date: ['', Validators.required],
       status: ['', Validators.required],
       checkInTime: ['', Validators.required],
       checkOutTime: ['', Validators.required],
       employeeId: ['', Validators.required],
+      fingerprintScanned: [false], // Add fingerprint scanned status
     });
   }
 
@@ -65,9 +67,20 @@ export class CreateAttendanceComponent implements OnInit {
     );
   }
 
+  // Handle fingerprint scanning
+  onFingerprintScan(): void {
+    // Simulate fingerprint scanning
+    this.fingerprintScanned = true;
+    this.attendanceForm.patchValue({
+      fingerprintScanned: true,
+    });
+    console.log('Fingerprint scanned successfully!');
+  }
+
   // Submit the form (Create or Update)
   onSubmit(): void {
-    if (this.attendanceForm.invalid) {
+    if (this.attendanceForm.invalid || !this.fingerprintScanned) {
+      this.errorMessage = 'Please complete the form and scan your fingerprint.';
       return;
     }
     const attendanceData = this.attendanceForm.value;
@@ -126,5 +139,6 @@ export class CreateAttendanceComponent implements OnInit {
     this.attendanceForm.reset();
     this.isEditMode = false;
     this.errorMessage = '';
+    this.fingerprintScanned = false; // Reset fingerprint scanned status
   }
 }
