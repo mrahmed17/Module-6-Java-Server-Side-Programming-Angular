@@ -18,7 +18,7 @@
         <p><strong>Gender:</strong> {{ employee.UserModel.gender }}</p>
         <p><strong>Joining Date:</strong> {{ employee.UserModel.joiningDate | date }}</p>
         <p><strong>Position:</strong> {{ employee.UserModel.role }}</p>
-        <p><strong>Salary:</strong> {{ employee.UserModel.salary | currency }}</p>
+        <p><strong>Salary:</strong> {{ employee.hourlyRate| currency }}</p>
         <p><strong>Department:</strong> {{ employee.DepartmentModel.departmentName || 'N/A' }}</p>
         <p><strong>Location:</strong> {{ employee.LocationModel.locationName || 'N/A' }}</p>
       </div>
