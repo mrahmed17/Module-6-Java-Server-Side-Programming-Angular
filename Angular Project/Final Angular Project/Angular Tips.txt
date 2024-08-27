@@ -1,6 +1,6 @@
 For Node JS
 ===============
-1. First install node-js (withour checking check box)
+1. First install node-js Software (withour checking check box)
 2. node --version (for checking installed node version)
 3. npm (install in the directory) (User name will show)
 4. npm -v (For checking npm version)
@@ -42,6 +42,10 @@ Tips: For reuse the program from tsp to home or home to tsp
 13. npm update (for update to github)
 
 
+For more tips:
+===============
+https://www.npmjs.com/package/@angular/cli/v/9.0.4
+
 
 For JSON API
 ===============
@@ -54,6 +58,14 @@ For db server: json-server --watch db.json
 
 Angular Program Connection Follow:
 =====================================
-1. Service => Url (Controller)
-2. component => service (Model)
-3. Html => component (View)
+1. Model (First of all, the model should be created according to the type of work to be done.)
+
+2. Service.ts (The CRUD part should be arranged in the service according to the model.)
+
+3. Component.ts (Logic or method should be arranged according to the service. Type of work should be told in the method)
+
+4. Component.html > (The html should be arranged according to the method or logic of the component, where the necessary tasks of the model can be done.)
+
+5. app-routing.module.ts (Now that html should be routed to the path.)
+
+6. Navbar or Sidebar or both part (The routing path in this part should be connected with navbar or sidebar or both parts.)
