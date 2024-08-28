@@ -7,7 +7,7 @@ export class PayrollModel {
   insurance: number; // Insurance amount (employees and managers)
   medicare: number; // Medicare amount (5000 for employees, 10000 for Manager)
   deductions: number; // Total deductions
-  overtimeHours: number; // Fixed 4 hours overtime
+  overtimeHours: number; // Overtime hours worked
   overtimeRate: number; // Overtime hourly rate
   yearlySickDay: number; // Reserved sick days
   totalPay: number; // Total pay after adding bonuses, deductions, and including overtime
@@ -21,7 +21,7 @@ export class PayrollModel {
     performanceBonuses: number,
     medicare: number,
     deductions: number,
-    overtimeHours: number,
+    overtimeHours: number = 4, // Default to 4 hours of overtime
     overtimeRate: number,
     yearlySickDay: number,
     payDate: Date
@@ -33,7 +33,7 @@ export class PayrollModel {
     this.performanceBonuses = performanceBonuses;
     this.insurance = this.calculateInsurance();
     this.medicare = medicare;
-    this.deductions = deductions + this.insurance;
+    this.deductions = deductions + this.insurance + this.medicare;
     this.overtimeHours = overtimeHours;
     this.overtimeRate = overtimeRate;
     this.yearlySickDay = yearlySickDay;
@@ -48,9 +48,9 @@ export class PayrollModel {
 
   // Method to calculate total pay including bonuses, deductions, and overtime
   private calculateTotalPay(): number {
-    const basePay = this.hourlyRate * (this.overtimeHours + 40); // 40 hours work week assumed
+    const basePay = this.hourlyRate * 40; // Assume 40 hours work week
     const overtimePay = this.overtimeHours * this.overtimeRate;
-    return basePay + this.performanceBonuses + overtimePay - this.deductions;
+    return basePay + overtimePay + this.performanceBonuses - this.deductions;
   }
 
   // Method to update the payroll details
@@ -67,7 +67,7 @@ export class PayrollModel {
     this.hourlyRate = hourlyRate;
     this.performanceBonuses = performanceBonuses;
     this.medicare = medicare;
-    this.deductions = deductions + this.calculateInsurance();
+    this.deductions = deductions + this.calculateInsurance() + this.medicare;
     this.overtimeHours = overtimeHours;
     this.overtimeRate = overtimeRate;
     this.yearlySickDay = yearlySickDay;

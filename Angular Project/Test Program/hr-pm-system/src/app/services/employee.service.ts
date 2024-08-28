@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class EmployeeService {
-  private baseUrl = 'http://localhost:3000/employees'; // Base URL for employees API
+  private baseUrl: string = 'http://localhost:3000/employees'; // Base URL for employees API
 
   constructor(private http: HttpClient) {}
 

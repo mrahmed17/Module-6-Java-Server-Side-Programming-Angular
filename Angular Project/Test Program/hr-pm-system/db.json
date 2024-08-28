@@ -1,7 +1,7 @@
 {
   "admins": [
     {
-      "adminId": "",
+      "adminId": "admin1",
       "username": "adminuser1",
       "fullName": "Admin User",
       "email": "adminuser1@example.com",
@@ -19,6 +19,107 @@
       "lastLogin": "2024-08-28T12:00:00Z",
       "status": "active",
       "hourlyRate": 50
+    }
+  ],
+  "employees": [
+    {
+      "employeeId": "emp1",
+      "username": "empuser1",
+      "fullName": "Employee User",
+      "email": "empuser1@example.com",
+      "contactNumber": "0987654321",
+      "role": "Employee",
+      "gender": "Female",
+      "age": "28",
+      "nidNo": 987654321,
+      "departmentId": "dept1",
+      "locationId": "loc1",
+      "profilePhoto": "employee.jpg",
+      "hireDate": "2024-01-01",
+      "status": "active",
+      "hourlyRate": 25
+    }
+  ],
+  "locations": [
+    {
+      "locationId": "loc1",
+      "name": "Main Office",
+      "address": "123 Main St",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastUpdatedAt": "2024-08-28T00:00:00Z",
+      "photo": "location.jpg"
+    }
+  ],
+  "departments": [
+    {
+      "departmentId": "dept1",
+      "name": "IT Department",
+      "locationId": "loc1",
+      "phoneNumber": "555-1234",
+      "email": "itdept@example.com"
+    }
+  ],
+  "attendance": [
+    {
+      "attendanceId": "att1",
+      "employeeId": "emp1",
+      "date": "2024-08-27",
+      "status": "Present",
+      "checkIn": "09:00",
+      "checkOut": "17:00"
+    }
+  ],
+  "payroll": [
+    {
+      "payrollId": "pay1",
+      "employeeId": "emp1",
+      "month": "August",
+      "year": "2024",
+      "basicSalary": 2000,
+      "overtime": 100,
+      "performanceBonus": 150,
+      "insurance": 1000,
+      "deductions": 200,
+      "netPay": 2150,
+      "status": "Processed"
+    }
+  ],
+  "leave": [
+    {
+      "leaveId": "leave1",
+      "employeeId": "emp1",
+      "startDate": "2024-08-15",
+      "endDate": "2024-08-20",
+      "leaveType": "Annual",
+      "status": "Approved",
+      "approvedBy": "mgr1"
+    }
+  ],
+  "performance": [
+    {
+      "performanceId": "perf1",
+      "employeeId": "emp1",
+      "rating": 4.5,
+      "reviewDate": "2024-08-01",
+      "comments": "Excellent performance throughout the year."
+    }
+  ],
+  "feedback": [
+    {
+      "feedbackId": "feed1",
+      "employeeId": "emp1",
+      "submittedBy": "mgr1",
+      "comments": "Great job on the recent project.",
+      "date": "2024-08-27"
+    }
+  ],
+  "reports": [
+    {
+      "reportId": "rep1",
+      "title": "Monthly Attendance Report",
+      "description": "Report on employee attendance for August 2024.",
+      "createdAt": "2024-08-28T12:00:00Z",
+      "file": "report.pdf"
     }
   ]
 }

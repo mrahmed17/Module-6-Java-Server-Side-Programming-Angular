@@ -7,12 +7,14 @@ export class AuthResponseModel {
   constructor(
     token: string,
     expiresIn: number,
-    issuedAt: Date,
+    issuedAt: Date | string,
     role: 'Admin' | 'Manager' | 'Employee'
   ) {
     this.token = token;
     this.expiresIn = expiresIn;
-    this.issuedAt = issuedAt;
+    // Convert issuedAt to Date if it's a string
+    this.issuedAt =
+      typeof issuedAt === 'string' ? new Date(issuedAt) : issuedAt;
     this.role = role;
   }
 

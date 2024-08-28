@@ -7,7 +7,7 @@ import { AttendanceModel } from '../models/attendance.model';
   providedIn: 'root',
 })
 export class AttendanceService {
-  private baseUrl = 'http://localhost:3000/attendances';
+  private baseUrl: string = 'http://localhost:3000/attendances';
 
   constructor(private http: HttpClient) {}
 

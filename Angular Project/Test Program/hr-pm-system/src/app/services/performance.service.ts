@@ -1,48 +1,82 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { PerformanceModel } from '../models/performance.model';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PerformanceService {
-  private baseUrl = 'http://localhost:3000/performances';
+  private baseUrl: string = 'http://localhost:3000/performance'; // Base URL for performance API
 
   constructor(private http: HttpClient) {}
 
+  // Method to generate a unique performanceId
+  private generatePerformanceId(employeeId: string): string {
+    const randomNumber = Math.floor(Math.random() * 10000);
+    return `${employeeId}-${randomNumber}`;
+  }
+
+  // Method to create a new performance record
   createPerformance(
-    performance: PerformanceModel
+    employeeId: string,
+    managerId: string,
+    goals: boolean,
+    achievements: string,
+    reviewDate: Date,
+    rating: number,
+    comments: string
   ): Observable<PerformanceModel> {
-    return this.http.post<PerformanceModel>(`${this.baseUrl}`, performance);
-  }
-
-  getPerformances(): Observable<PerformanceModel[]> {
-    return this.http.get<PerformanceModel[]>(`${this.baseUrl}`);
-  }
-
-  getPerformanceById(id: number): Observable<PerformanceModel> {
-    return this.http.get<PerformanceModel>(`${this.baseUrl}/${id}`);
-  }
-
-  updatePerformance(
-    id: number,
-    performance: PerformanceModel
-  ): Observable<PerformanceModel> {
-    return this.http.put<PerformanceModel>(
-      `${this.baseUrl}/${id}`,
-      performance
+    const performanceId = this.generatePerformanceId(employeeId);
+    const newPerformance = new PerformanceModel(
+      performanceId,
+      employeeId,
+      managerId,
+      goals,
+      achievements,
+      reviewDate,
+      rating,
+      comments
     );
+
+    return this.http
+      .post<PerformanceModel>(this.baseUrl, newPerformance)
+      .pipe(catchError(this.handleError));
   }
 
-  deletePerformance(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  // Method to get performance record by ID
+  getPerformanceById(performanceId: string): Observable<PerformanceModel> {
+    return this.http
+      .get<PerformanceModel>(`${this.baseUrl}/${performanceId}`)
+      .pipe(catchError(this.handleError));
   }
 
-  // Additional method to get performance by employee ID
-  getPerformanceByEmployee(employeeId: number): Observable<PerformanceModel[]> {
-    return this.http.get<PerformanceModel[]>(
-      `${this.baseUrl}?employeeId=${employeeId}`
+  // Method to update performance record
+  updatePerformance(
+    performanceId: string,
+    updatedDetails: Partial<PerformanceModel>
+  ): Observable<PerformanceModel> {
+    return this.http
+      .patch<PerformanceModel>(
+        `${this.baseUrl}/${performanceId}`,
+        updatedDetails
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  // Method to delete performance record
+  deletePerformance(performanceId: string): Observable<void> {
+    return this.http
+      .delete<void>(`${this.baseUrl}/${performanceId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Error handling
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred', error);
+    return throwError(
+      () => new Error('Something went wrong; please try again later.')
     );
   }
 }

@@ -1,40 +1,67 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LeaveModel } from '../models/leave.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { LeaveModel } from '../models/leave.model'; // Adjust the import path as necessary
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeaveService {
-  private baseUrl = 'http://localhost:3000/leaves';
+  private baseUrl: string = 'http://localhost:3000/leaves'; // Base URL for leave API
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) {}
 
-  createLeave(leave: LeaveModel): Observable<LeaveModel> {
-    return this.http.post<LeaveModel>(`${this.baseUrl}`, leave);
-  }
-
+  // Method to get all leave records
   getLeaves(): Observable<LeaveModel[]> {
-    return this.http.get<LeaveModel[]>(`${this.baseUrl}`);
+    return this.http
+      .get<LeaveModel[]>(this.baseUrl)
+      .pipe(catchError(this.handleError<LeaveModel[]>('getLeaves', [])));
   }
 
-  getLeaveById(id: number): Observable<LeaveModel> {
-    return this.http.get<LeaveModel>(`${this.baseUrl}/${id}`);
+  // Method to get leave by ID
+  getLeaveById(leaveId: string): Observable<LeaveModel> {
+    const url = `${this.baseUrl}/${leaveId}`;
+    return this.http
+      .get<LeaveModel>(url)
+      .pipe(catchError(this.handleError<LeaveModel>('getLeaveById')));
   }
 
-  updateLeave(id: number, leave: LeaveModel): Observable<LeaveModel> {
-    return this.http.put<LeaveModel>(`${this.baseUrl}/${id}`, leave);
+  // Method to create new leave
+  createLeave(leave: LeaveModel): Observable<LeaveModel> {
+    return this.http
+      .post<LeaveModel>(this.baseUrl, leave, { headers: this.headers })
+      .pipe(catchError(this.handleError<LeaveModel>('createLeave')));
   }
 
-  deleteLeave(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  // Method to update existing leave
+  updateLeave(
+    leaveId: string,
+    updatedDetails: Partial<LeaveModel>
+  ): Observable<LeaveModel> {
+    const url = `${this.baseUrl}/${leaveId}`;
+    return this.http
+      .put<LeaveModel>(url, updatedDetails, { headers: this.headers })
+      .pipe(catchError(this.handleError<LeaveModel>('updateLeave')));
   }
 
-  // Additional method to get leaves by employee ID
-  getLeavesByEmployee(employeeId: number): Observable<LeaveModel[]> {
-    return this.http.get<LeaveModel[]>(
-      `${this.baseUrl}?employeeId=${employeeId}`
+  // Method to delete leave
+  deleteLeave(leaveId: string): Observable<boolean> {
+    const url = `${this.baseUrl}/${leaveId}`;
+    return this.http.delete(url, { headers: this.headers }).pipe(
+      map(() => true),
+      catchError(this.handleError<boolean>('deleteLeave', false))
     );
+  }
+
+  // Error handling
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return throwError(
+        () => new Error('Something went wrong; please try again later.')
+      );
+    };
   }
 }
