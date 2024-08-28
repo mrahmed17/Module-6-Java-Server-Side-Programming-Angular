@@ -1,23 +1,55 @@
 export class DepartmentModel {
-  id!: string; //  Primary Key
-  departmentName!: string; //  Must provide department name
-  description?: string;
-  numberOfEmployees?: number; //  Number of employees will be shown here
+  departmentId: string;
+  name: string;
+  phoneNumber: string; // Contact phone number for the department
+  email: string; // Contact email for the department
+  locationId: string; // ID of the location where the department is based
+  managerId: string; // ID of the manager responsible for this department
+  numberOfEmployees: number; // It will be dynamic
 
-  LocationModel!: {
-    id: string;
-    locationName: string | undefined;
-    addressLine: string | undefined;
-    city: string | undefined;
-    state: string | undefined;
-    postalCode: string | undefined;
-    countryName: string | undefined;
-  };
+  constructor(
+    departmentId: string,
+    name: string,
+    phoneNumber: string,
+    email: string,
+    locationId: string,
+    managerId: string,
+    numberOfEmployees: number
+  ) {
+    this.departmentId = departmentId;
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
+    this.locationId = locationId;
+    this.managerId = managerId;
+    this.numberOfEmployees = numberOfEmployees;
+  }
 
-  UserModel!: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    role: 'HR' | 'Employee' | undefined;
-  };
+  // Method to add a new employee
+  addEmployee() {
+    this.numberOfEmployees++;
+  }
+
+  // Method to remove an employee
+  removeEmployee() {
+    if (this.numberOfEmployees > 0) {
+      this.numberOfEmployees--;
+    } else {
+      console.warn('No employees to remove.');
+    }
+  }
+
+  // Method to update the number of employees in the department
+  updateEmployeeCount(count: number) {
+    if (count >= 0) {
+      this.numberOfEmployees = count;
+    } else {
+      console.error('Number of employees cannot be negative.');
+    }
+  }
+
+  // Method to get department details as a string
+  getDepartmentDetails(): string {
+    return `${this.name} (Location ID: ${this.locationId}, Manager ID: ${this.managerId}) - Employees: ${this.numberOfEmployees}\nPhone: ${this.phoneNumber}\nEmail: ${this.email}`;
+  }
 }

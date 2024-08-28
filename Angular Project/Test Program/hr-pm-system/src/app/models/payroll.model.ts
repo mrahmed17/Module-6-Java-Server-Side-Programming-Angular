@@ -1,38 +1,77 @@
 export class PayrollModel {
-  id!: string; //  Primary Key
+  payrollId: string; // Unique identifier for the payroll record
+  employeeId: string; // ID of the employee receiving the payroll
+  managerId: string; // ID of the manager receiving the payroll
+  hourlyRate: number; // Hourly rate for employees or managers
+  performanceBonuses: number; // Performance bonuses based on rating
+  insurance: number; // Insurance amount (employees and managers)
+  medicare: number; // Medicare amount (5000 for employees, 10000 for Manager)
+  deductions: number; // Total deductions
+  overtimeHours: number; // Fixed 4 hours overtime
+  overtimeRate: number; // Overtime hourly rate
+  yearlySickDay: number; // Reserved sick days
+  totalPay: number; // Total pay after adding bonuses, deductions, and including overtime
+  payDate: Date; // Date of the payroll payment
 
-  UserModel!: {
-    id: string;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    role: 'HR' | 'Employee' | undefined;
-    profilePhoto: string | undefined;
-    contact: string | undefined;
-    nidNo: number | undefined;
-    hourlyRate: number | undefined; //  Hourly rate 150 for employees and 250 for HR
-  };
+  constructor(
+    payrollId: string,
+    employeeId: string,
+    managerId: string,
+    hourlyRate: number,
+    performanceBonuses: number,
+    medicare: number,
+    deductions: number,
+    overtimeHours: number,
+    overtimeRate: number,
+    yearlySickDay: number,
+    payDate: Date
+  ) {
+    this.payrollId = payrollId;
+    this.employeeId = employeeId;
+    this.managerId = managerId;
+    this.hourlyRate = hourlyRate;
+    this.performanceBonuses = performanceBonuses;
+    this.insurance = this.calculateInsurance();
+    this.medicare = medicare;
+    this.deductions = deductions + this.insurance;
+    this.overtimeHours = overtimeHours;
+    this.overtimeRate = overtimeRate;
+    this.yearlySickDay = yearlySickDay;
+    this.totalPay = this.calculateTotalPay();
+    this.payDate = payDate;
+  }
 
-  EmployeeModel!: {
-    id: string | undefined; //  Using this UserModel, an employee will be created. After creating a new employee, they have a unique ID
-    payPeriodStart: Date; //  Start date of the pay period
-    payPeriodEnd: Date; //  End date after 30 days from the start of the pay period
-    hourlyRate: number; //  Hourly based salary on the user's role
-    payrollCalculationMethod: 'Weekly' | 'Monthly'; //dropdown option for offer. employee choose the offer
-  };
+  // Method to calculate insurance based on employee or manager
+  private calculateInsurance(): number {
+    return this.managerId ? 3000 : 1000; // 3000 for manager, 1000 for employee
+  }
 
-  DepartmentModel!: {
-    id: string; //  Primary Key
-    departmentName: string; //  Must provide department name
-  };
+  // Method to calculate total pay including bonuses, deductions, and overtime
+  private calculateTotalPay(): number {
+    const basePay = this.hourlyRate * (this.overtimeHours + 40); // 40 hours work week assumed
+    const overtimePay = this.overtimeHours * this.overtimeRate;
+    return basePay + this.performanceBonuses + overtimePay - this.deductions;
+  }
 
-  performanceBonuses!: number; //  1* = 200, 2* = 400, 3* = 600, 4* = 800, 5* = 1600
-  insurance!: number; //  1000 for employees, 3000 for HR monthly
-  medicare!: number; //  5000 for employees, 10000 for HR
-  deductions!: number; //  Deductions (e.g., tax, insurance)
-  netPay!: number; //  Net pay after deductions
-  paymentDate!: Date; //  Date when payment was made
-  overtimeExemption!: boolean; //  Yes, Newcomer or older than 50 years. Or No.
-  overtimeHourlyRate!: number; //  Overtime hourly rate will add half of their main rate. Assume 150/2 = 75 + 150 = 225 for employees and 250/2 = 125 + 250 = 375 for HR
-  yearlySickDay!: number; //  10 days reserved
-  status!: 'Paid' | 'Pending' | 'Overdue'; //  Status of the payroll
+  // Method to update the payroll details
+  updatePayroll(
+    hourlyRate: number,
+    performanceBonuses: number,
+    medicare: number,
+    deductions: number,
+    overtimeHours: number,
+    overtimeRate: number,
+    yearlySickDay: number,
+    payDate: Date
+  ) {
+    this.hourlyRate = hourlyRate;
+    this.performanceBonuses = performanceBonuses;
+    this.medicare = medicare;
+    this.deductions = deductions + this.calculateInsurance();
+    this.overtimeHours = overtimeHours;
+    this.overtimeRate = overtimeRate;
+    this.yearlySickDay = yearlySickDay;
+    this.totalPay = this.calculateTotalPay();
+    this.payDate = payDate;
+  }
 }

@@ -1,15 +1,39 @@
 export class FeedbackModel {
-  id!: string;
+  feedbackId: string;
+  employeeId: string; // ID of the employee receiving the feedback
+  managerId: string; // ID of the manager providing the feedback
+  performanceRating: number; // Rating given by the manager (e.g., 1-5)
+  comments: string; // Detailed comments or feedback
+  date: Date; // Date when the feedback was given
 
-  UserModel!: {
-    id: string;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    role: 'HR' | 'Employee' | undefined;
-    profilePhoto: string | undefined;
-  };
+  constructor(
+    feedbackId: string,
+    employeeId: string,
+    managerId: string,
+    performanceRating: number,
+    comments: string,
+    date: Date
+  ) {
+    this.feedbackId = feedbackId;
+    this.employeeId = employeeId;
+    this.managerId = managerId;
+    this.performanceRating = performanceRating;
+    this.comments = comments;
+    this.date = date;
+  }
 
-  rating!: number; //  User rating will be shown here. 1 to 5 scale
-  comments!: string; //  User comments
-  feedbackDate!: Date; //  Feedback creation date
+  // Method to update feedback details
+  updateFeedback(performanceRating: number, comments: string) {
+    this.performanceRating = performanceRating;
+    this.comments = comments;
+  }
+
+  // Method to get feedback details as a string
+  getFeedbackDetails(): string {
+    return `Feedback ID: ${this.feedbackId}\nEmployee ID: ${
+      this.employeeId
+    }\nManager ID: ${this.managerId}\nRating: ${
+      this.performanceRating
+    }\nComments: ${this.comments}\nDate: ${this.date.toDateString()}`;
+  }
 }

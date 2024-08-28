@@ -1,13 +1,37 @@
-import { UserModel } from './user.model';
+export class AuthResponseModel {
+  token: string;
+  expiresIn: number; // Token expiry time in seconds
+  issuedAt: Date; // Date when the token was issued
+  role: 'Admin' | 'Manager' | 'Employee'; // Role of the authenticated user
 
-export class AuthResponse {
-  token!: string; // JWT or any other authentication token
+  constructor(
+    token: string,
+    expiresIn: number,
+    issuedAt: Date,
+    role: 'Admin' | 'Manager' | 'Employee'
+  ) {
+    this.token = token;
+    this.expiresIn = expiresIn;
+    this.issuedAt = issuedAt;
+    this.role = role;
+  }
 
-  UserModel!: {
-    role: 'Admin' | 'HR' | 'Employee';
-  }; // Reference to the authenticated UserModel
+  // Method to check if the token has expired
+  isTokenExpired(): boolean {
+    const now = new Date();
+    const expiryDate = new Date(
+      this.issuedAt.getTime() + this.expiresIn * 1000
+    );
+    return now > expiryDate;
+  }
 
-  expiresIn!: number; // Expiration time for the token, in seconds
-
-  issuedAt!: Date; // The date and time when the token was issued
+  // Method to get the token's remaining validity time in seconds
+  getRemainingValidity(): number {
+    if (this.isTokenExpired()) return 0;
+    const now = new Date();
+    const expiryDate = new Date(
+      this.issuedAt.getTime() + this.expiresIn * 1000
+    );
+    return Math.floor((expiryDate.getTime() - now.getTime()) / 1000);
+  }
 }

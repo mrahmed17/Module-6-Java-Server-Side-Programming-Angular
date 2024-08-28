@@ -1,24 +1,68 @@
 export class AttendanceModel {
-  id!: string;
-
-  workingDay!: Date; //  Must be provided to calculate a user's salary or grant leave on a specific day
-  workHours!: number; //  Example: 8.00
-
-  UserModel!: {
+  id: string;
+  user: {
     id: string;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    role: 'HR' | 'Employee' | undefined;
+    firstName: string;
+    lastName: string;
+    role: 'Admin' | 'Manager' | 'Employee';
+    profilePhoto: string;
   };
+  date: Date;
+  clockInTime: Date | null; // null if not clocked in yet
+  clockOutTime: Date | null; // null if not clocked out yet
+  totalHours: number; // Total hours worked
+  status: 'Present' | 'Absent' | 'Leave'; // Status of the attendance
 
-  DepartmentModel!: {
-    id: string; //  Primary Key
-    departmentName: string; //  Must provide department name;
-  };
+  constructor(
+    id: string,
+    userId: string,
+    firstName: string,
+    lastName: string,
+    role: 'Admin' | 'Manager' | 'Employee',
+    profilePhoto: string,
+    date: Date,
+    clockInTime: Date | null,
+    clockOutTime: Date | null,
+    totalHours: number,
+    status: 'Present' | 'Absent' | 'Leave'
+  ) {
+    this.id = id;
+    this.user = {
+      id: userId,
+      firstName: firstName,
+      lastName: lastName,
+      role: role,
+      profilePhoto: profilePhoto,
+    };
+    this.date = date;
+    this.clockInTime = clockInTime;
+    this.clockOutTime = clockOutTime;
+    this.totalHours = totalHours;
+    this.status = status;
+  }
 
-  inTime!: Date; //  In time for the day
+  // Method to calculate total hours worked based on clock-in and clock-out times
+  calculateTotalHours() {
+    if (this.clockInTime && this.clockOutTime) {
+      const diffInMillis =
+        this.clockOutTime.getTime() - this.clockInTime.getTime();
+      this.totalHours = diffInMillis / (1000 * 60 * 60); // Convert milliseconds to hours
+    } else {
+      this.totalHours = 0;
+    }
+  }
 
-  outTime!: Date; //  Out time for the day
+  // Method to update attendance status
+  updateStatus(newStatus: 'Present' | 'Absent' | 'Leave') {
+    this.status = newStatus;
+  }
 
-  status!: 'Present' | 'Absent' | 'On Leave' | 'Sick' | 'Holiday'; //  Status of the attendance record
+  // Method to get formatted attendance details
+  getAttendanceDetails() {
+    return `User: ${this.user.firstName} ${
+      this.user.lastName
+    }, Date: ${this.date.toDateString()}, Status: ${
+      this.status
+    }, Total Hours: ${this.totalHours}`;
+  }
 }

@@ -1,0 +1,24 @@
+{
+  "admins": [
+    {
+      "adminId": "",
+      "username": "adminuser1",
+      "fullName": "Admin User",
+      "email": "adminuser1@example.com",
+      "contactNumber": "1234567890",
+      "role": "Admin",
+      "gender": "Male",
+      "age": "30",
+      "nidNo": 123456789,
+      "accessLevel": "SuperAdmin",
+      "assignedLocations": ["loc1"],
+      "assignedManagers": ["mgr1"],
+      "assignedDepartments": ["dept1"],
+      "profilePhoto": "profile.jpg",
+      "payrollCalculationMethod": "Monthly",
+      "lastLogin": "2024-08-28T12:00:00Z",
+      "status": "active",
+      "hourlyRate": 50
+    }
+  ]
+}
