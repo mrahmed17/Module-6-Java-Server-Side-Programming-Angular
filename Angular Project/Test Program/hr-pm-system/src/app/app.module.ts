@@ -3,7 +3,6 @@ import {
   BrowserModule,
   provideClientHydration,
 } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
@@ -12,11 +11,29 @@ import { CreatelocationComponent } from './components/location/createlocation/cr
 import { EditlocationComponent } from './components/location/editlocation/editlocation.component';
 import { ListlocationComponent } from './components/location/listlocation/listlocation.component';
 import { ViewlocationComponent } from './components/location/viewlocation/viewlocation.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, DashboardComponent, CreatelocationComponent, EditlocationComponent, ListlocationComponent, ViewlocationComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [provideClientHydration()],
+  declarations: [
+    AppComponent,
+    SidebarComponent,
+    DashboardComponent,
+    CreatelocationComponent,
+    EditlocationComponent,
+    ListlocationComponent,
+    ViewlocationComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      // your routes
+    ]),
+  ],
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

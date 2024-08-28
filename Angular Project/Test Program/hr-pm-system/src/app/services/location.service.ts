@@ -29,7 +29,7 @@ export class LocationService {
   }
 
   // Method to create a new location
-  createLocation(location: LocationModel): Observable<LocationModel> {
+  createLocation(location: Partial<LocationModel>): Observable<LocationModel> {
     return this.http
       .post<LocationModel>(this.baseUrl, location, { headers: this.headers })
       .pipe(catchError(this.handleError<LocationModel>('createLocation')));

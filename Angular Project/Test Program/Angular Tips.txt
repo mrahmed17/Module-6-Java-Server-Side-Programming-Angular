@@ -69,3 +69,60 @@ Angular Program Connection Follow:
 5. app-routing.module.ts (Now that html should be routed to the path.)
 
 6. Navbar or Sidebar or both part (The routing path in this part should be connected with navbar or sidebar or both parts.)
+
+
+Nusrat
+=====================================
+
+project open: ng new myangular --standalone false
+
+new file component open: ng g c student
+
+new file service open: ng g s location
+
+for bootstrap: npm i bootstrap@5.3.3
+npm i bootstrap-icons
+
+"node_modules/bootstrap/dist/css/bootstrap.min.css"
+
+"node_modules/bootstrap-icons/font/bootstrap-icons.css"
+style.css -- @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+
+"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
+
+For update: npm update
+
+For run: ng s
+
+For close: ctrl + c
+
+
+
+## json file ##
+For Install: 
+npm install - g json-server
+
+for details show:
+json-server --watch db.json
+
+## ##
+
+
+add the following in app.module.ts: 
+provideHttpClient(withFetch())
+
+
+add the following path in app-routing.module.ts:
+{path: ' ', component:    ___Component},
+
+
+
+ng generate guard guard/authguard --implements CanActivate,CanLoad --project mybasicbms
+
+Role Guard
+ng generate guard role --project=clssProject
+ng generate guard reg-login/guard/role --implements CanActivate
+
+
