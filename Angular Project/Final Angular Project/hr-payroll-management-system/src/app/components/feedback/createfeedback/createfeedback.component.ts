@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackModel } from '../../../models/feedback.model';
 import { FeedbackService } from '../../../services/feedback.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createfeedback',
@@ -9,54 +9,30 @@ import { FeedbackService } from '../../../services/feedback.service';
   styleUrls: ['./createfeedback.component.css'],
 })
 export class CreatefeedbackComponent implements OnInit {
-  feedbackForm!: FormGroup;
-  feedback: FeedbackModel = new FeedbackModel();
-  isSubmitted = false;
-  errorMessage = '';
+  feedback: FeedbackModel = new FeedbackModel('', '', '', 1, '', new Date());
+  errorMessage: string = '';
+  submitting: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private feedbackService: FeedbackService
+    private feedbackService: FeedbackService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+  ngOnInit(): void {}
 
-  initForm() {
-    this.feedbackForm = this.formBuilder.group({
-      employeeId: ['', Validators.required],
-      departmentId: ['', Validators.required],
-      employeeName: ['', Validators.required],
-      rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
-      comments: ['', Validators.required],
-      feedbackDate: ['', Validators.required],
-    });
-  }
-
-  onSubmit() {
-    this.isSubmitted = true;
-    if (this.feedbackForm.invalid) {
-      return;
+  createFeedback(): void {
+    if (this.feedback) {
+      this.submitting = true;
+      this.feedbackService.createFeedback(this.feedback).subscribe(
+        () => this.router.navigate(['/feedbacks']),
+        (error) => {
+          this.errorMessage = 'Failed to create feedback.';
+          console.error('Error creating feedback', error);
+          this.submitting = false;
+        }
+      );
+    } else {
+      this.errorMessage = 'Feedback details are missing.';
     }
-
-    this.feedback = this.feedbackForm.value;
-
-    this.feedbackService.createFeedback(this.feedback).subscribe(
-      (data) => {
-        console.log('Feedback created successfully:', data);
-        this.resetForm();
-      },
-      (error) => {
-        console.error('Error creating feedback:', error);
-        this.errorMessage =
-          'An error occurred while creating the feedback. Please try again.';
-      }
-    );
-  }
-
-  resetForm() {
-    this.isSubmitted = false;
-    this.feedbackForm.reset();
   }
 }

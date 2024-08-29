@@ -14,7 +14,7 @@ export class PayrollService {
 
   // Create a new payroll record
   createPayroll(payroll: PayrollModel): Observable<PayrollModel> {
-    payroll.netPay = this.calculateNetPay(payroll); // Calculate net pay before creating
+    payroll.totalPay = this.calculateNetPay(payroll); // Calculate net pay before creating
     return this.httpClient
       .post<PayrollModel>(this.apiUrl, payroll)
       .pipe(catchError(this.handleError));
@@ -36,7 +36,7 @@ export class PayrollService {
 
   // Update an existing payroll record
   updatePayroll(id: string, payroll: PayrollModel): Observable<PayrollModel> {
-    payroll.netPay = this.calculateNetPay(payroll); // Recalculate net pay before updating
+    payroll.totalPay = this.calculateNetPay(payroll); // Recalculate net pay before updating
     return this.httpClient
       .put<PayrollModel>(`${this.apiUrl}/${id}`, payroll)
       .pipe(catchError(this.handleError));
@@ -51,9 +51,9 @@ export class PayrollService {
 
   // Calculate the net pay for a payroll record
   private calculateNetPay(payroll: PayrollModel): number {
-    const totalDeductions = (payroll.deductions || 0) + (payroll.tax || 0);
-    const totalBonuses = payroll.bonuses || 0;
-    return (payroll.UserModel.salary || 0) + totalBonuses - totalDeductions;
+    const totalDeductions = payroll.deductions;
+    const totalBonuses = payroll.performanceBonuses;
+    return payroll.hourlyRate * 40 + totalBonuses - totalDeductions;
   }
 
   // Handle any errors in the HTTP request

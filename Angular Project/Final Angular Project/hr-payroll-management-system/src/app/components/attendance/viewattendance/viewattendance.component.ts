@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceModel } from '../../../models/attendance.model';
-import { AttendanceService } from '../../../services/attendance.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AttendanceService } from '../../../services/attendance.service';
+import { AttendanceModel } from '../../../models/attendance.model';
 
 @Component({
   selector: 'app-viewattendance',
@@ -10,37 +10,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ViewattendanceComponent implements OnInit {
   attendance: AttendanceModel | null = null;
-  errorMessage: string = '';
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private attendanceService: AttendanceService
+    private attendanceService: AttendanceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.loadAttendance(id);
-    }
+    this.loadAttendance();
   }
 
-  // Load a single attendance record
-  loadAttendance(id: string): void {
-    this.attendanceService.getAttendance(id).subscribe(
-      (data) => {
-        this.attendance = data;
+  loadAttendance(): void {
+    const id = this.route.snapshot.paramMap.get('id') || '';
+    this.loading = true;
+    this.attendanceService.getAttendanceById(id).subscribe(
+      (attendance: AttendanceModel) => {
+        this.attendance = attendance;
+        this.loading = false;
       },
       (error) => {
+        this.errorMessage = 'Failed to load attendance details.';
+        this.loading = false;
         console.error('Failed to load attendance details', error);
-        this.errorMessage =
-          'Failed to load attendance details. Please try again.';
       }
     );
   }
 
-  // Navigate back to the list
   goBack(): void {
-    this.router.navigate(['/attendance/list']);
+    this.router.navigate(['/attendances']);
   }
 }

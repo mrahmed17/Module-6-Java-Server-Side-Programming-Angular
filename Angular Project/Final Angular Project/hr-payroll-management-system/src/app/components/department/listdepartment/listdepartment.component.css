@@ -1,40 +1,70 @@
-/* Container styling */
+/* Listdepartment.component.css */
+
 .container {
-  max-width: 1200px;
-  margin: auto;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Table styling */
-.table {
-  margin-top: 20px;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Table header styling */
-.table thead th {
-  background-color: #f8f9fa;
-  color: #333;
+.loading-spinner {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
 }
 
-/* Table row styling */
-.table tbody tr {
-  transition: background-color 0.3s ease;
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
-/* Table row hover effect */
-.table tbody tr:hover {
-  background-color: #f1f1f1;
+.department-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Button styling */
-.btn {
-  margin: 0 5px;
+.department-table th,
+.department-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-.btn-sm {
+.department-table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
+
+.department-table td {
+  text-align: left;
+}
+
+.department-table button {
   padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
 }
 
-/* Error message styling */
-.alert-danger {
-  margin-top: 20px;
+.department-table button:hover {
+  opacity: 0.8;
+}
+
+.department-table button:nth-child(1) {
+  background-color: #007bff; /* Blue for View */
+}
+
+.department-table button:nth-child(2) {
+  background-color: #28a745; /* Green for Edit */
+}
+
+.department-table button:nth-child(3) {
+  background-color: #dc3545; /* Red for Delete */
 }

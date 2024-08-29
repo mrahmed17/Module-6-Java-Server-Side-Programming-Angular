@@ -1,1 +1,48 @@
-<p>createdepartment works!</p>
+<div class="container">
+  <h2>Create New Department</h2>
+  <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="departmentId">Department ID:</label>
+      <input id="departmentId" formControlName="departmentId" type="text" required />
+    </div>
+
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text" required />
+    </div>
+
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" formControlName="phoneNumber" type="text" required />
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" required />
+    </div>
+
+    <div>
+      <label for="locationId">Location ID:</label>
+      <input id="locationId" formControlName="locationId" type="text" required />
+    </div>
+
+    <div>
+      <label for="managerId">Manager ID:</label>
+      <input id="managerId" formControlName="managerId" type="text" required />
+    </div>
+
+    <div>
+      <label for="numberOfEmployees">Number of Employees:</label>
+      <input id="numberOfEmployees" formControlName="numberOfEmployees" type="number" required [min]="0" readonly />
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="loading">Create</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

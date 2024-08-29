@@ -20,7 +20,7 @@ import { HomeComponent } from './template/home/home.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { HeaderComponent } from './template/header/header.component';
-import { CreateAttendanceComponent } from './components/attendance/createattendance/createattendance.component';
+import { CreateattendanceComponent } from './components/attendance/createattendance/createattendance.component';
 import { EditattendanceComponent } from './components/attendance/editattendance/editattendance.component';
 import { ListattendanceComponent } from './components/attendance/listattendance/listattendance.component';
 import { ViewattendanceComponent } from './components/attendance/viewattendance/viewattendance.component';
@@ -109,7 +109,7 @@ import { EditlocationComponent } from './components/location/editlocation/editlo
     LogoutComponent,
     FooterComponent,
     HeaderComponent,
-    CreateAttendanceComponent,
+    CreateattendanceComponent,
     EditattendanceComponent,
     ListattendanceComponent,
     ViewattendanceComponent,

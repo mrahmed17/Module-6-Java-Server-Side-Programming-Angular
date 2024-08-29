@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentModel } from '../../../models/department.model';
-import { DepartmentService } from '../../../services/department.service';
 import { Router } from '@angular/router';
+import { DepartmentService } from '../../../services/department.service';
+import { DepartmentModel } from '../../../models/department.model';
 
 @Component({
   selector: 'app-listdepartment',
   templateUrl: './listdepartment.component.html',
-  styleUrl: './listdepartment.component.css',
+  styleUrls: ['./listdepartment.component.css'],
 })
 export class ListdepartmentComponent implements OnInit {
   departments: DepartmentModel[] = [];
-  errorMessage: string = '';
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private departmentService: DepartmentService,
@@ -21,39 +22,44 @@ export class ListdepartmentComponent implements OnInit {
     this.loadDepartments();
   }
 
-  // Load all departments
   loadDepartments(): void {
+    this.loading = true;
     this.departmentService.getAllDepartments().subscribe(
-      (data) => {
-        this.departments = data;
+      (departments: DepartmentModel[]) => {
+        this.departments = departments;
+        this.loading = false;
       },
       (error) => {
+        this.errorMessage = 'Failed to load departments.';
+        this.loading = false;
         console.error('Failed to load departments', error);
-        this.errorMessage = 'Failed to load departments. Please try again.';
       }
     );
   }
 
   // Navigate to the department details view
   viewDepartment(id: string): void {
-    this.router.navigate([`/view-department/${id}`]);
+    this.router.navigate([`/departments/view/${id}`]);
   }
 
-  // Navigate to the edit department page
-  editDepartment(id: string): void {
-    this.router.navigate([`/edit-department/${id}`]);
+  editDepartment(departmentId: string): void {
+    this.router.navigate(['/departments/edit', departmentId]);
   }
 
-  // Delete a department
-  deleteDepartment(id: string): void {
+  deleteDepartment(departmentId: string): void {
     if (confirm('Are you sure you want to delete this department?')) {
-      this.departmentService.deleteDepartment(id).subscribe(
+      this.loading = true;
+      this.departmentService.deleteDepartment(departmentId).subscribe(
         () => {
-          this.loadDepartments();
+          this.departments = this.departments.filter(
+            (department) => department.departmentId !== departmentId
+          );
+          this.loading = false;
         },
         (error) => {
+          this.errorMessage = 'Failed to delete department.';
+          this.loading = false;
           console.error('Failed to delete department', error);
-          this.errorMessage = 'Failed to delete department. Please try again.';
         }
       );
     }

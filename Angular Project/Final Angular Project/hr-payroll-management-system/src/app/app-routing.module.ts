@@ -18,7 +18,7 @@ import { ViewdepartmentComponent } from './components/department/viewdepartment/
 import { ListdepartmentComponent } from './components/department/listdepartment/listdepartment.component';
 import { ForgetpasswordComponent } from './authentication/forgetpassword/forgetpassword.component';
 import { ListattendanceComponent } from './components/attendance/listattendance/listattendance.component';
-import { CreateAttendanceComponent } from './components/attendance/createattendance/createattendance.component';
+import { CreateattendanceComponent } from './components/attendance/createattendance/createattendance.component';
 import { EditattendanceComponent } from './components/attendance/editattendance/editattendance.component';
 import { ViewattendanceComponent } from './components/attendance/viewattendance/viewattendance.component';
 import { ListleaveComponent } from './components/leave/listleave/listleave.component';
@@ -142,7 +142,7 @@ const routes: Routes = [
     children: [
       {
         path: 'create',
-        component: CreateAttendanceComponent,
+        component: CreateattendanceComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { role: 'Admin' },
       },

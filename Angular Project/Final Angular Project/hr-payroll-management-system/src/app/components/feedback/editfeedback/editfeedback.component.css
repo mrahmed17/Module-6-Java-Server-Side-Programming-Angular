@@ -1,0 +1,27 @@
+.container {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  height: 100px;
+}
+
+.alert {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  margin-top: 20px;
+}

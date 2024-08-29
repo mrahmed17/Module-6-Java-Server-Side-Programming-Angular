@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceService } from '../../../services/attendance.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserModel } from '../../../models/user.model';
-import { UserprofileService } from '../../../services/userprofile.service';
+import { AttendanceService } from '../../../services/attendance.service';
+import { AttendanceModel } from '../../../models/attendance.model';
 
 @Component({
   selector: 'app-editattendance',
@@ -11,94 +10,90 @@ import { UserprofileService } from '../../../services/userprofile.service';
   styleUrls: ['./editattendance.component.css'],
 })
 export class EditattendanceComponent implements OnInit {
-  attendanceForm!: FormGroup;
-  attendanceId!: string;
-  employees: UserModel[] = [];
-  errorMessage: string = '';
+  attendanceForm: FormGroup;
+  loading = false;
+  errorMessage: string | null = null;
+  attendanceId: string ="";
 
   constructor(
+    private fb: FormBuilder,
     private attendanceService: AttendanceService,
-    private formBuilder: FormBuilder,
-    private userService: UserprofileService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.attendanceForm = this.fb.group({
+      userId: [{ value: '', disabled: true }, Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      role: ['Employee', Validators.required],
+      profilePhoto: ['', Validators.required],
+      date: ['', Validators.required],
+      clockInTime: [null],
+      clockOutTime: [null],
+      status: ['Present', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
-    this.initForm();
-    this.loadEmployees();
-    this.route.params.subscribe((params) => {
-      this.attendanceId = params['id'];
-      if (this.attendanceId) {
-        this.loadAttendance(this.attendanceId);
-      }
-    });
+    this.attendanceId = this.route.snapshot.paramMap.get('id')!;
+    this.loadAttendance();
   }
 
-  // Initialize the form
-  initForm(): void {
-    this.attendanceForm = this.formBuilder.group({
-      id: [null],
-      date: ['', Validators.required],
-      status: ['', Validators.required],
-      checkInTime: ['', Validators.required],
-      checkOutTime: ['', Validators.required],
-      employeeId: ['', Validators.required],
-    });
-  }
-
-  // Load the attendance record to edit
-  loadAttendance(id: string): void {
-    this.attendanceService.getAttendance(id).subscribe(
+  loadAttendance(): void {
+    this.loading = true;
+    this.attendanceService.getAttendanceById(this.attendanceId).subscribe(
       (attendance) => {
-        if (attendance) {
-          this.attendanceForm.patchValue(attendance);
-        } else {
-          this.errorMessage = 'Attendance record not found.';
-        }
+        this.loading = false;
+        this.attendanceForm.patchValue({
+          userId: attendance.user.id,
+          firstName: attendance.user.firstName,
+          lastName: attendance.user.lastName,
+          role: attendance.user.role,
+          profilePhoto: attendance.user.profilePhoto,
+          date: attendance.date.toISOString().substring(0, 10),
+          clockInTime: attendance.clockInTime
+            ? attendance.clockInTime.toISOString().substring(11, 16)
+            : '',
+          clockOutTime: attendance.clockOutTime
+            ? attendance.clockOutTime.toISOString().substring(11, 16)
+            : '',
+          status: attendance.status,
+        });
       },
       (error) => {
+        this.errorMessage = 'Failed to load attendance record.';
+        this.loading = false;
         console.error('Failed to load attendance', error);
-        this.errorMessage = 'Failed to load attendance. Please try again.';
       }
     );
   }
 
-  // Load all employees
-  loadEmployees(): void {
-    this.userService.getAllUsers().subscribe(
-      (data: UserModel[]) => {
-        this.employees = data;
-      },
-      (error) => {
-        console.error('Failed to load employees', error);
-        this.errorMessage = 'Failed to load employees. Please try again.';
-      }
-    );
-  }
-
-  // Submit the form to update the attendance record
   onSubmit(): void {
-    if (this.attendanceForm.invalid) {
-      return;
+    if (this.attendanceForm.valid) {
+      this.loading = true;
+      const updatedAttendance: AttendanceModel = {
+        ...this.attendanceForm.value,
+        id: this.attendanceId,
+        totalHours: 0, // To be calculated if needed
+      };
+
+      this.attendanceService
+        .updateAttendance(this.attendanceId, updatedAttendance)
+        .subscribe(
+          () => {
+            this.loading = false;
+            this.router.navigate(['/attendances/list']);
+          },
+          (error) => {
+            this.errorMessage = 'Failed to update attendance record.';
+            this.loading = false;
+            console.error('Failed to update attendance', error);
+          }
+        );
     }
-    const attendanceData = this.attendanceForm.value;
-    this.attendanceService
-      .updateAttendance(this.attendanceId, attendanceData)
-      .subscribe(
-        (response) => {
-          this.router.navigate(['/attendances']);
-        },
-        (error) => {
-          console.error('Failed to update attendance', error);
-          this.errorMessage = 'Failed to update attendance. Please try again.';
-        }
-      );
   }
 
-  // Reset the form and clear the state
-  resetForm(): void {
-    this.attendanceForm.reset();
-    this.errorMessage = '';
+  cancel(): void {
+    this.router.navigate(['/attendances/list']);
   }
 }

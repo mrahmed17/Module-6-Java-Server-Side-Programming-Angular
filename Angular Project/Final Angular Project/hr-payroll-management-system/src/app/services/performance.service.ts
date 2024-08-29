@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { PerformanceModel } from '../models/performance.model'; // Ensure this import points to the correct location
+import { PerformanceModel } from '../models/performance.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class PerformanceService {
 
   // Update an existing performance record
   updatePerformance(
-    id: number,
+    id: string,
     performance: PerformanceModel
   ): Observable<PerformanceModel> {
     return this.http
@@ -54,9 +54,7 @@ export class PerformanceService {
 
   // Handle errors from HTTP requests
   private handleError(error: HttpErrorResponse): Observable<never> {
-    // Log error to the console (or send to a remote logging infrastructure)
     console.error('An error occurred:', error.message);
-    // Return an observable with a user-facing error message
     return throwError(
       () => new Error('Something went wrong; please try again later.')
     );

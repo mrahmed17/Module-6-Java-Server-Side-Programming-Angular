@@ -1,1 +1,30 @@
-<p>viewpayroll works!</p>
+<div class="container">
+  <h1>Payroll Details</h1>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <p>Loading payroll details...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="payroll && !loading && !errorMessage" class="payroll-details">
+    <p><strong>Employee ID:</strong> {{ payroll.employeeId }}</p>
+    <p><strong>Manager ID:</strong> {{ payroll.managerId }}</p>
+    <p><strong>Hourly Rate:</strong> {{ payroll.hourlyRate | currency }}</p>
+    <p><strong>Performance Bonuses:</strong> {{ payroll.performanceBonuses | currency }}</p>
+    <p><strong>Medicare:</strong> {{ payroll.medicare | currency }}</p>
+    <p><strong>Deductions:</strong> {{ payroll.deductions | currency }}</p>
+    <p><strong>Overtime Hours:</strong> {{ payroll.overtimeHours }}</p>
+    <p><strong>Overtime Rate:</strong> {{ payroll.overtimeRate | currency }}</p>
+    <p><strong>Yearly Sick Day:</strong> {{ payroll.yearlySickDay }}</p>
+    <p><strong>Total Pay:</strong> {{ payroll.totalPay | currency }}</p>
+    <p><strong>Pay Date:</strong> {{ payroll.payDate | date }}</p>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" (click)="editPayroll()">Edit</button>
+      <button class="btn btn-secondary" (click)="backToList()">Back to List</button>
+    </div>
+  </div>
+</div>

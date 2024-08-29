@@ -1,38 +1,16 @@
 export class LeaveModel {
-  leaveId: string;
-  employeeId: string; // ID of the employee requesting leave
-  leaveType: 'Sick' | 'Vacation' | 'Personal' | 'Other'; // Type of leave
-  startDate: Date; // Start date of the leave
-  endDate: Date; // End date of the leave
-  remainingLeave: number; // Remaining leave balance for each employee
-  reason: string; // Reason for taking leave
+  leaveId!: string;
+  employeeId!: string; // ID of the employee requesting leave
+  leaveType!: 'Sick' | 'Vacation' | 'Personal' | 'Other'; // Type of leave
+  startDate!: Date; // Start date of the leave
+  endDate!: Date; // End date of the leave
+  remainingLeave!: number; // Remaining leave balance for each employee
+  reason!: string; // Reason for taking leave
   attachment?: string; // Optional, URL or reference to an attachment (e.g., medical certificate)
-  status: 'Pending' | 'Approved' | 'Rejected'; // Status of the leave request
-  requestDate: Date; // Date when the leave request was submitted
+  status!: 'Pending' | 'Approved' | 'Rejected'; // Status of the leave request
+  requestDate!: Date; // Date when the leave request was submitted
   approvedBy?: string; // ID of the manager who approved or rejected the leave
   approvalDate?: Date; // Date when the leave was approved or rejected
-
-  constructor(
-    leaveId: string,
-    employeeId: string,
-    leaveType: 'Sick' | 'Vacation' | 'Personal' | 'Other',
-    startDate: Date,
-    endDate: Date,
-    remainingLeave: number,
-    reason: string,
-    status: 'Pending' | 'Approved' | 'Rejected',
-    requestDate: Date
-  ) {
-    this.leaveId = leaveId;
-    this.employeeId = employeeId;
-    this.leaveType = leaveType;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.remainingLeave = remainingLeave;
-    this.reason = reason;
-    this.status = status;
-    this.requestDate = requestDate;
-  }
 
   // Method to update leave status and assign approver
   updateStatus(

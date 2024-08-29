@@ -44,7 +44,7 @@ export class DepartmentService {
   // Update an existing department
   updateDepartment(
     id: string,
-    department: DepartmentModel
+    department: Partial<DepartmentModel>
   ): Observable<DepartmentModel> {
     return this.httpClient
       .put<DepartmentModel>(`${this.apiUrl}/${id}`, department)

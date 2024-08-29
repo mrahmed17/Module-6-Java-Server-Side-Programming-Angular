@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-login',
@@ -10,47 +10,35 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string = '';
+  submitting: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private formBuilder: FormBuilder
+    private router: Router
   ) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+    this.loginForm = this.fb.group({
+      identifier: ['', [Validators.required]], // Changed from email to identifier
+      password: ['', [Validators.required]],
     });
-
-    // this.loginForm = this.formBuilder.group({
-    //   email: [''],
-    //   password: [''],
-    // });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const credentials = this.loginForm.value;
-      this.authService.login(credentials).subscribe({
-        next: (res) => {
-          console.log('User logged in successfully:', res);
-
-          this.authService.storeToken(res.token);
-          const role = this.authService.getUserRole();
-          if (role === 'admin') {
-            this.router.navigate(['/admin']);
-          } else {
-            this.router.navigate(['/userprofile']);
-          }
-          // Navigate to a protected route after login
+      const { identifier, password } = this.loginForm.value;
+      this.submitting = true;
+      this.authService.login(identifier, password).subscribe({
+        next: () => {
+          this.submitting = false;
+          this.router.navigate(['/dashboard']); // Redirect to a dashboard or another route upon successful login
         },
-        error: (err) => {
-          console.error('Error logging in:', err);
-          // Display an error message to the user
-          alert('Login failed. Please check your credentials and try again.');
+        error: (error) => {
+          this.submitting = false;
+          this.errorMessage = 'Invalid credentials. Please try again.';
+          console.error('Login error:', error);
         },
       });
-    } else {
-      alert('Please fill out all required fields.');
     }
   }
 }

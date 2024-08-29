@@ -1,1 +1,39 @@
-<p>listfeedback works!</p>
+<div class="container">
+  <h2>Feedback List</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading feedbacks...
+  </div>
+
+  <table class="table table-bordered" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th>Feedback ID</th>
+        <th>Employee ID</th>
+        <th>Manager ID</th>
+        <th>Performance Rating</th>
+        <th>Comments</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks">
+        <td>{{ feedback.feedbackId }}</td>
+        <td>{{ feedback.employeeId }}</td>
+        <td>{{ feedback.managerId }}</td>
+        <td>{{ feedback.performanceRating }}</td>
+        <td>{{ feedback.comments }}</td>
+        <td>{{ feedback.date | date }}</td>
+        <td>
+          <a [routerLink]="['/feedbacks/edit', feedback.feedbackId]" class="btn btn-warning btn-sm">Edit</a>
+          <button (click)="deleteFeedback(feedback.feedbackId)" class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

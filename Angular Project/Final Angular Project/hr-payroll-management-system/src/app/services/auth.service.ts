@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { AdminModel } from '../models/admin.model';
 import { ManagerModel } from '../models/manager.model';
 import { EmployeeModel } from '../models/employee.model';
-import { AuthResponseModel } from '../models/auth-response';
+import { AuthResponseModel } from '../models/auth-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,24 +17,27 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   // Method to login and obtain an authentication token
-  login(email: string, password: string): Observable<AuthResponseModel> {
+  login(identifier: string, password: string): Observable<AuthResponseModel> {
     return this.http
-      .get<(AdminModel | ManagerModel | EmployeeModel)[]>(this.apiUrl, {
-        params: { email },
-      })
+      .get<(AdminModel | ManagerModel | EmployeeModel)[]>(this.apiUrl)
       .pipe(
         map((users) => {
-          const user = users.find((u) => u.email === email);
+          const user = users.find(
+            (u) =>
+              (u.email === identifier ||
+                u.username === identifier ||
+                u.id === identifier) &&
+              u.password === password // Ensure the 'password' field is in the models
+          );
 
-          if (user && user.password === password) {
-            // Simple password check
+          if (user) {
             const token = this.generateToken(user);
-            const authResponse: AuthResponseModel = {
+            const authResponse: AuthResponseModel = new AuthResponseModel(
               token,
-              expiresIn: 3600, // Example expiration time in seconds
-              issuedAt: new Date(),
-              role: user.role as 'Admin' | 'Manager' | 'Employee',
-            };
+              3600, // Example expiration time in seconds
+              new Date(),
+              user.role as 'Admin' | 'Manager' | 'Employee'
+            );
             this.storeToken(authResponse.token);
             this.setCurrentUser(user);
             return authResponse;
@@ -84,6 +87,12 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 
+  requestPasswordReset(email: string): Observable<void> {
+    return this.http
+      .post<void>(`${this.apiUrl}/forgot-password`, { email })
+      .pipe(catchError(this.handleError));
+  }
+
   // Generates a token (for educational purposes)
   private generateToken(
     user: AdminModel | ManagerModel | EmployeeModel
@@ -101,5 +110,12 @@ export class AuthService {
   getUserId(): string | null {
     const user = this.getCurrentUser();
     return user ? user.id : null;
+  }
+
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError(
+      () => new Error('An error occurred while processing the request.')
+    );
   }
 }

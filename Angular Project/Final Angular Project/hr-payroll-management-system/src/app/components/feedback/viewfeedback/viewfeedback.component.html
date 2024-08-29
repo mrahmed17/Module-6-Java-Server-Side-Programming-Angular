@@ -1,1 +1,31 @@
-<p>viewfeedback works!</p>
+<div class="container">
+  <h2>View Feedback</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="feedback">
+    <dl class="row">
+      <dt class="col-sm-3">Feedback ID:</dt>
+      <dd class="col-sm-9">{{ feedback.feedbackId }}</dd>
+
+      <dt class="col-sm-3">Employee ID:</dt>
+      <dd class="col-sm-9">{{ feedback.employeeId }}</dd>
+
+      <dt class="col-sm-3">Manager ID:</dt>
+      <dd class="col-sm-9">{{ feedback.managerId }}</dd>
+
+      <dt class="col-sm-3">Performance Rating:</dt>
+      <dd class="col-sm-9">{{ feedback.performanceRating }}</dd>
+
+      <dt class="col-sm-3">Comments:</dt>
+      <dd class="col-sm-9">{{ feedback.comments }}</dd>
+
+      <dt class="col-sm-3">Date:</dt>
+      <dd class="col-sm-9">{{ feedback.date | date }}</dd>
+    </dl>
+  </div>
+
+  <button class="btn btn-primary" (click)="goBack()">Back to List</button>
+</div>

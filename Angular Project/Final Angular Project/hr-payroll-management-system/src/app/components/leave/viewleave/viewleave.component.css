@@ -1,0 +1,31 @@
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.leave-details {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.leave-details p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+.leave-details strong {
+  display: inline-block;
+  width: 150px;
+}
+
+.alert {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  margin-top: 20px;
+}

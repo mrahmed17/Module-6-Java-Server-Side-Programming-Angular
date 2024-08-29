@@ -1,1 +1,55 @@
-<p>listpayroll works!</p>
+<div class="container">
+  <h1>Payroll List</h1>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <p>Loading payroll records...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <table *ngIf="!loading && !errorMessage" class="payroll-table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Manager ID</th>
+        <th>Hourly Rate</th>
+        <th>Performance Bonuses</th>
+        <th>Medicare</th>
+        <th>Deductions</th>
+        <th>Overtime Hours</th>
+        <th>Overtime Rate</th>
+        <th>Yearly Sick Day</th>
+        <th>Total Pay</th>
+        <th>Pay Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payroll of payrolls">
+        <td>{{ payroll.employeeId }}</td>
+        <td>{{ payroll.managerId }}</td>
+        <td>{{ payroll.hourlyRate }}</td>
+        <td>{{ payroll.performanceBonuses }}</td>
+        <td>{{ payroll.medicare }}</td>
+        <td>{{ payroll.deductions }}</td>
+        <td>{{ payroll.overtimeHours }}</td>
+        <td>{{ payroll.overtimeRate }}</td>
+        <td>{{ payroll.yearlySickDay }}</td>
+        <td>{{ payroll.totalPay }}</td>
+        <td>{{ payroll.payDate | date }}</td>
+        <td>
+          <button (click)="viewPayroll(payroll.payrollId)">View</button>
+          <button (click)="editPayroll(payroll.payrollId)">Edit</button>
+          <button (click)="deletePayroll(payroll.payrollId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add new payroll button -->
+  <div class="text-center mt-4">
+    <a class="btn btn-primary" routerLink="/payroll/create">Add New Payroll</a>
+  </div>
+</div>

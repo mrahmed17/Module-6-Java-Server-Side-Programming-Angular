@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceModel } from '../../../models/attendance.model';
-import { AttendanceService } from '../../../services/attendance.service';
 import { Router } from '@angular/router';
+import { AttendanceService } from '../../../services/attendance.service';
+import { AttendanceModel } from '../../../models/attendance.model';
 
 @Component({
   selector: 'app-listattendance',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ListattendanceComponent implements OnInit {
   attendances: AttendanceModel[] = [];
-  errorMessage: string = '';
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private attendanceService: AttendanceService,
@@ -21,35 +22,46 @@ export class ListattendanceComponent implements OnInit {
     this.loadAttendances();
   }
 
-  // Load all attendance records
   loadAttendances(): void {
+    this.loading = true;
     this.attendanceService.getAllAttendances().subscribe(
-      (data) => {
-        this.attendances = data;
+      (attendances: AttendanceModel[]) => {
+        this.attendances = attendances;
+        this.loading = false;
       },
       (error) => {
-        console.error('Failed to load attendance records', error);
-        this.errorMessage =
-          'Failed to load attendance records. Please try again.';
+        this.errorMessage = 'Failed to load attendances.';
+        this.loading = false;
+        console.error('Failed to load attendances', error);
       }
     );
   }
 
-  // Edit an existing attendance record
-  editAttendance(attendance: AttendanceModel): void {
-    this.router.navigate(['/edit-attendance', attendance.id]);
+  // Navigate to the attendance details view
+  viewAttendance(id: string): void {
+    this.router.navigate([`/attendances/view/${id}`]);
+  }
+
+  // Navigate to the edit attendance page
+  editAttendance(id: string): void {
+    this.router.navigate([`/attendances/edit/${id}`]);
   }
 
   // Delete an attendance record
   deleteAttendance(id: string): void {
     if (confirm('Are you sure you want to delete this attendance record?')) {
+      this.loading = true;
       this.attendanceService.deleteAttendance(id).subscribe(
         () => {
-          this.loadAttendances();
+          this.attendances = this.attendances.filter(
+            (attendance) => attendance.id !== id
+          );
+          this.loading = false;
         },
         (error) => {
-          console.error('Failed to delete attendance', error);
-          this.errorMessage = 'Failed to delete attendance. Please try again.';
+          this.errorMessage = 'Failed to delete attendance record.';
+          this.loading = false;
+          console.error('Failed to delete attendance record', error);
         }
       );
     }

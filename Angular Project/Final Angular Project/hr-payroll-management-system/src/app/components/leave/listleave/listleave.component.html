@@ -1,1 +1,36 @@
-<p>listleave works!</p>
+<div class="container">
+  <h2>Leave Requests</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Remaining Leave</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaves">
+        <td>{{ leave.employeeId }}</td>
+        <td>{{ leave.leaveType }}</td>
+        <td>{{ leave.startDate | date }}</td>
+        <td>{{ leave.endDate | date }}</td>
+        <td>{{ leave.remainingLeave }}</td>
+        <td>{{ leave.reason }}</td>
+        <td>{{ leave.status }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="editLeave(leave.id)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteLeave(leave.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/leaves/create" class="btn btn-success">Add Leave Request</a>
+</div>
