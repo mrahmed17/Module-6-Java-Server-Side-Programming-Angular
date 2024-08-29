@@ -1,5 +1,5 @@
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -8,6 +8,16 @@
   margin-bottom: 15px;
 }
 
-.btn {
-  margin-top: 10px;
+.btn-primary {
+  margin-right: 10px;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 0.2em;
+}
+
+.alert {
+  margin-top: 20px;
 }

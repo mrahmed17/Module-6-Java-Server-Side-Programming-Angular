@@ -13,15 +13,11 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { LocationComponent } from './components/location/viewlocation/location.component';
 import { CreatelocationComponent } from './components/location/createlocation/createlocation.component';
-import { UpdatelocationComponent } from './components/location/updatelocation/updatelocation.component';
 import { LoginComponent } from './authentication/login/login.component';
-import { RegistrationComponent } from './admin/createprofile/registration.component';
+
 import { HomeComponent } from './template/home/home.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
-import { UserprofileComponent } from './admin/userprofile/userprofile.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { HeaderComponent } from './template/header/header.component';
 import { CreateAttendanceComponent } from './components/attendance/createattendance/createattendance.component';
@@ -91,18 +87,26 @@ import { ViewperformancereportComponent } from './reports/performancereport/view
 import { CreateperformancereportComponent } from './reports/performancereport/createperformancereport/createperformancereport.component';
 import { EditperformancereportComponent } from './reports/performancereport/editperformancereport/editperformancereport.component';
 import { ListperformancereportComponent } from './reports/performancereport/listperformancereport/listperformancereport.component';
+import { ListlocationComponent } from './components/location/listlocation/listlocation.component';
+import { ViewlocationComponent } from './components/location/viewlocation/viewlocation.component';
+import { CreateadminComponent } from './components/admin/createadmin/createadmin.component';
+import { EditadminComponent } from './components/admin/editadmin/editadmin.component';
+import { ListadminComponent } from './components/admin/listadmin/listadmin.component';
+import { ViewadminComponent } from './components/admin/viewadmin/viewadmin.component';
+import { CreatemanagerComponent } from './components/manager/createmanager/createmanager.component';
+import { EditmanagerComponent } from './components/manager/editmanager/editmanager.component';
+import { ListmanagerComponent } from './components/manager/listmanager/listmanager.component';
+import { ViewmanagerComponent } from './components/manager/viewmanager/viewmanager.component';
+import { ViewleaveComponent } from './components/leave/viewleave/viewleave.component';
+import { EditlocationComponent } from './components/location/editlocation/editlocation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LocationComponent,
     CreatelocationComponent,
-    UpdatelocationComponent,
     LoginComponent,
-    RegistrationComponent,
     HomeComponent,
     LogoutComponent,
-    UserprofileComponent,
     FooterComponent,
     HeaderComponent,
     CreateAttendanceComponent,
@@ -172,6 +176,18 @@ import { ListperformancereportComponent } from './reports/performancereport/list
     CreateperformancereportComponent,
     EditperformancereportComponent,
     ListperformancereportComponent,
+    ListlocationComponent,
+    ViewlocationComponent,
+    CreateadminComponent,
+    EditadminComponent,
+    ListadminComponent,
+    ViewadminComponent,
+    CreatemanagerComponent,
+    EditmanagerComponent,
+    ListmanagerComponent,
+    ViewmanagerComponent,
+    ViewleaveComponent,
+    EditlocationComponent,
   ],
 
   imports: [

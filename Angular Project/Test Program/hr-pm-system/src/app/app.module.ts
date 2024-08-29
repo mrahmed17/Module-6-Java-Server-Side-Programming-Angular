@@ -14,6 +14,8 @@ import { ViewlocationComponent } from './components/location/viewlocation/viewlo
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { BreadcrumbComponent } from './template/breadcrumb/breadcrumb.component';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     EditlocationComponent,
     ListlocationComponent,
     ViewlocationComponent,
+    BreadcrumbComponent,
+
   ],
   imports: [
     BrowserModule,

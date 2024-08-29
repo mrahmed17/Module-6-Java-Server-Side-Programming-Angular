@@ -12,21 +12,21 @@ export class AttendanceService {
 
   constructor(private http: HttpClient) {}
 
-  getAllAttendances(): Observable<AttendanceModel[]> {
+  createAttendance(attendance: AttendanceModel): Observable<AttendanceModel> {
     return this.http
-      .get<AttendanceModel[]>(this.apiUrl)
+      .post<AttendanceModel>(this.apiUrl, attendance)
       .pipe(catchError(this.handleError));
   }
 
-  getAttendance(id: string): Observable<AttendanceModel> {
+  getAttendanceById(id: string): Observable<AttendanceModel> {
     return this.http
       .get<AttendanceModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  createAttendance(attendance: AttendanceModel): Observable<AttendanceModel> {
+  getAllAttendances(): Observable<AttendanceModel[]> {
     return this.http
-      .post<AttendanceModel>(this.apiUrl, attendance)
+      .get<AttendanceModel[]>(this.apiUrl)
       .pipe(catchError(this.handleError));
   }
 
@@ -43,6 +43,16 @@ export class AttendanceService {
     return this.http
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
+  }
+
+  // Additional method to get attendance by date range
+  getAttendanceByDateRange(
+    startDate: string,
+    endDate: string
+  ): Observable<AttendanceModel[]> {
+    return this.http.get<AttendanceModel[]>(
+      `${this.apiUrl}?startDate=${startDate}&endDate=${endDate}`
+    );
   }
 
   private handleError(error: any): Observable<never> {

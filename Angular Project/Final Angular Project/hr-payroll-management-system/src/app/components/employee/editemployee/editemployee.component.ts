@@ -3,12 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../../services/employee.service';
 import { EmployeeModel } from '../../../models/employee.model';
-import { DepartmentService } from '../../../services/department.service';
-import { UserprofileService } from '../../../services/userprofile.service';
-import { LocationService } from '../../../services/location.service';
-import { DepartmentModel } from '../../../models/department.model';
-import { UserModel } from '../../../models/user.model';
-import { LocationModel } from '../../../models/location.model';
 
 @Component({
   selector: 'app-editemployee',
@@ -16,110 +10,94 @@ import { LocationModel } from '../../../models/location.model';
   styleUrls: ['./editemployee.component.css'],
 })
 export class EditemployeeComponent implements OnInit {
-  employeeForm!: FormGroup;
-  employee: EmployeeModel | null = null;
-  departments: DepartmentModel[] = [];
-  users: UserModel[] = [];
-  locations: LocationModel[] = [];
-  errorMessage: string = '';
+  employeeForm: FormGroup;
+  loading = false;
+  errorMessage: string | null = null;
+  id: string = '';
 
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,
-    private departmentService: DepartmentService,
-    private userService: UserprofileService,
-    private locationService: LocationService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-    this.loadDepartments();
-    this.loadUsers();
-    this.loadLocations();
-    this.loadEmployee();
-  }
-
-  initForm(): void {
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.employeeForm = this.fb.group({
-      id: [{ value: '', disabled: true }], // Ensure the ID is disabled and not editable
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      username: ['', Validators.required],
+      fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
+      contactNumber: ['', Validators.required],
       gender: ['Male', Validators.required],
-      contact: ['', Validators.required],
-      joiningDate: ['', Validators.required],
+      age: ['', Validators.required],
+      nidNo: ['', Validators.required],
+      department: ['', Validators.required],
+      managerId: ['', Validators.required],
+      hireDate: ['', Validators.required],
+      payrollCalculationMethod: ['Weekly', Validators.required],
+      overtimeExemption: [false],
+      lastLogin: [new Date(), Validators.required],
+      status: ['active', Validators.required],
+      hourlyRate: ['', Validators.required],
       profilePhoto: [''],
-      position: ['', Validators.required],
-      salary: [''],
-      departmentId: [null, Validators.required],
-      locationId: [null, Validators.required],
     });
   }
 
-  loadDepartments(): void {
-    this.departmentService.getAllDepartments().subscribe(
-      (data) => (this.departments = data),
-      (error) => console.error('Failed to load departments', error)
-    );
-  }
-
-  loadUsers(): void {
-    this.userService.getAllUsers().subscribe(
-      (data) => (this.users = data),
-      (error) => console.error('Failed to load users', error)
-    );
-  }
-
-  loadLocations(): void {
-    this.locationService.getAllLocations().subscribe(
-      (data) => (this.locations = data),
-      (error) => console.error('Failed to load locations', error)
-    );
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.loadEmployee();
   }
 
   loadEmployee(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.employeeService.getEmployeeById(id).subscribe(
-        (data) => {
-          this.employee = data;
-          this.employeeForm.patchValue(data);
-        },
-        (error) => {
-          console.error('Failed to load employee', error);
-          this.errorMessage = 'Failed to load employee. Please try again.';
-        }
-      );
-    } else {
-      this.errorMessage = 'Invalid employee ID.';
-    }
+    this.loading = true;
+    this.employeeService.getEmployeeById(this.id).subscribe(
+      (employee: EmployeeModel) => {
+        this.employeeForm.patchValue({
+          ...employee,
+          hireDate: this.formatDate(employee.hireDate),
+          lastLogin: this.formatDate(employee.lastLogin),
+        });
+        this.loading = false;
+      },
+      (error) => {
+        this.errorMessage = 'Failed to load employee details.';
+        this.loading = false;
+        console.error('Failed to load employee', error);
+      }
+    );
   }
 
   onSubmit(): void {
-    if (this.employeeForm.invalid) {
-      return;
-    }
-    const updatedEmployee: EmployeeModel = this.employeeForm.value;
-    if (this.employee && this.employee.id) {
-      this.employeeService
-        .updateEmployee(this.employee.id, updatedEmployee)
-        .subscribe(
-          () => {
-            this.router.navigate(['/employee/list']);
-          },
-          (error) => {
-            console.error('Failed to update employee', error);
-            this.errorMessage = 'Failed to update employee. Please try again.';
-          }
-        );
-    } else {
-      this.errorMessage = 'Invalid employee data.';
+    if (this.employeeForm.valid) {
+      this.loading = true;
+
+      const updatedEmployee: Partial<EmployeeModel> = {
+        ...this.employeeForm.value,
+        updatedAt: new Date(), // Ensure `updatedAt` is included in the update
+      };
+
+      this.employeeService.updateEmployee(this.id, updatedEmployee).subscribe(
+        () => {
+          this.loading = false;
+          this.router.navigate(['/employees/list']);
+        },
+        (error) => {
+          this.errorMessage = 'Failed to update employee.';
+          this.loading = false;
+          console.error('Failed to update employee', error);
+        }
+      );
     }
   }
 
-  goBack(): void {
-    this.router.navigate(['/employee/list']);
+  resetForm(): void {
+    this.employeeForm.reset();
+  }
+
+  cancel(): void {
+    this.router.navigate(['/employees/list']);
+  }
+
+  private formatDate(date: Date | string): string {
+    return new Date(date).toISOString().slice(0, 16); // Format date for input fields
   }
 }

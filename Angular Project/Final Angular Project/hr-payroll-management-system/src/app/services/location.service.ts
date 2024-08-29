@@ -12,24 +12,24 @@ export class LocationService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // Method to get all locations
-  getAllLocations(): Observable<LocationModel[]> {
-    return this.httpClient
-      .get<LocationModel[]>(this.apiUrl)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Method to get locations filtered for a specific purpose
-  getLocationForUser(): Observable<LocationModel[]> {
-    return this.httpClient
-      .get<LocationModel[]>(this.apiUrl)
-      .pipe(catchError(this.handleError));
-  }
-
   // Method to create a new location
   createLocation(location: LocationModel): Observable<LocationModel> {
     return this.httpClient
       .post<LocationModel>(this.apiUrl, location)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Method to get a location by ID
+  getLocationById(id: string): Observable<LocationModel> {
+    return this.httpClient
+      .get<LocationModel>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Method to get all locations
+  getAllLocations(): Observable<LocationModel[]> {
+    return this.httpClient
+      .get<LocationModel[]>(this.apiUrl)
       .pipe(catchError(this.handleError));
   }
 
@@ -38,8 +38,6 @@ export class LocationService {
     return this.httpClient
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
-    //  http://localhost:3000/locations/id
-    // return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 
   // Method to update a location by ID
@@ -49,13 +47,6 @@ export class LocationService {
   ): Observable<LocationModel> {
     return this.httpClient
       .put<LocationModel>(`${this.apiUrl}/${id}`, location)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Method to get a location by ID
-  getLocationById(id: string): Observable<LocationModel> {
-    return this.httpClient
-      .get<LocationModel>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }
 

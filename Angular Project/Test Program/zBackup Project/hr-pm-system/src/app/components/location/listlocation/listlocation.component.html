@@ -1,0 +1,52 @@
+<!-- listlocation.component.html -->
+<div class="container mt-4">
+  <h2>Locations</h2>
+  <div *ngIf="locations.length > 0; else noLocations">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Created At</th>
+          <th>View</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let location of locations">
+          <td><img [src]="location.photo" alt="{{ location.name }}"
+              style="border-radius: 1rem; width: 50px; height: 50px;"></td>
+          <td> <strong>{{ location.name }} </strong></td>
+          <td><strong> {{ location.address }},
+              {{ location.city }}
+              {{ location.zipCode }},
+              {{ location.state }},
+              {{ location.country }} </strong></td>
+          <td> <strong>{{ location.createdAt | date: 'short' }} </strong></td>
+          <td>
+            <button class="btn btn-info" (click)="viewLocation(location.locationId)">
+              View
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-warning" (click)="editLocation(location.locationId)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteLocation(location.locationId)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noLocations>
+    <div class="alert alert-info" role="alert">
+      No locations found.
+    </div>
+  </ng-template>
+</div>

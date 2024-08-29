@@ -1,5 +1,5 @@
 export class LocationModel {
-  locationId: string;
+  id: string;
   name: string; // Name of the location
   address: string; // Address of the location
   city: string; // City where the location is situated
@@ -22,7 +22,7 @@ export class LocationModel {
     lastUpdatedAt: Date,
     photo?: string // Made photo optional in the constructor
   ) {
-    this.locationId = locationId;
+    this.id = locationId;
     this.name = name;
     this.address = address;
     this.city = city;
@@ -59,7 +59,7 @@ export class LocationModel {
 
   // Method to get location details as a string
   getLocationDetails(): string {
-    return `Location ID: ${this.locationId}\nName: ${this.name}\nAddress: ${
+    return `Location ID: ${this.id}\nName: ${this.name}\nAddress: ${
       this.address
     }\nCity: ${this.city}\nState: ${this.state}\nZIP Code: ${
       this.zipCode

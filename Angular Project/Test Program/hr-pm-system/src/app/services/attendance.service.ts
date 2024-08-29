@@ -19,18 +19,18 @@ export class AttendanceService {
     return this.http.get<AttendanceModel[]>(`${this.baseUrl}`);
   }
 
-  getAttendanceById(id: number): Observable<AttendanceModel> {
+  getAttendanceById(id: string): Observable<AttendanceModel> {
     return this.http.get<AttendanceModel>(`${this.baseUrl}/${id}`);
   }
 
   updateAttendance(
-    id: number,
+    id: string,
     attendance: AttendanceModel
   ): Observable<AttendanceModel> {
     return this.http.put<AttendanceModel>(`${this.baseUrl}/${id}`, attendance);
   }
 
-  deleteAttendance(id: number): Observable<void> {
+  deleteAttendance(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 

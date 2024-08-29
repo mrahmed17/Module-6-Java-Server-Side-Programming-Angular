@@ -1,25 +1,27 @@
-.employee-details,
-.user-profile {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
+.container {
+  margin-top: 20px;
 }
 
-.error-message {
-  color: red;
-  margin-bottom: 20px;
+.employee-details {
+  margin-top: 20px;
 }
 
-button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.detail-item {
+  margin-bottom: 10px;
 }
 
-button:hover {
-  background-color: #0056b3;
+.profile-photo {
+  max-width: 150px;
+  max-height: 150px;
+  display: block;
+  margin-top: 10px;
+}
+
+.spinner-border {
+  display: block;
+  margin: auto;
+}
+
+.btn {
+  margin-top: 20px;
 }
