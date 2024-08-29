@@ -32,19 +32,19 @@ export class ListlocationComponent implements OnInit {
   }
 
   viewLocation(id: string | undefined): void {
-    this.router.navigate(['/locations/view', id]);
+    this.router.navigate(['/locations/view/:id', id]);
   }
 
   editLocation(id: string | undefined): void {
-    this.router.navigate(['/locations/edit', id]);
+    this.router.navigate(['/locations/edit/:id', id]);
   }
 
   deleteLocation(id: string | undefined): void {
-    if (confirm('Are you sure you want to delete this location?')) {
+    if (id && confirm('Are you sure you want to delete this location?')) {
       this.locationService.deleteLocation(id!).subscribe(
         () => {
           this.locations = this.locations.filter(
-            (location) => location.locationId !== id
+            (location) => location.id !== id
           );
           alert('Location deleted successfully');
         },

@@ -1,0 +1,15 @@
+{
+  "locations": [
+    {
+      "id": "2b59",
+      "name": "Lalbag",
+      "address": "4 way road, lalbag kellah",
+      "city": "Dhaka",
+      "state": "South Dhaka",
+      "zipCode": "1211",
+      "country": "Bangladesh ",
+      "photo": "https://angular.io/assets/images/tutorials/faa/phil-hearing-IYfp2Ixe9nM-unsplash.jpg",
+      "createdAt": "2024-08-28T12:26:38.738Z"
+    }
+  ]
+}

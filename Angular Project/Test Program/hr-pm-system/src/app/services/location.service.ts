@@ -21,8 +21,9 @@ export class LocationService {
   }
 
   // Method to get a location by ID
-  getLocationById(locationId: string): Observable<LocationModel> {
-    const url = `${this.baseUrl}/${locationId}`;
+  getLocationById(id: string): Observable<LocationModel> {
+    const url = `${this.baseUrl}/${id}`;
+    console.log('Fetching location with URL:', url); // Log the URL
     return this.http
       .get<LocationModel>(url)
       .pipe(catchError(this.handleError<LocationModel>('getLocationById')));
@@ -37,18 +38,18 @@ export class LocationService {
 
   // Method to update an existing location
   updateLocation(
-    locationId: string,
+    id: string,
     updatedDetails: Partial<LocationModel>
   ): Observable<LocationModel> {
-    const url = `${this.baseUrl}/${locationId}`;
+    const url = `${this.baseUrl}/${id}`;
     return this.http
       .put<LocationModel>(url, updatedDetails, { headers: this.headers })
       .pipe(catchError(this.handleError<LocationModel>('updateLocation')));
   }
 
   // Method to delete a location
-  deleteLocation(locationId: string): Observable<boolean> {
-    const url = `${this.baseUrl}/${locationId}`;
+  deleteLocation(id: string): Observable<boolean> {
+    const url = `${this.baseUrl}/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(
       map(() => true),
       catchError(this.handleError<boolean>('deleteLocation', false))

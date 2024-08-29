@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2 class="text-center">Managers List</h2>
+
+  <!-- Display error message if any -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Display loading spinner while data is being fetched -->
+  <div *ngIf="loading" class="text-center">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  </div>
+
+  <!-- Display the table of managers -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let manager of managers">
+        <td>
+          <img [src]="manager.profilePhoto" alt="{{ manager.fullName }}" class="profile-photo" />
+        </td>
+        <td>{{ manager.username }}</td>
+        <td>{{ manager.fullName }}</td>
+        <td>{{ manager.email }}</td>
+        <td>{{ manager.department }}</td>
+        <td>{{ manager.status }}</td>
+        <td>
+          <button (click)="viewManager(manager.id)" class="btn btn-info btn-sm">View</button>
+          <button (click)="editManager(manager.id)" class="btn btn-warning btn-sm">Edit</button>
+          <button (click)="deleteManager(manager.id)" class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -9,6 +9,7 @@ import { AuthResponseModel } from '../models/authresponse.model';
 })
 export class AuthService {
   private baseUrl: string = 'http://localhost:3000/auth'; // Base URL for authentication API
+
   private tokenKey = 'authToken'; // Key to store token in localStorage
 
   constructor(private http: HttpClient) {}

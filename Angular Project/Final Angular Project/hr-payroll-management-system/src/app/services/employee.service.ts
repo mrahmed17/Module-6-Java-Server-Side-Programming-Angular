@@ -35,10 +35,12 @@ export class EmployeeService {
   // Update an existing employee by ID
   updateEmployee(
     id: string,
-    employee: EmployeeModel
+    updatedDetails: Partial<EmployeeModel>
   ): Observable<EmployeeModel> {
+    // Ensure that `updatedAt` is included in the update
+    updatedDetails.updatedAt = new Date();
     return this.http
-      .put<EmployeeModel>(`${this.apiUrl}/${id}`, employee)
+      .put<EmployeeModel>(`${this.apiUrl}/${id}`, updatedDetails)
       .pipe(catchError(this.handleError));
   }
 

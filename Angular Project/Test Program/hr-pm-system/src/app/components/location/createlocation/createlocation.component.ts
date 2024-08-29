@@ -58,6 +58,6 @@ export class CreatelocationComponent {
   }
 
   cancel(): void {
-    this.router.navigate(['/locations']);
+    this.router.navigate(['/locations/list']);
   }
 }

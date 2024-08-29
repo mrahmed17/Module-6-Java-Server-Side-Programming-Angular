@@ -1,34 +1,64 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Employee Details</h2>
-
-  <!-- Error message display -->
+<div class="container">
+  <h2>Employee Details</h2>
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
-
-  <!-- Display employee details -->
-  <div *ngIf="employee">
-    <div class="row">
-      <!-- Employee details -->
-      <div class="col-md-6">
-        <p><strong>ID:</strong> {{ employee.id }}</p>
-        <p><strong>Name:</strong> {{ employee.UserModel.firstName }} {{ employee.UserModel.lastName }}</p>
-        <p><strong>Email:</strong> {{ employee.UserModel.email }}</p>
-        <p><strong>Contact:</strong> {{ employee.UserModel.contact }}</p>
-        <p><strong>Gender:</strong> {{ employee.UserModel.gender }}</p>
-        <p><strong>Joining Date:</strong> {{ employee.UserModel.joiningDate | date }}</p>
-        <p><strong>Position:</strong> {{ employee.UserModel.role }}</p>
-        <p><strong>Salary:</strong> {{ employee.hourlyRate| currency }}</p>
-        <p><strong>Department:</strong> {{ employee.DepartmentModel.departmentName || 'N/A' }}</p>
-        <p><strong>Location:</strong> {{ employee.LocationModel.locationName || 'N/A' }}</p>
-      </div>
-      <!-- Profile photo -->
-      <div class="col-md-6">
-        <img *ngIf="employee.UserModel.profilePhoto" [src]="employee.UserModel.profilePhoto" alt="Profile Photo"
-          class="img-fluid rounded-circle" />
-      </div>
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="!loading && employee" class="employee-details">
+    <div class="detail-item">
+      <strong>Username:</strong> {{ employee.username }}
     </div>
-    <!-- Back to list button -->
-    <button class="btn btn-primary mt-4" (click)="goBack()">Back to List</button>
+    <div class="detail-item">
+      <strong>Full Name:</strong> {{ employee.fullName }}
+    </div>
+    <div class="detail-item">
+      <strong>Email:</strong> {{ employee.email }}
+    </div>
+    <div class="detail-item">
+      <strong>Address:</strong> {{ employee.address }}
+    </div>
+    <div class="detail-item">
+      <strong>Contact Number:</strong> {{ employee.contactNumber }}
+    </div>
+    <div class="detail-item">
+      <strong>Gender:</strong> {{ employee.gender }}
+    </div>
+    <div class="detail-item">
+      <strong>Age:</strong> {{ employee.age }}
+    </div>
+    <div class="detail-item">
+      <strong>NID No:</strong> {{ employee.nidNo }}
+    </div>
+    <div class="detail-item">
+      <strong>Department:</strong> {{ employee.department }}
+    </div>
+    <div class="detail-item">
+      <strong>Manager ID:</strong> {{ employee.managerId }}
+    </div>
+    <div class="detail-item">
+      <strong>Hire Date:</strong> {{ employee.hireDate | date }}
+    </div>
+    <div class="detail-item">
+      <strong>Payroll Calculation Method:</strong> {{ employee.payrollCalculationMethod }}
+    </div>
+    <div class="detail-item">
+      <strong>Overtime Exemption:</strong> {{ employee.overtimeExemption ? 'Yes' : 'No' }}
+    </div>
+    <div class="detail-item">
+      <strong>Last Login:</strong> {{ employee.lastLogin | date }}
+    </div>
+    <div class="detail-item">
+      <strong>Status:</strong> {{ employee.status }}
+    </div>
+    <div class="detail-item">
+      <strong>Hourly Rate:</strong> {{ employee.hourlyRate }}
+    </div>
+    <div class="detail-item">
+      <strong>Profile Photo:</strong>
+      <img *ngIf="employee.profilePhoto" [src]="employee.profilePhoto" alt="Profile Photo" class="profile-photo" />
+    </div>
+    <button class="btn btn-primary" (click)="goBack()">Back to List</button>
   </div>
 </div>

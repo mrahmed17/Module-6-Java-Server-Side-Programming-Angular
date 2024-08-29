@@ -1,80 +1,16 @@
-/* Container Styling */
 .container {
   margin-top: 20px;
 }
 
-/* Heading Styling */
-h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-}
-
-/* Table Styling */
 .table {
-  width: 100%;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-}
-
-.table-striped {
-  border: 1px solid #dee2e6;
-}
-
-.table thead {
-  background-color: #f8f9fa;
-}
-
-.table th,
-.table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.table th {
-  font-weight: bold;
-}
-
-.table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-/* Button Styling */
-.btn {
-  margin: 5px;
-}
-
-.btn-info {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-}
-
-.btn-info:hover {
-  background-color: #138496;
-  border-color: #117a8b;
-}
-
-.btn-warning {
-  background-color: #ffc107;
-  border-color: #ffc107;
-}
-
-.btn-warning:hover {
-  background-color: #e0a800;
-  border-color: #d39e00;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-  border-color: #bd2130;
-}
-
-/* Alert Styling */
-.alert {
   margin-top: 20px;
+}
+
+.spinner-border {
+  display: block;
+  margin: auto;
+}
+
+.btn {
+  margin-right: 5px;
 }

@@ -70,16 +70,6 @@
             </div>
           </div>
         </div>
-        <!-- 
-        <div class="mb-3">
-          <label for="createdAt" class="form-label">Created At</label>
-          <input type="date" id="createdAt" formControlName="createdAt" class="form-control" />
-          <div *ngIf="locationForm.get('createdAt')?.invalid && locationForm.get('createdAt')?.touched"
-            class="text-danger">
-           
-          </div>
-        </div> -->
-
 
         <div class="mb-3">
           <label for="photo" class="form-label">Photo URL</label>
@@ -90,13 +80,14 @@
         </div>
 
         <!-- Buttons -->
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+        <div class="row justify-content-center">
+          <div class="col-md-6 mb-3 mt-3">
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Reset</button>
             <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
           </div>
         </div>
+
       </form>
     </div>
   </div>

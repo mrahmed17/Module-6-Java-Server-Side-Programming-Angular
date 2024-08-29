@@ -1,97 +1,90 @@
+/* Ensure the container takes full width and has some margin and padding */
 .container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
 }
 
-h2 {
+/* Center the heading and adjust its font size */
+h2.text-center {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* Style the alert for errors */
+.alert {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.375rem;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
+/* Style the form controls */
 .form-control {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .form-control:focus {
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
 }
 
-.form-check-input {
-  margin-left: 0;
-  margin-right: 10px;
-  margin-top: 10px;
-  width: auto;
+/* Style for invalid form controls */
+.text-danger {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
+/* Style the buttons */
 .btn {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  text-transform: uppercase;
 }
 
 .btn-primary {
   background-color: #007bff;
-  color: #fff;
+  border-color: #007bff;
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
+  border-color: #004085;
 }
 
 .btn-secondary {
   background-color: #6c757d;
-  color: #fff;
-  margin-top: 10px;
+  border-color: #6c757d;
 }
 
 .btn-secondary:hover {
   background-color: #5a6268;
+  border-color: #545b62;
 }
 
-button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 15px;
-  }
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
 
-  .form-control {
-    font-size: 14px;
-  }
+/* Add spacing to form groups */
+.mb-3 {
+  margin-bottom: 1rem;
+}
 
-  .btn {
-    font-size: 14px;
-    padding: 8px;
-  }
+/* Center buttons */
+.row.justify-content-center {
+  display: flex;
+  justify-content: center;
 }

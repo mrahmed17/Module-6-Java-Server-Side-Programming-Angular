@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeModel } from '../../../models/employee.model';
-import { EmployeeService } from '../../../services/employee.service';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../../../services/employee.service';
+import { EmployeeModel } from '../../../models/employee.model';
 
 @Component({
   selector: 'app-listemployee',
   templateUrl: './listemployee.component.html',
-  styleUrl: './listemployee.component.css',
+  styleUrls: ['./listemployee.component.css'],
 })
 export class ListemployeeComponent implements OnInit {
   employees: EmployeeModel[] = [];
-  errorMessage: string = '';
+  loading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private employeeService: EmployeeService,
@@ -21,40 +22,38 @@ export class ListemployeeComponent implements OnInit {
     this.loadEmployees();
   }
 
-  // Load all employees
   loadEmployees(): void {
+    this.loading = true;
     this.employeeService.getAllEmployees().subscribe(
-      (data: EmployeeModel[]) => {
-        this.employees = data;
-        console.log('Employees loaded:', this.employees); // Debugging
+      (employees: EmployeeModel[]) => {
+        this.employees = employees;
+        this.loading = false;
       },
       (error) => {
+        this.errorMessage = 'Failed to load employees.';
+        this.loading = false;
         console.error('Failed to load employees', error);
-        this.errorMessage = 'Failed to load employees. Please try again.';
       }
     );
   }
 
-  // Navigate to employee details
   viewEmployee(id: string): void {
-    this.router.navigate(['/employee/view', id]);
+    this.router.navigate([`/employees/view/${id}`]);
   }
 
-  // Navigate to employee edit form
   editEmployee(id: string): void {
-    this.router.navigate(['/employee/edit', id]);
+    this.router.navigate([`/employees/edit/${id}`]);
   }
 
-  // Delete an employee
   deleteEmployee(id: string): void {
     if (confirm('Are you sure you want to delete this employee?')) {
       this.employeeService.deleteEmployee(id).subscribe(
         () => {
-          this.loadEmployees();
+          this.loadEmployees(); // Refresh the list after deletion
         },
         (error) => {
+          this.errorMessage = 'Failed to delete employee.';
           console.error('Failed to delete employee', error);
-          this.errorMessage = 'Failed to delete employee. Please try again.';
         }
       );
     }
