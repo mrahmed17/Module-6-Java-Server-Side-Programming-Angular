@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Attendance Records</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Check-In Time</th>
+        <th>Check-Out Time</th>
+        <th>Employee</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let attendance of attendances">
+        <td>{{ attendance.date | date }}</td>
+        <td>{{ attendance.status }}</td>
+        <td>{{ attendance.checkInTime }}</td>
+        <td>{{ attendance.checkOutTime }}</td>
+        <td>{{ attendance.UserModel.firstName }} {{ attendance.UserModel.lastName }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editAttendance(attendance)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteAttendance(attendance.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

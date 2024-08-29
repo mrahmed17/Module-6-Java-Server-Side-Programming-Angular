@@ -1,0 +1,163 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" formControlName="username" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('username')?.invalid && (employeeForm.get('username')?.dirty || employeeForm.get('username')?.touched)"
+      class="text-danger">
+      Username is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="fullName">Full Name</label>
+    <input id="fullName" formControlName="fullName" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('fullName')?.invalid && (employeeForm.get('fullName')?.dirty || employeeForm.get('fullName')?.touched)"
+      class="text-danger">
+      Full Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)"
+      class="text-danger">
+      Valid Email is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input id="address" formControlName="address" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('address')?.invalid && (employeeForm.get('address')?.dirty || employeeForm.get('address')?.touched)"
+      class="text-danger">
+      Address is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="contactNumber">Contact Number</label>
+    <input id="contactNumber" formControlName="contactNumber" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('contactNumber')?.invalid && (employeeForm.get('contactNumber')?.dirty || employeeForm.get('contactNumber')?.touched)"
+      class="text-danger">
+      Contact Number is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="gender">Gender</label>
+    <select id="gender" formControlName="gender" class="form-control">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input id="age" formControlName="age" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('age')?.invalid && (employeeForm.get('age')?.dirty || employeeForm.get('age')?.touched)"
+      class="text-danger">
+      Age is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="nidNo">National ID Number</label>
+    <input id="nidNo" formControlName="nidNo" type="number" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('nidNo')?.invalid && (employeeForm.get('nidNo')?.dirty || employeeForm.get('nidNo')?.touched)"
+      class="text-danger">
+      National ID Number is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="department">Department</label>
+    <input id="department" formControlName="department" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('department')?.invalid && (employeeForm.get('department')?.dirty || employeeForm.get('department')?.touched)"
+      class="text-danger">
+      Department is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="managerId">Manager ID</label>
+    <input id="managerId" formControlName="managerId" type="text" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('managerId')?.invalid && (employeeForm.get('managerId')?.dirty || employeeForm.get('managerId')?.touched)"
+      class="text-danger">
+      Manager ID is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="hireDate">Hire Date</label>
+    <input id="hireDate" formControlName="hireDate" type="date" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('hireDate')?.invalid && (employeeForm.get('hireDate')?.dirty || employeeForm.get('hireDate')?.touched)"
+      class="text-danger">
+      Hire Date is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="payrollCalculationMethod">Payroll Calculation Method</label>
+    <select id="payrollCalculationMethod" formControlName="payrollCalculationMethod" class="form-control">
+      <option value="Weekly">Weekly</option>
+      <option value="Monthly">Monthly</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="overtimeExemption">Overtime Exemption</label>
+    <input id="overtimeExemption" formControlName="overtimeExemption" type="checkbox" />
+  </div>
+
+  <div class="form-group">
+    <label for="lastLogin">Last Login</label>
+    <input id="lastLogin" formControlName="lastLogin" type="date" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('lastLogin')?.invalid && (employeeForm.get('lastLogin')?.dirty || employeeForm.get('lastLogin')?.touched)"
+      class="text-danger">
+      Last Login is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select id="status" formControlName="status" class="form-control">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="hourlyRate">Hourly Rate</label>
+    <input id="hourlyRate" formControlName="hourlyRate" type="number" class="form-control" />
+    <div
+      *ngIf="employeeForm.get('hourlyRate')?.invalid && (employeeForm.get('hourlyRate')?.dirty || employeeForm.get('hourlyRate')?.touched)"
+      class="text-danger">
+      Hourly Rate is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="profilePhoto">Profile Photo URL</label>
+    <input id="profilePhoto" formControlName="profilePhoto" type="text" class="form-control" />
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="loading">
+    {{ loading ? 'Saving...' : 'Save' }}
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">
+    Cancel
+  </button>
+</form>
