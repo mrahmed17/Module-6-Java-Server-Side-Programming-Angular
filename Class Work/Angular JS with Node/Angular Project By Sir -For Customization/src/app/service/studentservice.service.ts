@@ -15,9 +15,6 @@ export class StudentserviceService {
     private http: HttpClient
   ) { }
 
-
-
-
   viewAllStudent(): Observable<any> {
 
     return this.http.get(this.baseUrl);
